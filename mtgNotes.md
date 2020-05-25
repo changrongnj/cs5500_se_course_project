@@ -1,3 +1,71 @@
+# Meeting on May 24, 2020
+Questions (to ask Alan)
+-	What is the range of data that we need to simulate?
+    o	Are the users allowed to specify the total date range (assuming no), or
+    o	Are users only allowed to specify a range inside the data we already simulated?
+-	Adrienne mentioned that we are not expected to use statistics for this project.
+    o	No covariance, regression, correlation, standard deviation, etc. data
+    o	Is this in line with Alan’s expectations for us?
+-	Assumptions while implementing the software:
+    o	Assume that we can specify the expected number of people per day for a given interval (e.g. in May, all Mondays have 1.0K people on average)
+
+
+Discussion Points
+-	Scope of sprint 1
+    o	Language: Java to support better OOD practices, Gradle-built.
+    o	Goal: Using the Class Diagram UML as the base, implement the classes and their relationships to each other for now.
+    o	Changes:
+        	Add a class that contains information about the expected number of people per day (to simulate the data). Similar to a Scheduler
+        	Add a class responsible for producing the csv file (View in MVC model)
+        	Figure out a suitable way to keep track of Date and Time information.
+            •	May use the LocalDate class, which contains methods we might be able to take advantage of. Does not contain time information.
+            •	May create own Date/Time class with simple information that we need. In this case, can move some of the attributes in the Day class into the Date/Time class. 
+    o	Clarifications
+        	For our project, we are allowed(?) to pre-specify the number of people per day for a given interval (e.g. all Mondays in April have 0.8K people)
+        	For each day, we want to know the number of shoppers physically present during each hour of the store operation hours.
+            •	Idea: Take advantage of the Random class or another simulation class supported by Java to create random visits throughout the store
+            •	Should be able to generate more people during a particular hour. 
+        	Final write-up:
+            •	“in this model we assumed <…>”
+            •	“In our analysis data, we generated…”
+            •	“In the result of our data, we generated this based on what we assume…”
+            •	Answer the three questions in sprint 1.
+o	Quality Assurance (not included in sprint 0):
+    	Will need to create some tests for the software.
+    	Check that the number of people in the Schedule class (can be renamed something else as appropriate) are as expected.
+    	Make tests for each of the four methods listed in Day
+    	Make tests for additional methods that we may add.
+    	Think about exception/edge cases and test for those as well.
+    	May need to create custom exception classes as well.
+
+Outstanding Questions (Implementation/Design)
+-	Best way to keep track of date and/or time?
+-	The flow of inputs and outputs in our software?
+-	What to include in the final csv file?
+-	What other design patterns should we incorporate?
+    o	Consider: Using the Factory pattern for the subclasses of Day.
+
+Current Tasks
+-	Implement the accessory classes (DayOfWeek, Weather, Visits)
+    o	Assigned to Andy
+-	Implement the Day class (excluding methods)
+    o	Assigned to Rong (partially)
+-	Implement a Date/Time class (May include LocalDate for the date portion)
+    o	Assigned to James (collaborate with Rong)
+-	Create small-scaled simulation that includes expected csv output:
+    o	Assigned to Rong and James
+-	Create test cases
+    o	Assigned to Andy (Collaborate with all)
+-	Research preexisting simulation packages
+    o	Assigned to Rong (collaborate with all)
+-	Implement Scheduler model that contains all of the expected number of people per day
+    o	Unassigned (may need this for simulation)
+-	Implement csv output class
+    o	Unassigned (may need this for simulation)
+-	Implement the subclass under the Day class
+    o	Unassigned
+
+
 # Meeting on May 17,2020
 * User story
     * Add more details
