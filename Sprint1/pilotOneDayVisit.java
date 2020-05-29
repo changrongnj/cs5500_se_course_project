@@ -62,70 +62,70 @@ public class pilotSim {
 
 
 
-class Time {
-    /**
-     * main constructor
-     * @param hour
-     * @param min
-     */
-    public Time(int hour, int min) {
-        this.setHour(hour);
-        this.setMin(min);
-    }
-
-    /**
-     * default constructor
-     */
-    public Time() {
-
-    }
-
-    /**
-     * copy constructor
-     */
-    public Time(Time other) {
-        if (other != null) {
-            this.setHour(other.getHour());
-            this.setMin(other.getMin());
-        }
-    }
-
-    private int hour = 0;
-    private int min = 0;
-
-
-    /**
-     * setter and getter
-     */
-    public void setHour(int hour) { 
-        if (hour < 0 || hour > 23) {  
-            System.out.println("Hour input is invalid.");
-            System.exit(1);
-        }
-        else {
-            this.hour = hour;
-        }
-    }
-
-    public int getHour() {return this.hour;}
-
-    public void setMin(int min) { 
-        if (min < 0 || min > 59) {  
-            System.out.println("Min input is invalid.");
-            System.exit(1);
-        }
-        else {
-            this.min = min;
-        }
-    }
-
-    public int getMin() {return this.min;}
-
-    /**
-     * toString() method for Date
-     */
-    @Override
-    public String toString() {
-        return this.hour + ":" + this.min;
-    }
-}    
+//class Time {
+//    /**
+//     * main constructor
+//     * @param hour
+//     * @param min
+//     */
+//    public Time(int hour, int min) {
+//        this.setHour(hour);
+//        this.setMin(min);
+//    }
+//
+//    /**
+//     * default constructor
+//     */
+//    public Time() {
+//
+//    }
+//
+//    /**
+//     * copy constructor
+//     */
+//    public Time(Time other) {
+//        if (other != null) {
+//            this.setHour(other.getHour());
+//            this.setMin(other.getMin());
+//        }
+//    }
+//
+//    private int hour = 0;
+//    private int min = 0;
+//
+//
+//    /**
+//     * setter and getter
+//     */
+//    public void setHour(int hour) {
+//        if (hour < 0 || hour > 23) {
+//            System.out.println("Hour input is invalid.");
+//            System.exit(1);
+//        }
+//        else {
+//            this.hour = hour;
+//        }
+//    }
+//
+//    public int getHour() {return this.hour;}
+//
+//    public void setMin(int min) {
+//        if (min < 0 || min > 59) {
+//            System.out.println("Min input is invalid.");
+//            System.exit(1);
+//        }
+//        else {
+//            this.min = min;
+//        }
+//    }
+//
+//    public int getMin() {return this.min;}
+//
+//    /**
+//     * toString() method for Date
+//     */
+//    @Override
+//    public String toString() {
+//        return this.hour + ":" + this.min;
+//    }
+//}
