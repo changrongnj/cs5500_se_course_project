@@ -1,3 +1,16 @@
+# Meeting on 05/28 with Alan - Sprint 1 and coding preparation
+* Scope
+    * time range: 1 month
+    * 6 months expectation
+    * No UI requirement
+* Parameters and Classes
+    * Assign those realistic parameters manageable
+    * Random generate as few parameters as possible
+* Sprint 1
+    * How you delivered against your first sprint user stories,
+    * The functionality you actually deliver for sprint 1
+    * An assessment of the quality of your code. 
+
 # Meeting on May 24, 2020
 ## Questions (to ask Alan)
 * What is the range of data that we need to simulate?
