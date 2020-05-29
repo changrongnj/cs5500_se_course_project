@@ -9,12 +9,13 @@ public class DateTime {
     // I suggest you convert them into localDatetime at first,
     // then use my functions
     private LocalDateTime localDateTime;
-
+    private Weather weather;
     private boolean isHoliday;
 
     // constructor
-    public DateTime(LocalDateTime localDateTime, boolean isHoliday) {
+    public DateTime(LocalDateTime localDateTime, Weather weather, boolean isHoliday) {
         this.localDateTime = localDateTime;
+        this.weather = weather;
         this.isHoliday = isHoliday;
     }
 
@@ -24,6 +25,14 @@ public class DateTime {
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
         this.localDateTime = localDateTime;
+    }
+
+    public Weather getWeather() {
+        return weather;
+    }
+
+    public void setWeather(Weather weather) {
+        this.weather = weather;
     }
 
     public boolean isHoliday() {

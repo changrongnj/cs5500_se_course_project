@@ -19,4 +19,35 @@ public class Visit {
     // Will update once we figure out how to represent time.
   }
 
+  public String getVisitID() {
+    return visitID;
+  }
+
+  public void setVisitID(String visitID) {
+    this.visitID = visitID;
+  }
+
+  public DateTime getEntryTime() {
+    return entryTime;
+  }
+
+  public void setEntryTime(DateTime entryTime) {
+    this.entryTime = entryTime;
+  }
+
+  public DateTime getLeaveTime() {
+    return leaveTime;
+  }
+
+  public void setLeaveTime(DateTime leaveTime) {
+    this.leaveTime = leaveTime;
+  }
+
+  public Integer getTotalTime() {
+    return totalTime;
+  }
+
+  public void setTotalTime(Integer totalTime) {
+    this.totalTime = totalTime;
+  }
 }
