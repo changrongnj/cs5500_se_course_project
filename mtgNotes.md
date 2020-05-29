@@ -7,9 +7,9 @@
     * Assign those realistic parameters manageable
     * Random generate as few parameters as possible
 * Sprint 1
-    * How you delivered against your first sprint user stories,
-    * The functionality you actually deliver for sprint 1
-    * An assessment of the quality of your code. 
+    * focus on the pilot code to generate data
+    * go through with Alan next Thursday if possible
+    * The techniques generating the code is the way we deliver the product for user needs; the features/parameters of the generated data from codes are the functionality of the code.
 
 # Meeting on May 24, 2020
 ## Questions (to ask Alan)
