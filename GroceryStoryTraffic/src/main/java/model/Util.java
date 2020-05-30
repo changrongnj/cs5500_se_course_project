@@ -5,15 +5,14 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 
 public class Util {
 
@@ -149,6 +148,51 @@ public class Util {
 
         // IF NOTHING ELSE, IT'S A BUSINESS DAY
         return false;
+    }
+
+    public void writeToCSV(List<Visit> visitList) {
+
+        // borrow some code from https://stackoverflow.com/questions/3666007/how-to-serialize-object-to-csv-file
+
+        String CSV_SEPARATOR = ",";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        try {
+
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("products.csv"), "UTF-8"));
+            StringBuilder oneLine = new StringBuilder();
+            oneLine.append("VisitID");
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append("EntryTime");
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append("IsNiceWeather");
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append("Temperature");
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append("IsHoliday");
+            bw.write(oneLine.toString());
+            bw.newLine();
+
+            for (Visit visit : visitList)
+            {
+                oneLine = new StringBuilder();
+                oneLine.append(visit.getVisitID());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(visit.getEntryTime().getLocalDateTime().format(formatter));
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(visit.getEntryTime().getWeather().getWasNiceWeather());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(visit.getEntryTime().getWeather().getAverageTemperature());
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(visit.getEntryTime().isHoliday());
+                bw.write(oneLine.toString());
+                bw.newLine();
+            }
+            bw.flush();
+            bw.close();
+        } catch (IOException e){
+            System.out.println("I/O exception");
+        }
     }
 
 }
