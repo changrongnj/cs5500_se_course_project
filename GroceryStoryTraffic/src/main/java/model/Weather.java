@@ -2,8 +2,8 @@ package model;
 
 /**
  * Constructs an instance of the Weather class with the following fields:
- * Boolean representing whether or not the overall weather was nice, and Double
- * representing the average temperature during store operation hours.
+ * Boolean representing whether or not the overall weather was nice, and
+ * Double representing the average temperature during store operation hours.
  */
 public class Weather {
   private Boolean wasNiceWeather;

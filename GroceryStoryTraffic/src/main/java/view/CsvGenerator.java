@@ -11,8 +11,8 @@ import model.Weather;
 
 public class CsvGenerator {
 
-    int month = 5;
-    int dailyAvg = 2000;
+    static final int MONTH = 5;;
+    static final int DAILY_VOLUME = 2000;
 
     // load useful instances here
     private static PilotSim pilotSim = new PilotSim();
@@ -23,18 +23,18 @@ public class CsvGenerator {
         List<Visit> visits = new ArrayList<>();
 
         for(int i=1; i <= 31; i++) {
-            int dailyNum = 2000;
-            for(int j=0; j < dailyNum; j++) {
+            // int dailyNum = 2000;
+            for(int j=0; j < DAILY_VOLUME; j++) {
                 LocalDateTime ldt = pilotSim.timeGenerator(i);
                 Weather weather = util.findWeather(ldt);
 
                 //incorporate weather into datetime class
                 DateTime dateTime = new DateTime(ldt, weather, util.isHoliday(ldt));
                 Visit visit = new Visit();
-                visit.setVisitID(String.valueOf((i-1)*2000 + j));
+                visit.setVisitID(String.valueOf((i-1)*DAILY_VOLUME + j));
                 visit.setEntryTime(dateTime);
 
-                // not sure about how to generate duration and corresponding leave time
+                // todo (all): Need methods to generate the duration and corresponding leave time.
                 visits.add(visit);
             }
         }

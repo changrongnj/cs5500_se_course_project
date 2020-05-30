@@ -20,7 +20,7 @@ public class DateTime {
     }
 
     public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+        return this.localDateTime;
     }
 
     public void setLocalDateTime(LocalDateTime localDateTime) {
@@ -28,7 +28,7 @@ public class DateTime {
     }
 
     public Weather getWeather() {
-        return weather;
+        return this.weather;
     }
 
     public void setWeather(Weather weather) {
@@ -36,11 +36,11 @@ public class DateTime {
     }
 
     public boolean isHoliday() {
-        return isHoliday;
+        return this.isHoliday;
     }
 
     public void setHoliday(boolean holiday) {
-        isHoliday = holiday;
+        this.isHoliday = holiday;
     }
 
 }

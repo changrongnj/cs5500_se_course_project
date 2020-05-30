@@ -15,11 +15,10 @@ public class PilotSimTest {
 
   @Test
   public void findHour() {
-    System.out.println(test1.findHour(0, test1.getVisitCumulative()));
-    System.out.println(test1.findHour(10, test1.getVisitCumulative()));
-    System.out.println(test1.findHour(30, test1.getVisitCumulative()));
-    System.out.println(test1.findHour(99, test1.getVisitCumulative()));
-
+    System.out.println(test1.findHour(0));
+    System.out.println(test1.findHour(10));
+    System.out.println(test1.findHour(55));
+    System.out.println(test1.findHour(99));
   }
 
   @Test

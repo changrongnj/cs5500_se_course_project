@@ -1,18 +1,15 @@
 package model;
 
-import java.time.LocalDate;
-
 public class Visit {
   private String visitID;
 
-  // I just remembered that LocalDate does not include time data
-  // Will need to think about how to represent the exact time data.
-  // Using String as a placeholder for now.
   // Updated (James): switch to self-defined DateTime class.
   private DateTime entryTime;
+
+  // Will calculate the leave time based on the totalTime.
   private DateTime leaveTime;
 
-  // Will calculate this based on leave time - entry time.
+  // Will need to randomly generate this somehow.
   private Integer totalTime;
 
   public Visit() {
@@ -28,7 +25,7 @@ public class Visit {
   }
 
   public DateTime getEntryTime() {
-    return entryTime;
+    return this.entryTime;
   }
 
   public void setEntryTime(DateTime entryTime) {
@@ -36,7 +33,7 @@ public class Visit {
   }
 
   public DateTime getLeaveTime() {
-    return leaveTime;
+    return this.leaveTime;
   }
 
   public void setLeaveTime(DateTime leaveTime) {
@@ -44,7 +41,7 @@ public class Visit {
   }
 
   public Integer getTotalTime() {
-    return totalTime;
+    return this.totalTime;
   }
 
   public void setTotalTime(Integer totalTime) {

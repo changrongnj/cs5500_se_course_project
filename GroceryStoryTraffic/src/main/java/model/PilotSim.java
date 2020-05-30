@@ -4,7 +4,6 @@ import java.time.Month;
 import java.util.Random;
 
 public class PilotSim {
-
     // Made VISIT_DIST into a constant since we never modify in our calculations.
     private static final int VISIT_YEAR = 2016;
     private static final double[] VISIT_DIST = new double[] {0.03, 0.05, 0.06, 0.08, 0.09, 0.11,
@@ -82,8 +81,8 @@ public class PilotSim {
         for (int i = 1; i < VISIT_DIST.length; i++) {
             visitCumulative[i] = visitCumulative[i - 1] + VISIT_DIST[i] * 100;
         }*/
-        int randomPercent = this.randomNumberGenerator(FULL_PERCENTAGE);
-        int entryHour = this.findHour(randomPercent);
+        int visitPercentage = this.randomNumberGenerator(FULL_PERCENTAGE);
+        int entryHour = this.findHour(visitPercentage);
         int entryMinute = this.randomNumberGenerator(MINUTES_PER_HOUR);
 
         return LocalDateTime.of(VISIT_YEAR, Month.MAY, visitDay, entryHour, entryMinute);
