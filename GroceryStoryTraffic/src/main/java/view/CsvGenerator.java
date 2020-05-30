@@ -1,8 +1,13 @@
-package model;
+package view;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import model.DateTime;
+import model.PilotSim;
+import model.Util;
+import model.Visit;
+import model.Weather;
 
 public class CsvGenerator {
 
