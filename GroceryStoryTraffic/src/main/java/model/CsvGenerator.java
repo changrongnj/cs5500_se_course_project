@@ -26,6 +26,7 @@ public class CsvGenerator {
                 //incorporate weather into datetime class
                 DateTime dateTime = new DateTime(ldt, weather, util.isHoliday(ldt));
                 Visit visit = new Visit();
+                visit.setVisitID(String.valueOf((i-1)*2000 + j));
                 visit.setEntryTime(dateTime);
 
                 // not sure about how to generate duration and corresponding leave time
@@ -33,8 +34,8 @@ public class CsvGenerator {
             }
         }
 
-        // function to convert list of Visit into csv here
-        //...
+        // generate the csv file
+        util.writeToCSV(visits);
 
         // simple test
         for(Visit v: visits) {
