@@ -67,20 +67,13 @@ public class PilotSim {
 
     /**
      * Returns a LocalDateTime instance representing the entry information of a visit.
-     * @param visitDay - An int representing the day of a month that the visit occured.
+     * @param visitDay - An int representing the day of a month that the visit occurred.
      * @return a LocalDateTime instance representing the entry information of a visit.
      */
     public LocalDateTime timeGenerator(int visitDay) {
         final int MINUTES_PER_HOUR = 60;
         final int FULL_PERCENTAGE = 100;
 
-        // This section of code seems independent of the parameter, day.
-        // Moved to a separate method and generated as an attribute of this class instead.
-        /*double[] visitCumulative = new double[TOTAL_STORE_HOURS];
-        visitCumulative[0] = VISIT_DIST[0] * 100;  // Might still have decimals.
-        for (int i = 1; i < VISIT_DIST.length; i++) {
-            visitCumulative[i] = visitCumulative[i - 1] + VISIT_DIST[i] * 100;
-        }*/
         int visitPercentage = this.randomNumberGenerator(FULL_PERCENTAGE);
         int entryHour = this.findHour(visitPercentage);
         int entryMinute = this.randomNumberGenerator(MINUTES_PER_HOUR);
