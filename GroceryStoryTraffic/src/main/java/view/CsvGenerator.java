@@ -1,8 +1,8 @@
 package view;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
 import model.DateTime;
 import model.PilotSim;
 import model.Util;
@@ -38,6 +38,14 @@ public class CsvGenerator {
                 visits.add(visit);
             }
         }
+
+        //sort Visit based on entryTime
+        Collections.sort(visits, new Comparator<Visit>() {
+            @Override
+            public int compare(Visit v1, Visit v2) {
+                return v1.getEntryTime().getLocalDateTime().compareTo(v2.getEntryTime().getLocalDateTime());
+            }
+        });
 
         // generate the csv file
         util.writeToCSV(visits);
