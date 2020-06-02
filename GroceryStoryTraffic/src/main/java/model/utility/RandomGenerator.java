@@ -1,4 +1,4 @@
-package model;
+package model.utility;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -70,7 +70,7 @@ public final class RandomGenerator {
    * @return an int representing the hour of a particular visit.
    */
   private static int findHour(int num, double[] visitCumulative) {
-    final int STORE_OPENING_HOUR = 6;
+    final int STORE_OPENING_HOUR = 8;
     final int DEFAULT_RETURN = -1;
 
     for (int i = 0; i < visitCumulative.length; i++) {
