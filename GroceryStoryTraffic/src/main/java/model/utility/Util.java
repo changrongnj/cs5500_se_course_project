@@ -32,7 +32,8 @@ public class Util {
         JSONParser parser = new JSONParser();
 
         try {
-            Object obj = parser.parse(new FileReader("/Users/yfyan/Desktop/NEU/Summer_2020/cs5500/cs5500_sum2020_group8/GroceryStoryTraffic/src/main/java/weatherData.json"));
+            String filePath = new File("").getAbsolutePath();
+            Object obj = parser.parse(new FileReader(filePath + "/src/main/java/weatherData.json"));
             jsonObject =  (JSONObject) obj;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
