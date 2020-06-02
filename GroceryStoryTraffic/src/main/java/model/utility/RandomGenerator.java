@@ -2,6 +2,9 @@ package model.utility;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public final class RandomGenerator {
@@ -28,9 +31,26 @@ public final class RandomGenerator {
     return LocalDateTime.of(VISIT_YEAR, month, visitDay, entryHour, entryMinute);
   }
 
-  // Todo: Implement this method. Accepts a duration distribution and generates data accordingly.
-  public static int generateDuration() {
-    return 0;
+  /**
+   * Given the duration distribution, returns a random number of duration minutes.
+   * @param dist - A doule array representing the distribution of duration.
+   * @return an int representing the duration(in minute) of a visit.
+   */
+  public static int generateDuration(double[] dist) {
+
+    int[][] intervals = {{6, 20}, {21, 30}, {31, 40}, {41, 50}, {51, 60}, {61, 75}};
+    List<Integer> samples = new ArrayList<>();
+
+    for(int i=0; i < dist.length; i++) {
+      for(int j=0; j < dist[i]*1000; j++) {
+        samples.add(i);
+      }
+    }
+
+    int idx = samples.get(randomNumberGenerator(samples.size()));
+
+    return randomNumberGenerator(intervals[idx][1] - intervals[idx][0] + 1) + intervals[idx][0];
+
   }
 
   /**
