@@ -55,20 +55,22 @@ public class PilotSim {
 
         // sort Visit based on entryTime
 
-//        Collections.sort(visits, new Comparator<Visit>() {
-//            @Override
-//            public int compare(Visit v1, Visit v2) {
-//                return v1.getEntryTime().getLocalDateTime().compareTo(v2.getEntryTime().getLocalDateTime());
-//            }
-//        });
+        for (Day day : days) {
+            Collections.sort(day.getVisits(), new Comparator<Visit>() {
+                @Override
+                public int compare(Visit v1, Visit v2) {
+                    return v1.getEntryTime().getLocalDateTime().compareTo(v2.getEntryTime().getLocalDateTime());
+                }
+            });
+        }
 
         // generate the csv file
         csvGenerator.writeToCSV(days);
 
         // simple test
-//        for(Visit v: visits) {
-//            System.out.println(v.getEntryTime().getLocalDateTime().toString());
-//            System.out.println(v.getEntryTime().getWeather().getAverageTemperature());
-//        }
+        /*for(Visit v: visits) {
+            System.out.println(v.getEntryTime().getLocalDateTime().toString());
+            System.out.println(v.getEntryTime().getWeather().getAverageTemperature());
+        }*/
     }
 }
