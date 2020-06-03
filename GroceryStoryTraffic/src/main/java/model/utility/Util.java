@@ -79,7 +79,7 @@ public class Util {
         return true;
     }
 
-    // self-defined function to calculate DayOfWeekInMonth
+/*    // self-defined function to calculate DayOfWeekInMonth
     public int calDayOfWeekInMonth(LocalDateTime ldt) {
         LocalDate monthStart = LocalDate.of(ldt.getYear(), ldt.getMonth(), 1);
         DayOfWeek dayOfWeek = monthStart.getDayOfWeek();
@@ -151,5 +151,5 @@ public class Util {
 
         // IF NOTHING ELSE, IT'S A BUSINESS DAY
         return false;
-    }
+    }*/
 }

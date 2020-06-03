@@ -92,7 +92,7 @@ public class CsvGenerator {
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("Temperature");
             oneLine.append(CSV_SEPARATOR);
-            oneLine.append("IsHoliday");
+            oneLine.append("HolidayType");
             bw.write(oneLine.toString());
             bw.newLine();
             for (Day day : dayList) {  // todo: Need to review if this modification is okay.

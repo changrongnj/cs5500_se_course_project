@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import model.*;
+import model.utility.HolidayDeterminer;
 import model.utility.RandomGenerator;
 import model.utility.Util;
 import view.CsvGenerator;
@@ -191,7 +192,7 @@ public class PilotSim {
                 Weather weather = util.findWeather(ldt);
 
                 //incorporate weather into datetime class
-                DateTime dateTime = new DateTime(ldt, weather, util.isHoliday(ldt));
+                DateTime dateTime = new DateTime(ldt, weather, HolidayDeterminer.getHolidayInfo(ldt));
                 Visit visit = new Visit();
                 visit.setVisitID(String.valueOf((i-1)*DAILY_VOLUME + j));
                 visit.setEntryTime(dateTime);
@@ -202,7 +203,7 @@ public class PilotSim {
 
                 // generate the corresponding leave time.
                 LocalDateTime leaveTime = ldt.plusMinutes(totalMinutes);
-                DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime), util.isHoliday(leaveTime));
+                DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime), HolidayDeterminer.getHolidayInfo(ldt));
                 visit.setLeaveTime(leaveDateTime);
 
                 newDay.addVisit(visit);
