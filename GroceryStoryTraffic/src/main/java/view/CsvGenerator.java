@@ -84,6 +84,10 @@ public class CsvGenerator {
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("EntryTime");
             oneLine.append(CSV_SEPARATOR);
+            oneLine.append("LeaveTime");
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append("Duration(minute)");
+            oneLine.append(CSV_SEPARATOR);
             oneLine.append("IsNiceWeather");
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("Temperature");
@@ -98,6 +102,10 @@ public class CsvGenerator {
                     oneLine.append(visit.getVisitID());
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getEntryTime().getLocalDateTime().format(formatter));
+                    oneLine.append(CSV_SEPARATOR);
+                    oneLine.append(visit.getLeaveTime().getLocalDateTime().format(formatter));
+                    oneLine.append(CSV_SEPARATOR);
+                    oneLine.append(visit.getTotalTime());
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getEntryTime().getWeather().getWasNiceWeather());
                     oneLine.append(CSV_SEPARATOR);

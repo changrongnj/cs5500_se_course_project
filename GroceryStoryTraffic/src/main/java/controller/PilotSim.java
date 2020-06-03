@@ -1,13 +1,12 @@
 package controller;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import model.DateTime;
-import model.Day;
-import model.Visit;
-import model.Weather;
+
+import model.*;
 import model.utility.RandomGenerator;
 import model.utility.Util;
 import view.CsvGenerator;
@@ -34,11 +33,161 @@ public class PilotSim {
     public static void main(String[] args) {
         // List<Visit> visits = new ArrayList<>();
         List<Day> days = new ArrayList<>();  // List of days of the month.
+        Constant constant = new Constant();
 
         for(int i=1; i <= DAYS_IN_MONTH; i++) {
+
             Day newDay = new Day();
+            // initialize a LocalDate instance here for determination
+            LocalDate ld = LocalDate.of(2016, 5, i);
+
+            // TODO: use amountOfCustomers here to replace DAILY_VOLUME
+
             for(int j=0; j < DAILY_VOLUME; j++) {
-                LocalDateTime ldt = RandomGenerator.generateEntryData(i, VISIT_DIST);
+
+                LocalDateTime ldt = null;
+                double[] durationDist = null;
+
+                switch (ld.getDayOfWeek()) {
+                    case MONDAY:
+                        ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Monday"));
+                        if(ldt.getHour() < 10) {
+                            durationDist = constant.getDurationTimeDist().get("6-9").get("Monday");
+                        } else if(ldt.getHour() < 12) {
+                            durationDist = constant.getDurationTimeDist().get("10-11").get("Monday");
+                        } else if(ldt.getHour() < 13) {
+                            durationDist = constant.getDurationTimeDist().get("12").get("Monday");
+                        } else if(ldt.getHour() < 17) {
+                            durationDist = constant.getDurationTimeDist().get("13-16").get("Monday");
+                        } else if(ldt.getHour() < 19) {
+                            durationDist = constant.getDurationTimeDist().get("17-18").get("Monday");
+                        } else {
+                            durationDist = constant.getDurationTimeDist().get("19-20").get("Monday");
+                        }
+                    case TUESDAY:
+                        ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Tuesday"));
+                        if(ldt.getHour() < 10) {
+                            durationDist = constant.getDurationTimeDist().get("6-9").get("Tuesday");
+                        } else if(ldt.getHour() < 12) {
+                            durationDist = constant.getDurationTimeDist().get("10-11").get("Tuesday");
+                        } else if(ldt.getHour() < 13) {
+                            durationDist = constant.getDurationTimeDist().get("12").get("Tuesday");
+                        } else if(ldt.getHour() < 17) {
+                            durationDist = constant.getDurationTimeDist().get("13-16").get("Tuesday");
+                        } else if(ldt.getHour() < 19) {
+                            durationDist = constant.getDurationTimeDist().get("17-18").get("Tuesday");
+                        } else {
+                            durationDist = constant.getDurationTimeDist().get("19-20").get("Tuesday");
+                        }
+                    case WEDNESDAY:
+                        ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Wednesday"));
+                        if(ldt.getHour() < 10) {
+                            durationDist = constant.getDurationTimeDist().get("6-9").get("Wednesday");
+                        } else if(ldt.getHour() < 12) {
+                            durationDist = constant.getDurationTimeDist().get("10-11").get("Wednesday");
+                        } else if(ldt.getHour() < 13) {
+                            durationDist = constant.getDurationTimeDist().get("12").get("Wednesday");
+                        } else if(ldt.getHour() < 17) {
+                            durationDist = constant.getDurationTimeDist().get("13-16").get("Wednesday");
+                        } else if(ldt.getHour() < 19) {
+                            durationDist = constant.getDurationTimeDist().get("17-18").get("Wednesday");
+                        } else {
+                            durationDist = constant.getDurationTimeDist().get("19-20").get("Wednesday");
+                        }
+                    case THURSDAY:
+                        ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Thursday"));
+                        if(ldt.getHour() < 10) {
+                            durationDist = constant.getDurationTimeDist().get("6-9").get("Thursday");
+                        } else if(ldt.getHour() < 12) {
+                            durationDist = constant.getDurationTimeDist().get("10-11").get("Thursday");
+                        } else if(ldt.getHour() < 13) {
+                            durationDist = constant.getDurationTimeDist().get("12").get("Thursday");
+                        } else if(ldt.getHour() < 17) {
+                            durationDist = constant.getDurationTimeDist().get("13-16").get("Thursday");
+                        } else if(ldt.getHour() < 19) {
+                            durationDist = constant.getDurationTimeDist().get("17-18").get("Thursday");
+                        } else {
+                            durationDist = constant.getDurationTimeDist().get("19-20").get("Thursday");
+                        }
+                    case FRIDAY:
+                        ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Friday"));
+                        if(ldt.getHour() < 10) {
+                            durationDist = constant.getDurationTimeDist().get("6-9").get("Friday");
+                        } else if(ldt.getHour() < 12) {
+                            durationDist = constant.getDurationTimeDist().get("10-11").get("Friday");
+                        } else if(ldt.getHour() < 13) {
+                            durationDist = constant.getDurationTimeDist().get("12").get("Friday");
+                        } else if(ldt.getHour() < 17) {
+                            durationDist = constant.getDurationTimeDist().get("13-16").get("Friday");
+                        } else if(ldt.getHour() < 19) {
+                            durationDist = constant.getDurationTimeDist().get("17-18").get("Friday");
+                        } else {
+                            durationDist = constant.getDurationTimeDist().get("19-20").get("Friday");
+                        }
+                    case SATURDAY:
+                        ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Saturday"));
+                        if(ldt.getHour() < 10) {
+                            durationDist = constant.getDurationTimeDist().get("6-9").get("Saturday");
+                        } else if(ldt.getHour() < 12) {
+                            durationDist = constant.getDurationTimeDist().get("10-11").get("Saturday");
+                        } else if(ldt.getHour() < 13) {
+                            durationDist = constant.getDurationTimeDist().get("12").get("Saturday");
+                        } else if(ldt.getHour() < 17) {
+                            durationDist = constant.getDurationTimeDist().get("13-16").get("Saturday");
+                        } else if(ldt.getHour() < 19) {
+                            durationDist = constant.getDurationTimeDist().get("17-18").get("Saturday");
+                        } else {
+                            durationDist = constant.getDurationTimeDist().get("19-20").get("Saturday");
+                        }
+                        if(util.findWeather(ldt).getWasNiceWeather()) {
+                            ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("NiceSaturday"));
+                            if(ldt.getHour() < 10) {
+                                durationDist = constant.getDurationTimeDist().get("6-9").get("NiceSaturday");
+                            } else if(ldt.getHour() < 12) {
+                                durationDist = constant.getDurationTimeDist().get("10-11").get("NiceSaturday");
+                            } else if(ldt.getHour() < 13) {
+                                durationDist = constant.getDurationTimeDist().get("12").get("NiceSaturday");
+                            } else if(ldt.getHour() < 17) {
+                                durationDist = constant.getDurationTimeDist().get("13-16").get("NiceSaturday");
+                            } else if(ldt.getHour() < 19) {
+                                durationDist = constant.getDurationTimeDist().get("17-18").get("NiceSaturday");
+                            } else {
+                                durationDist = constant.getDurationTimeDist().get("19-20").get("NiceSaturday");
+                            }
+                        }
+                    case SUNDAY:
+                        ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Sunday"));
+                        if(ldt.getHour() < 10) {
+                            durationDist = constant.getDurationTimeDist().get("6-9").get("Sunday");
+                        } else if(ldt.getHour() < 12) {
+                            durationDist = constant.getDurationTimeDist().get("10-11").get("Sunday");
+                        } else if(ldt.getHour() < 13) {
+                            durationDist = constant.getDurationTimeDist().get("12").get("Sunday");
+                        } else if(ldt.getHour() < 17) {
+                            durationDist = constant.getDurationTimeDist().get("13-16").get("Sunday");
+                        } else if(ldt.getHour() < 19) {
+                            durationDist = constant.getDurationTimeDist().get("17-18").get("Sunday");
+                        } else {
+                            durationDist = constant.getDurationTimeDist().get("19-20").get("Sunday");
+                        }
+                        if(util.findWeather(ldt).getWasNiceWeather()) {
+                            ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("NiceSunday"));
+                            if(ldt.getHour() < 10) {
+                                durationDist = constant.getDurationTimeDist().get("6-9").get("NiceSunday");
+                            } else if(ldt.getHour() < 12) {
+                                durationDist = constant.getDurationTimeDist().get("10-11").get("NiceSunday");
+                            } else if(ldt.getHour() < 13) {
+                                durationDist = constant.getDurationTimeDist().get("12").get("NiceSunday");
+                            } else if(ldt.getHour() < 17) {
+                                durationDist = constant.getDurationTimeDist().get("13-16").get("NiceSunday");
+                            } else if(ldt.getHour() < 19) {
+                                durationDist = constant.getDurationTimeDist().get("17-18").get("NiceSunday");
+                            } else {
+                                durationDist = constant.getDurationTimeDist().get("19-20").get("NiceSunday");
+                            }
+                        }
+                }
+
                 Weather weather = util.findWeather(ldt);
 
                 //incorporate weather into datetime class
@@ -47,7 +196,15 @@ public class PilotSim {
                 visit.setVisitID(String.valueOf((i-1)*DAILY_VOLUME + j));
                 visit.setEntryTime(dateTime);
 
-                // todo (all): Need methods to generate the duration and corresponding leave time.
+                // generate the corresponding duration time(Minutes).
+                int totalMinutes = RandomGenerator.generateDuration(durationDist);
+                visit.setTotalTime(totalMinutes);
+
+                // generate the corresponding leave time.
+                LocalDateTime leaveTime = ldt.plusMinutes(totalMinutes);
+                DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime), util.isHoliday(leaveTime));
+                visit.setLeaveTime(leaveDateTime);
+
                 newDay.addVisit(visit);
             }
             days.add(newDay);

@@ -70,7 +70,7 @@ public final class RandomGenerator {
    * @return an array of doubles representing the cumulative visits by hour for the day.
    */
   private static double[] getVisitCumulative(double[] visitDist) {
-    final int TOTAL_STORE_HOURS = 13;
+    final int TOTAL_STORE_HOURS = 15;
     final int PERCENT_CONVERSION_FACTOR = 100;
 
     double[] visitCumulative = new double[TOTAL_STORE_HOURS];
@@ -90,7 +90,7 @@ public final class RandomGenerator {
    * @return an int representing the hour of a particular visit.
    */
   private static int findHour(int num, double[] visitCumulative) {
-    final int STORE_OPENING_HOUR = 8;
+    final int STORE_OPENING_HOUR = 6;
     final int DEFAULT_RETURN = -1;
 
     for (int i = 0; i < visitCumulative.length; i++) {
