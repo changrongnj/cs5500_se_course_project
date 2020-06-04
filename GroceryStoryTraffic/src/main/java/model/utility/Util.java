@@ -54,7 +54,7 @@ public class Util {
     public Weather findWeather(LocalDateTime ldt) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String key = ldt.format(formatter).substring(0, 13) + ":00:00";
-        System.out.println(key);
+//        System.out.println(key);
 //        for(String k:weatherMap.keySet())
 //            System.out.println(k);
         String[] ans = weatherMap.get(key).split("-");

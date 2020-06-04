@@ -18,7 +18,6 @@ public class PilotSim {
     // This class will be in charge of putting everything together for a month of data.
     static final int MONTH = 5;  // Todo: Figure out how to incorporate the month parameter.
     static final int DAYS_IN_MONTH = 31;
-    static final int DAILY_VOLUME = 2000;  // Todo: Adjust this to actual values later.
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
 
@@ -35,6 +34,7 @@ public class PilotSim {
         // List<Visit> visits = new ArrayList<>();
         List<Day> days = new ArrayList<>();  // List of days of the month.
         Constant constant = new Constant();
+        Integer DAILY_VOLUME = 2000;
 
         for(int i=1; i <= DAYS_IN_MONTH; i++) {
 
@@ -42,7 +42,57 @@ public class PilotSim {
             // initialize a LocalDate instance here for determination
             LocalDate ld = LocalDate.of(2016, 5, i);
 
-            // TODO: use amountOfCustomers here to replace DAILY_VOLUME
+            // TODO: Maybe we don't have to use LocalDateTime as getHolidayInfo's input, LocalDate should contain enough information
+            HolidayType holidayType = HolidayDeterminer.getHolidayInfo(LocalDateTime.of(2016, 5, i, 12, 0));
+            switch (holidayType) {
+                case IS_HOLIDAY:
+                    DAILY_VOLUME = constant.getAmountOfCustomers().get("Holiday");
+                case DAY_BEFORE_HOLIDAY:
+                    DAILY_VOLUME = constant.getAmountOfCustomers().get("DayBeforeHoliday");
+                case WEEK_TO_HOLIDAY:
+                    switch (ld.getDayOfWeek()) {
+                        case MONDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("MondayBeforeHoliday");
+                        case TUESDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("TuesdayBeforeHoliday");
+                        case WEDNESDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("WednesdayBeforeHoliday");
+                        case THURSDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("ThursdayBeforeHoliday");
+                        case FRIDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("FridayBeforeHoliday");
+                        case SATURDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("SaturdayBeforeHoliday");
+                        case SUNDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("SundayBeforeHoliday");
+                    }
+                case NON_HOLIDAY:
+                    switch (ld.getDayOfWeek()) {
+                    case MONDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Monday");
+                    case TUESDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Tuesday");
+                    case WEDNESDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Wednesday");
+                    case THURSDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Thursday");
+                    case FRIDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Friday");
+                    case SATURDAY:
+                        // TODO: I use the weather at 12am to represent the whole day's weather(there could be some better idea)
+                        if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather()) {
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("NiceWeekend");
+                        } else {
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("Saturday");
+                        }
+                    case SUNDAY:
+                        if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather()) {
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("NiceWeekend");
+                        } else {
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("Sunday");
+                        }
+                }
+            }
 
             for(int j=0; j < DAILY_VOLUME; j++) {
 
