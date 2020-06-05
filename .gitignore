@@ -36,3 +36,6 @@ hs_err_pid*
 gradlew.bat
 settings.gradle
 .DS_Store
+
+# Ignore codeMR files
+*codemr/
