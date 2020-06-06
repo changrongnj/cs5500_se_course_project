@@ -74,7 +74,7 @@ public class CsvGenerator {
         // borrow some code from https://stackoverflow.com/questions/3666007/how-to-serialize-object-to-csv-file
 
         String CSV_SEPARATOR = ",";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         try {
 
@@ -101,9 +101,9 @@ public class CsvGenerator {
                     oneLine = new StringBuilder();
                     oneLine.append(visit.getVisitID());
                     oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getEntryTime().getLocalDateTime().format(formatter));
+                    oneLine.append(visit.getEntryTime().getLocalDateTime().withYear(2020).format(formatter));
                     oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getLeaveTime().getLocalDateTime().format(formatter));
+                    oneLine.append(visit.getLeaveTime().getLocalDateTime().withYear(2020).format(formatter));
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getTotalTime());
                     oneLine.append(CSV_SEPARATOR);
