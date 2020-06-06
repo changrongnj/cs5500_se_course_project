@@ -1,4 +1,4 @@
-package model;
+package model.data;
 
 import java.time.DayOfWeek;
 import java.util.HashMap;

@@ -1,10 +1,11 @@
-package model;
+package model.data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+import model.HolidayType;
 
 /**
  * Creates an instance of the class HolidayRelatedDates which contains a single method,

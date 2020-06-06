@@ -3,7 +3,7 @@ package model.utility;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
-import model.HolidayRelatedDates;
+import model.data.HolidayRelatedDates;
 import model.HolidayType;
 
 /**
