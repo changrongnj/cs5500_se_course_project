@@ -47,19 +47,19 @@ public final class HolidayDeterminer {
     return false;
   }
 
-  public static HolidayType getHolidayInfo(LocalDateTime ltd) {
-    HolidayRelatedDates dates = new HolidayRelatedDates(2016);
-    HashMap<HolidayType, List<LocalDate>> allDates = dates.get2016Map();
+  public static HolidayType getHolidayInfo(LocalDate date, int targetYear) {
+    HolidayRelatedDates dates = new HolidayRelatedDates();
+    HashMap<HolidayType, List<LocalDate>> allDates = dates.getHolidaysByYear(targetYear);
 
-    if (isHoliday(allDates.get(HolidayType.IS_HOLIDAY), ltd.toLocalDate())) {
+    if (isHoliday(allDates.get(HolidayType.IS_HOLIDAY), date)) {
       return HolidayType.IS_HOLIDAY;
     }
 
-    if (isHoliday(allDates.get(HolidayType.DAY_BEFORE_HOLIDAY), ltd.toLocalDate())) {
+    if (isHoliday(allDates.get(HolidayType.DAY_BEFORE_HOLIDAY), date)) {
       return HolidayType.DAY_BEFORE_HOLIDAY;
     }
 
-    if (isWeekToHoliday(allDates.get(HolidayType.WEEK_TO_HOLIDAY), ltd.toLocalDate())) {
+    if (isWeekToHoliday(allDates.get(HolidayType.WEEK_TO_HOLIDAY), date)) {
       return HolidayType.WEEK_TO_HOLIDAY;
     }
 
