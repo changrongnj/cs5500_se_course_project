@@ -1,7 +1,7 @@
 package model.utility;
 
-import model.Constant;
 import model.HolidayType;
+import model.data.Constant;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

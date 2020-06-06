@@ -7,9 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import model.*;
-import model.utility.HolidayDeterminer;
-import model.utility.RandomGenerator;
-import model.utility.Util;
+import model.data.Constant;
+import model.utility.*;
 import view.CsvGenerator;
 
 
@@ -44,57 +43,57 @@ public class PilotSim {
             // initialize a LocalDate instance here for determination
             LocalDate ld = LocalDate.of(2016, 5, i);
 
-//            // TODO: Maybe we don't have to use LocalDateTime as getHolidayInfo's input, LocalDate should contain enough information
-//            HolidayType holidayType = HolidayDeterminer.getHolidayInfo(LocalDateTime.of(2016, 5, i, 12, 0));
-//            switch (holidayType) {
-//                case IS_HOLIDAY:
-//                    DAILY_VOLUME = constant.getAmountOfCustomers().get("Holiday");
-//                case DAY_BEFORE_HOLIDAY:
-//                    DAILY_VOLUME = constant.getAmountOfCustomers().get("DayBeforeHoliday");
-//                case WEEK_TO_HOLIDAY:
-//                    switch (ld.getDayOfWeek()) {
-//                        case MONDAY:
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("MondayBeforeHoliday");
-//                        case TUESDAY:
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("TuesdayBeforeHoliday");
-//                        case WEDNESDAY:
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("WednesdayBeforeHoliday");
-//                        case THURSDAY:
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("ThursdayBeforeHoliday");
-//                        case FRIDAY:
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("FridayBeforeHoliday");
-//                        case SATURDAY:
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("SaturdayBeforeHoliday");
-//                        case SUNDAY:
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("SundayBeforeHoliday");
-//                    }
-//                case NON_HOLIDAY:
-//                    switch (ld.getDayOfWeek()) {
-//                    case MONDAY:
-//                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Monday");
-//                    case TUESDAY:
-//                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Tuesday");
-//                    case WEDNESDAY:
-//                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Wednesday");
-//                    case THURSDAY:
-//                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Thursday");
-//                    case FRIDAY:
-//                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Friday");
-//                    case SATURDAY:
-//                        // TODO: I use the weather at 12am to represent the whole day's weather(there could be some better idea)
-//                        if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather()) {
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("NiceWeekend");
-//                        } else {
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("Saturday");
-//                        }
-//                    case SUNDAY:
-//                        if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather()) {
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("NiceWeekend");
-//                        } else {
-//                            DAILY_VOLUME = constant.getAmountOfCustomers().get("Sunday");
-//                        }
-//                }
-//            }
+            // Fixed so that getHolidayInfo accepts LocalDate instead.
+            HolidayType holidayType = HolidayDeterminer.getHolidayInfo(LocalDate.of(2016, 5, i));
+            switch (holidayType) {
+                case IS_HOLIDAY:
+                    DAILY_VOLUME = constant.getAmountOfCustomers().get("Holiday");
+                case DAY_BEFORE_HOLIDAY:
+                    DAILY_VOLUME = constant.getAmountOfCustomers().get("DayBeforeHoliday");
+                case WEEK_TO_HOLIDAY:
+                    switch (ld.getDayOfWeek()) {
+                        case MONDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("MondayBeforeHoliday");
+                        case TUESDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("TuesdayBeforeHoliday");
+                        case WEDNESDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("WednesdayBeforeHoliday");
+                        case THURSDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("ThursdayBeforeHoliday");
+                        case FRIDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("FridayBeforeHoliday");
+                        case SATURDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("SaturdayBeforeHoliday");
+                        case SUNDAY:
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("SundayBeforeHoliday");
+                    }
+                case NON_HOLIDAY:
+                    switch (ld.getDayOfWeek()) {
+                    case MONDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Monday");
+                    case TUESDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Tuesday");
+                    case WEDNESDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Wednesday");
+                    case THURSDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Thursday");
+                    case FRIDAY:
+                        DAILY_VOLUME = constant.getAmountOfCustomers().get("Friday");
+                    case SATURDAY:
+                        // TODO: I use the weather at 12am to represent the whole day's weather(there could be some better idea)
+                        if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather()) {
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("NiceWeekend");
+                        } else {
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("Saturday");
+                        }
+                    case SUNDAY:
+                        if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather()) {
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("NiceWeekend");
+                        } else {
+                            DAILY_VOLUME = constant.getAmountOfCustomers().get("Sunday");
+                        }
+                }
+            }
 
             for(int j=0; j < DAILY_VOLUME; j++) {
 
@@ -244,7 +243,7 @@ public class PilotSim {
                 Weather weather = util.findWeather(ldt);
 
                 //incorporate weather into datetime class
-                DateTime dateTime = new DateTime(ldt, weather, HolidayDeterminer.getHolidayInfo(ldt));
+                DateTime dateTime = new DateTime(ldt, weather, HolidayDeterminer.getHolidayInfo(ldt.toLocalDate()));
                 Visit visit = new Visit();
                 visit.setVisitID(String.valueOf((i-1)*DAILY_VOLUME + j));
                 visit.setEntryTime(dateTime);
@@ -255,7 +254,8 @@ public class PilotSim {
 
                 // generate the corresponding leave time.
                 LocalDateTime leaveTime = ldt.plusMinutes(totalMinutes);
-                DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime), HolidayDeterminer.getHolidayInfo(ldt));
+                DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime),
+                    HolidayDeterminer.getHolidayInfo(ldt.toLocalDate()));
                 visit.setLeaveTime(leaveDateTime);
 
                 newDay.addVisit(visit);
