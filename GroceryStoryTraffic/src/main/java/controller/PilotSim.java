@@ -20,11 +20,6 @@ public class PilotSim {
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
 
-    private static final double[] VISIT_DIST = new double[] {0.03, 0.05, 0.06, 0.08, 0.09, 0.11,
-        0.095, 0.08, 0.07, 0.085, 0.12, 0.095, 0.035};  // Todo: Pass this as parameter.
-
-
-
     // (Andy): I moved the main class to PilotSim since it seemed more appropriate to run the
     // simulations here. I am currently defining the Day class as a concrete class, but I plan on
     // making it an abstract class with sub-classes later (if that still makes sense) to allow more
@@ -47,8 +42,10 @@ public class PilotSim {
 
             for(int j=0; j < DAILY_VOLUME; j++) {
 
+                // now use DistributionDeterminer for getting a random entry time.
                 LocalDateTime ldt = DistributionDeterminer.getEntryTime(i, ld, constant, util);
 
+                // now use DistributionDeterminer for retrieving a distribution.
                 double[] durationDist = DistributionDeterminer.getDurationDistribution(ldt, constant, util);
 
                 Weather weather = util.findWeather(ldt);
