@@ -101,7 +101,7 @@ public class CsvGenerator {
                     oneLine = new StringBuilder();
                     oneLine.append(visit.getVisitID());
                     oneLine.append(CSV_SEPARATOR);
-                    // here replace the year with 2016
+                    // here replace the year with 2020
                     oneLine.append(visit.getEntryTime().getLocalDateTime().withYear(2020).format(formatter));
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getLeaveTime().getLocalDateTime().withYear(2020).format(formatter));
