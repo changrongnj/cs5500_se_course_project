@@ -1,55 +1,26 @@
 package model.utility;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import model.HolidayRelatedDates;
 import model.HolidayType;
 
+/**
+ * A static class containing a single static method, getHolidayInfo(LocalDate) which returns a
+ * self-defined enum, HolidayType based on the specified LocalDate object.
+ */
 public final class HolidayDeterminer {
   private HolidayDeterminer() {}
 
-/*  // self-defined function to calculate DayOfWeekInMonth
-  public static int calDayOfWeekInMonth(LocalDateTime ldt) {
-    LocalDate monthStart = LocalDate.of(ldt.getYear(), ldt.getMonth(), 1);
-    DayOfWeek dayOfWeek = monthStart.getDayOfWeek();
-    int newStart = 8 - dayOfWeek.getValue();
-    return (ldt.getDayOfMonth() - newStart + 7 - 1) / 7 + 1;
-  }*/
-
-  public static boolean isHoliday(List<LocalDate> localDates, LocalDate ldt) {
-    for (LocalDate date : localDates) {
-      if (date.equals(ldt)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-//  public static boolean isDayBeforeHoliday(List<LocalDate> localDates, LocalDate ldt) {
-//    for (LocalDate date : localDates) {
-//      if (date.equals(ldt)) {
-//        return true;
-//      }
-//    }
-//    return false;
-//  }
-
-  public static boolean isWeekToHoliday(List<LocalDate> localDates, LocalDate ldt) {
-    for (LocalDate date : localDates) {
-      int holidayTarget = date.getDayOfYear();
-      int potentialMatch = ldt.getDayOfYear();
-      if (potentialMatch >= holidayTarget && potentialMatch - 7 <= holidayTarget) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  public static HolidayType getHolidayInfo(LocalDate date, int targetYear) {
+  /**
+   * Returns an enum representing the type of holiday based on the provided date
+   * @param date - LocalDate instance representing the date of interest.
+   * @return an enum representing the type of holiday based on the provided date
+   */
+  public static HolidayType getHolidayInfo(LocalDate date) {
     HolidayRelatedDates dates = new HolidayRelatedDates();
-    HashMap<HolidayType, List<LocalDate>> allDates = dates.getHolidaysByYear(targetYear);
+    HashMap<HolidayType, List<LocalDate>> allDates = dates.getHolidaysByYear(date.getYear());
 
     if (isHoliday(allDates.get(HolidayType.IS_HOLIDAY), date)) {
       return HolidayType.IS_HOLIDAY;
@@ -65,4 +36,47 @@ public final class HolidayDeterminer {
 
     return HolidayType.NON_HOLIDAY;
   }
+
+  /**
+   * Helper function.
+   * Returns a boolean indicating whether or not the given date is a holiday/day before holiday.
+   * @param localDates - List of LocalDate objects representing the holidays/days before holiday.
+   * @param date - LocalDate representing a single date being compared.
+   * @return a boolean indicating whether or not the given date is a holiday.
+   */
+  private static boolean isHoliday(List<LocalDate> localDates, LocalDate date) {
+    for (LocalDate holiday : localDates) {
+      if (date.equals(holiday)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Returns a boolean indicating whether or not the given date is within a holiday week.
+   * @param localDates - List of LocalDate objects representing the holidays of that year.
+   * @param date - LocalDate instance representing the date being compared.
+   * @return a boolean indicating whether or not the given date is within a holiday week.
+   */
+  private static boolean isWeekToHoliday(List<LocalDate> localDates, LocalDate date) {
+    for (LocalDate holiday : localDates) {
+      int holidayTarget = holiday.getDayOfYear();
+      int potentialMatch = date.getDayOfYear();
+      if (potentialMatch >= holidayTarget && potentialMatch - 7 <= holidayTarget) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /*
+  // (Andy): I left this here since it might still be useful in refactoring.
+  // self-defined function to calculate DayOfWeekInMonth
+  public static int calDayOfWeekInMonth(LocalDateTime ldt) {
+    LocalDate monthStart = LocalDate.of(ldt.getYear(), ldt.getMonth(), 1);
+    DayOfWeek dayOfWeek = monthStart.getDayOfWeek();
+    int newStart = 8 - dayOfWeek.getValue();
+    return (ldt.getDayOfMonth() - newStart + 7 - 1) / 7 + 1;
+  }*/
 }

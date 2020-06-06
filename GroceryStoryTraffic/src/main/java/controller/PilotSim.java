@@ -18,7 +18,6 @@ public class PilotSim {
     // This class will be in charge of putting everything together for a month of data.
     static final int MONTH = 5;  // Todo: Figure out how to incorporate the month parameter.
     static final int DAYS_IN_MONTH = 31;
-    static final int TARGET_YEAR = 2016;
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
 
@@ -44,8 +43,7 @@ public class PilotSim {
             LocalDate ld = LocalDate.of(2016, 5, i);
 
             // Fixed so that getHolidayInfo accepts LocalDate instead.
-            HolidayType holidayType = HolidayDeterminer.getHolidayInfo(
-                LocalDate.of(2016, 5, i), TARGET_YEAR);
+            HolidayType holidayType = HolidayDeterminer.getHolidayInfo(LocalDate.of(2016, 5, i));
             switch (holidayType) {
                 case IS_HOLIDAY:
                     DAILY_VOLUME = constant.getAmountOfCustomers().get("Holiday");
@@ -244,8 +242,7 @@ public class PilotSim {
                 Weather weather = util.findWeather(ldt);
 
                 //incorporate weather into datetime class
-                DateTime dateTime = new DateTime(ldt, weather,
-                    HolidayDeterminer.getHolidayInfo(ldt.toLocalDate(), TARGET_YEAR));
+                DateTime dateTime = new DateTime(ldt, weather, HolidayDeterminer.getHolidayInfo(ldt.toLocalDate()));
                 Visit visit = new Visit();
                 visit.setVisitID(String.valueOf((i-1)*DAILY_VOLUME + j));
                 visit.setEntryTime(dateTime);
@@ -257,7 +254,7 @@ public class PilotSim {
                 // generate the corresponding leave time.
                 LocalDateTime leaveTime = ldt.plusMinutes(totalMinutes);
                 DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime),
-                    HolidayDeterminer.getHolidayInfo(ldt.toLocalDate(), TARGET_YEAR));
+                    HolidayDeterminer.getHolidayInfo(ldt.toLocalDate()));
                 visit.setLeaveTime(leaveDateTime);
 
                 newDay.addVisit(visit);
