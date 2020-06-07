@@ -21,7 +21,7 @@ public final class RandomGenerator {
   public static LocalDateTime generateEntryData(int visitDay, double[] visitDist) {
     final int MINUTES_PER_HOUR = 60;
     final int FULL_PERCENTAGE = 100;
-    final int VISIT_YEAR = 2016;  // Make this a parameter?
+    final int VISIT_YEAR = 2020;  // Make this a parameter?
     final Month month = Month.MAY;  // Make this a parameter?
 
     int visitPercentage = randomNumberGenerator(FULL_PERCENTAGE);

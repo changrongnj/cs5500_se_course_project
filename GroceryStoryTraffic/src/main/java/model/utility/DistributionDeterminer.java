@@ -100,8 +100,10 @@ public final class DistributionDeterminer {
 
         double[] durationDist = new double[0];
         if(ldt.getDayOfWeek() == DayOfWeek.MONDAY) {
-            if(ldt.getHour() < 10) {
-                durationDist = constant.getDurationTimeDist().get("6-9").get("Monday");
+            if(ldt.getHour() < 8) {
+                durationDist = constant.getDurationTimeDist().get("6-7").get("Monday");
+            } else if(ldt.getHour() < 10) {
+                durationDist = constant.getDurationTimeDist().get("8-9").get("Monday");
             } else if(ldt.getHour() < 12) {
                 durationDist = constant.getDurationTimeDist().get("10-11").get("Monday");
             } else if(ldt.getHour() < 13) {
@@ -114,8 +116,10 @@ public final class DistributionDeterminer {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Monday");
             }
         } else if(ldt.getDayOfWeek() == DayOfWeek.TUESDAY) {
-            if(ldt.getHour() < 10) {
-                durationDist = constant.getDurationTimeDist().get("6-9").get("Tuesday");
+            if(ldt.getHour() < 8) {
+                durationDist = constant.getDurationTimeDist().get("6-7").get("Tuesday");
+            } else if(ldt.getHour() < 10) {
+                durationDist = constant.getDurationTimeDist().get("8-9").get("Tuesday");
             } else if(ldt.getHour() < 12) {
                 durationDist = constant.getDurationTimeDist().get("10-11").get("Tuesday");
             } else if(ldt.getHour() < 13) {
@@ -128,8 +132,10 @@ public final class DistributionDeterminer {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Tuesday");
             }
         } else if(ldt.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
-            if(ldt.getHour() < 10) {
-                durationDist = constant.getDurationTimeDist().get("6-9").get("Wednesday");
+            if(ldt.getHour() < 8) {
+                durationDist = constant.getDurationTimeDist().get("6-7").get("Wednesday");
+            } else if(ldt.getHour() < 10) {
+                durationDist = constant.getDurationTimeDist().get("8-9").get("Wednesday");
             } else if(ldt.getHour() < 12) {
                 durationDist = constant.getDurationTimeDist().get("10-11").get("Wednesday");
             } else if(ldt.getHour() < 13) {
@@ -142,8 +148,10 @@ public final class DistributionDeterminer {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Wednesday");
             }
         } else if(ldt.getDayOfWeek() == DayOfWeek.THURSDAY) {
-            if(ldt.getHour() < 10) {
-                durationDist = constant.getDurationTimeDist().get("6-9").get("Thursday");
+            if(ldt.getHour() < 8) {
+                durationDist = constant.getDurationTimeDist().get("6-7").get("Thursday");
+            } else if(ldt.getHour() < 10) {
+                durationDist = constant.getDurationTimeDist().get("8-9").get("Thursday");
             } else if(ldt.getHour() < 12) {
                 durationDist = constant.getDurationTimeDist().get("10-11").get("Thursday");
             } else if(ldt.getHour() < 13) {
@@ -156,8 +164,10 @@ public final class DistributionDeterminer {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Thursday");
             }
         } else if(ldt.getDayOfWeek() == DayOfWeek.FRIDAY) {
-            if(ldt.getHour() < 10) {
-                durationDist = constant.getDurationTimeDist().get("6-9").get("Friday");
+            if(ldt.getHour() < 8) {
+                durationDist = constant.getDurationTimeDist().get("6-7").get("Friday");
+            } else if(ldt.getHour() < 10) {
+                durationDist = constant.getDurationTimeDist().get("8-9").get("Friday");
             } else if(ldt.getHour() < 12) {
                 durationDist = constant.getDurationTimeDist().get("10-11").get("Friday");
             } else if(ldt.getHour() < 13) {
@@ -170,8 +180,10 @@ public final class DistributionDeterminer {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Friday");
             }
         } else if(ldt.getDayOfWeek() == DayOfWeek.SATURDAY) {
-            if(ldt.getHour() < 10) {
-                durationDist = constant.getDurationTimeDist().get("6-9").get("Saturday");
+            if(ldt.getHour() < 8) {
+                durationDist = constant.getDurationTimeDist().get("6-7").get("Saturday");
+            } else if(ldt.getHour() < 10) {
+                durationDist = constant.getDurationTimeDist().get("8-9").get("Saturday");
             } else if(ldt.getHour() < 12) {
                 durationDist = constant.getDurationTimeDist().get("10-11").get("Saturday");
             } else if(ldt.getHour() < 13) {
@@ -184,8 +196,10 @@ public final class DistributionDeterminer {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Saturday");
             }
             if(util.findWeather(ldt).getWasNiceWeather()) {
-                if(ldt.getHour() < 10) {
-                    durationDist = constant.getDurationTimeDist().get("6-9").get("NiceSaturday");
+                if(ldt.getHour() < 8) {
+                    durationDist = constant.getDurationTimeDist().get("6-7").get("NiceSaturday");
+                } else if(ldt.getHour() < 10) {
+                    durationDist = constant.getDurationTimeDist().get("8-9").get("NiceSaturday");
                 } else if(ldt.getHour() < 12) {
                     durationDist = constant.getDurationTimeDist().get("10-11").get("NiceSaturday");
                 } else if(ldt.getHour() < 13) {
@@ -199,8 +213,10 @@ public final class DistributionDeterminer {
                 }
             }
         } else if(ldt.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            if(ldt.getHour() < 10) {
-                durationDist = constant.getDurationTimeDist().get("6-9").get("Sunday");
+            if(ldt.getHour() < 8) {
+                durationDist = constant.getDurationTimeDist().get("6-7").get("Sunday");
+            } else if(ldt.getHour() < 10) {
+                durationDist = constant.getDurationTimeDist().get("8-9").get("Sunday");
             } else if(ldt.getHour() < 12) {
                 durationDist = constant.getDurationTimeDist().get("10-11").get("Sunday");
             } else if(ldt.getHour() < 13) {
@@ -213,8 +229,10 @@ public final class DistributionDeterminer {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Sunday");
             }
             if(util.findWeather(ldt).getWasNiceWeather()) {
-                if(ldt.getHour() < 10) {
-                    durationDist = constant.getDurationTimeDist().get("6-9").get("NiceSunday");
+                if(ldt.getHour() < 8) {
+                    durationDist = constant.getDurationTimeDist().get("6-7").get("NiceSunday");
+                } else if(ldt.getHour() < 10) {
+                    durationDist = constant.getDurationTimeDist().get("8-9").get("NiceSunday");
                 } else if(ldt.getHour() < 12) {
                     durationDist = constant.getDurationTimeDist().get("10-11").get("NiceSunday");
                 } else if(ldt.getHour() < 13) {
