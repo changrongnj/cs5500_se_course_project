@@ -93,6 +93,8 @@ public class CsvGenerator {
             oneLine.append("Temperature");
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("HolidayType");
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append("DayOfWeek");
             bw.write(oneLine.toString());
             bw.newLine();
             for (Day day : dayList) {  // todo: Need to review if this modification is okay.
@@ -102,9 +104,9 @@ public class CsvGenerator {
                     oneLine.append(visit.getVisitID());
                     oneLine.append(CSV_SEPARATOR);
                     // here replace the year with 2020
-                    oneLine.append(visit.getEntryTime().getLocalDateTime().withYear(2020).format(formatter));
+                    oneLine.append(visit.getEntryTime().getLocalDateTime().format(formatter));
                     oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getLeaveTime().getLocalDateTime().withYear(2020).format(formatter));
+                    oneLine.append(visit.getLeaveTime().getLocalDateTime().format(formatter));
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getTotalTime());
                     oneLine.append(CSV_SEPARATOR);
@@ -113,6 +115,8 @@ public class CsvGenerator {
                     oneLine.append(visit.getEntryTime().getWeather().getAverageTemperature());
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getEntryTime().isHoliday());
+                    oneLine.append(CSV_SEPARATOR);
+                    oneLine.append(visit.getEntryTime().getLocalDateTime().getDayOfWeek());
                     bw.write(oneLine.toString());
                     bw.newLine();
                 }

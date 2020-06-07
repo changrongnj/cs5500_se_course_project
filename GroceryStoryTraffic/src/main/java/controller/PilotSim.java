@@ -36,7 +36,7 @@ public class PilotSim {
 
             Day newDay = new Day();
             // initialize a LocalDate instance here for determination
-            LocalDate ld = LocalDate.of(2016, 5, i);
+            LocalDate ld = LocalDate.of(2020, 5, i);
 
             DAILY_VOLUME = DistributionDeterminer.getDailyVolume(ld, constant, util);
 
