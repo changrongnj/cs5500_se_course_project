@@ -8,6 +8,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -61,6 +63,8 @@ public class Util {
         String weatherType = ans[0];
         String temperature = ans[1];
         Boolean isNiceWeather = isNiceWeather(weatherType);
+        String[] tmp = temperature.split("\\.");
+        temperature = tmp[0] + "." + tmp[1].substring(0, Math.min(2, tmp[1].length()));
         return new Weather(isNiceWeather, Double.valueOf(temperature));
     }
 
