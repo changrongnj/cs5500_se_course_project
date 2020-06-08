@@ -50,14 +50,14 @@ public class Visit {
 
     if (thisDay == DayOfWeek.SATURDAY || thisDay == DayOfWeek.SUNDAY) {
       if (this.entryTime.getWeather().getWasNiceWeather()) {
-        return "niceWeatherWeekend";
+        return "NICE_WEEKEND";
       } else {
-        return "regularWeekend";
+        return "REGULAR_WEEKEND";
       }
     } else if (thisDay == seniorDay) {
-      return "seniorDiscountWeekday";
+      return "SENIOR_DISCOUNT_WEEKDAY";
     } else {
-      return "regularWeekday";
+      return "REGULAR_WEEKDAY";
     }
   }
 }
