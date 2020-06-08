@@ -97,7 +97,7 @@ public class CsvGenerator {
             oneLine.append("DayOfWeek");
             bw.write(oneLine.toString());
             bw.newLine();
-            for (Day day : dayList) {  // todo: Need to review if this modification is okay.
+            for (Day day : dayList) {
                 for (Visit visit : day.getVisits())
                 {
                     oneLine = new StringBuilder();

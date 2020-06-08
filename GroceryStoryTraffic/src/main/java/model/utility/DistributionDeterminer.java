@@ -15,8 +15,8 @@ public final class DistributionDeterminer {
 
         int DAILY_VOLUME = 0;
         // Fixed so that getHolidayInfo accepts LocalDate instead.
-        HolidayType holidayType = HolidayDeterminer.getHolidayInfo(ld);
-        if(holidayType == HolidayType.IS_HOLIDAY) {
+        // HolidayType holidayType = HolidayDeterminer.getHolidayInfo(ld);
+        /*if(holidayType == HolidayType.IS_HOLIDAY) {
             DAILY_VOLUME = constant.getAmountOfCustomers().get("Holiday");
         } else if(holidayType == HolidayType.DAY_BEFORE_HOLIDAY) {
             DAILY_VOLUME = constant.getAmountOfCustomers().get("DayBeforeHoliday");
@@ -39,7 +39,7 @@ public final class DistributionDeterminer {
                 DAILY_VOLUME = -1;
                 System.out.println("unexpected day of week");
             }
-        } else if(holidayType == HolidayType.NON_HOLIDAY) {
+        } else if(holidayType == HolidayType.NON_HOLIDAY) {*/
             if(ld.getDayOfWeek() == DayOfWeek.MONDAY) {
                 DAILY_VOLUME = constant.getAmountOfCustomers().get("Monday");
             } else if(ld.getDayOfWeek() == DayOfWeek.TUESDAY) {
@@ -63,11 +63,28 @@ public final class DistributionDeterminer {
                     DAILY_VOLUME = constant.getAmountOfCustomers().get("Sunday");
                 }
             }
-        } else {
+        /*} else {
             System.out.println("unexpected holiday type");
             return -1;
-        }
+        }*/
         return DAILY_VOLUME;
+    }
+
+    public static int applyHolidayVolume(HolidayType holiday, int currentVolume) {
+        final double HOLIDAY_FACTOR = 1.20;
+        final double DAY_BEFORE_HOLIDAY_FACTOR = 1.40;
+        final double WEEK_TO_HOLIDAY_FACTOR = 1.15;
+
+        switch (holiday) {
+            case IS_HOLIDAY:
+                return (int) (currentVolume * HOLIDAY_FACTOR);
+            case DAY_BEFORE_HOLIDAY:
+                return (int) (currentVolume * DAY_BEFORE_HOLIDAY_FACTOR);
+            case WEEK_TO_HOLIDAY:
+                return (int) (currentVolume * WEEK_TO_HOLIDAY_FACTOR);
+            default:
+                return currentVolume;
+        }
     }
 
     public static LocalDateTime getEntryTime(int i, LocalDate ld, Constant constant, Util util) {
