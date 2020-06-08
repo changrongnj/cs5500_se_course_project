@@ -5,11 +5,7 @@ public class Visit {
 
   // Updated (James): switch to self-defined DateTime class.
   private DateTime entryTime;
-
-  // Will calculate the leave time based on the totalTime.
   private DateTime leaveTime;
-
-  // Will need to randomly generate this somehow.
   private Integer totalTime;
 
   public Visit() {

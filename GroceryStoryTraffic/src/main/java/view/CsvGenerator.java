@@ -88,13 +88,15 @@ public class CsvGenerator {
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("Duration(minute)");
             oneLine.append(CSV_SEPARATOR);
-            oneLine.append("IsNiceWeather");
-            oneLine.append(CSV_SEPARATOR);
-            oneLine.append("Temperature");
-            oneLine.append(CSV_SEPARATOR);
+            // oneLine.append("IsNiceWeather");
+            // oneLine.append(CSV_SEPARATOR);
+            // oneLine.append("Temperature");
+            // oneLine.append(CSV_SEPARATOR);
             oneLine.append("HolidayType");
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("DayOfWeek");
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append("DayDescription");
             bw.write(oneLine.toString());
             bw.newLine();
             for (Day day : dayList) {
@@ -117,6 +119,8 @@ public class CsvGenerator {
                     oneLine.append(visit.getEntryTime().isHoliday());
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getEntryTime().getLocalDateTime().getDayOfWeek());
+                    oneLine.append(CSV_SEPARATOR);
+                    // Add code for the descriptor.
                     bw.write(oneLine.toString());
                     bw.newLine();
                 }
