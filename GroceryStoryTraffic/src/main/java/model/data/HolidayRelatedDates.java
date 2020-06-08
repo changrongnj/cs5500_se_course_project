@@ -16,14 +16,12 @@ import model.HolidayType;
 public class HolidayRelatedDates {
   private static final int START_YEAR = 2016;
   private HashMap<Integer, HashMap<HolidayType, List<LocalDate>>> holidayMap;
-  private List<List<LocalDate>> holidaysPerYear;
 
   /**
    * Constructs an instance of the HolidayRelatedDates containing a collection of federal holidays
    * from a pre-determined start year (currently 2016) through 2020.
    */
   public HolidayRelatedDates() {
-    this.holidaysPerYear = this.generateHolidaysPerYear();
     this.holidayMap = this.loadMap(START_YEAR);
   }
 
@@ -48,7 +46,7 @@ public class HolidayRelatedDates {
    */
   private HashMap<Integer, HashMap<HolidayType, List<LocalDate>>> loadMap(int startYear) {
       HashMap<Integer, HashMap<HolidayType, List<LocalDate>>> mapYears = new HashMap<>();
-      for (List<LocalDate> holidays : this.holidaysPerYear) {
+      for (List<LocalDate> holidays : this.generateHolidaysPerYear()) {
         // For each iteration, load a key: Integer mapped to value: HashMap of holiday data.
         HashMap<HolidayType, List<LocalDate>> mapYear = new HashMap<>();
         List<LocalDate> dayBeforeHolidays = this.subtractByDays(holidays, 1);
