@@ -4,17 +4,10 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-import model.DateTime;
-import controller.PilotSim;
 import model.Day;
-import model.utility.RandomGenerator;
-import model.utility.Util;
 import model.Visit;
-import model.Weather;
 
 public class CsvGenerator {
 
