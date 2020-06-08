@@ -35,7 +35,7 @@ public class DateTime {
         this.weather = weather;
     }
 
-    public HolidayType isHoliday() {
+    public HolidayType getHolidayType() {
         return this.holidayType;
     }
 

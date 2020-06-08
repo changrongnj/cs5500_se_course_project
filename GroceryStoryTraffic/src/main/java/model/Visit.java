@@ -1,5 +1,7 @@
 package model;
 
+import java.time.DayOfWeek;
+
 public class Visit {
   private String visitID;
 
@@ -42,5 +44,20 @@ public class Visit {
 
   public void setTotalTime(Integer totalTime) {
     this.totalTime = totalTime;
+  }
+
+  public String getAdditionalDescriptors(DayOfWeek thisDay, DayOfWeek seniorDay) {
+
+    if (thisDay == DayOfWeek.SATURDAY || thisDay == DayOfWeek.SUNDAY) {
+      if (this.entryTime.getWeather().getWasNiceWeather()) {
+        return "niceWeatherWeekend";
+      } else {
+        return "regularWeekend";
+      }
+    } else if (thisDay == seniorDay) {
+      return "seniorDiscountWeekday";
+    } else {
+      return "regularWeekday";
+    }
   }
 }
