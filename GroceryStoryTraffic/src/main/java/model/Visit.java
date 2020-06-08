@@ -1,15 +1,13 @@
 package model;
 
+import java.time.DayOfWeek;
+
 public class Visit {
   private String visitID;
 
   // Updated (James): switch to self-defined DateTime class.
   private DateTime entryTime;
-
-  // Will calculate the leave time based on the totalTime.
   private DateTime leaveTime;
-
-  // Will need to randomly generate this somehow.
   private Integer totalTime;
 
   public Visit() {
@@ -46,5 +44,20 @@ public class Visit {
 
   public void setTotalTime(Integer totalTime) {
     this.totalTime = totalTime;
+  }
+
+  public String getAdditionalDescriptors(DayOfWeek thisDay, DayOfWeek seniorDay) {
+
+    if (thisDay == DayOfWeek.SATURDAY || thisDay == DayOfWeek.SUNDAY) {
+      if (this.entryTime.getWeather().getWasNiceWeather()) {
+        return "NICE_WEEKEND";
+      } else {
+        return "REGULAR_WEEKEND";
+      }
+    } else if (thisDay == seniorDay) {
+      return "SENIOR_DISCOUNT_WEEKDAY";
+    } else {
+      return "REGULAR_WEEKDAY";
+    }
   }
 }

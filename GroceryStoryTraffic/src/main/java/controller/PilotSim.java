@@ -20,30 +20,24 @@ public class PilotSim {
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
 
-    // (Andy): I moved the main class to PilotSim since it seemed more appropriate to run the
-    // simulations here. I am currently defining the Day class as a concrete class, but I plan on
-    // making it an abstract class with sub-classes later (if that still makes sense) to allow more
-    // flexibilities dealing with holiday-dependent changes later. However, I think just having the
-    // concept for now might help us visualize more options for the final product and help us
-    // decide if one way might make more design sense than the other.
     public static void main(String[] args) {
-        // List<Visit> visits = new ArrayList<>();
         List<Day> days = new ArrayList<>();  // List of days of the month.
         Constant constant = new Constant();
-        int DAILY_VOLUME = 2000;
+        int dailyVolume;
 
         for(int i=1; i <= DAYS_IN_MONTH; i++) {
 
             Day newDay = new Day();
             // initialize a LocalDate instance here for determination
-            LocalDate ld = LocalDate.of(2020, 5, i);
+            LocalDate date = LocalDate.of(2020, 5, i);
+            HolidayType holiday = HolidayDeterminer.getHolidayInfo(date);
+            dailyVolume = DistributionDeterminer.getDailyVolume(date, constant, util);
+            dailyVolume = DistributionDeterminer.applyHolidayVolume(holiday, dailyVolume);
 
-            DAILY_VOLUME = DistributionDeterminer.getDailyVolume(ld, constant, util);
-
-            for(int j=0; j < DAILY_VOLUME; j++) {
+            for(int j=0; j < dailyVolume; j++) {
 
                 // now use DistributionDeterminer for getting a random entry time.
-                LocalDateTime ldt = DistributionDeterminer.getEntryTime(i, ld, constant, util);
+                LocalDateTime ldt = DistributionDeterminer.getEntryTime(i, date, constant, util);
 
                 // now use DistributionDeterminer for retrieving a distribution.
                 double[] durationDist = DistributionDeterminer.getDurationDistribution(ldt, constant, util);
@@ -51,9 +45,9 @@ public class PilotSim {
                 Weather weather = util.findWeather(ldt);
 
                 //incorporate weather into datetime class
-                DateTime dateTime = new DateTime(ldt, weather, HolidayDeterminer.getHolidayInfo(ldt.toLocalDate()));
+                DateTime dateTime = new DateTime(ldt, weather, holiday);
                 Visit visit = new Visit();
-                visit.setVisitID(String.valueOf((i-1)*DAILY_VOLUME + j));
+                visit.setVisitID(String.valueOf((i-1)*dailyVolume + j));
                 visit.setEntryTime(dateTime);
 
                 // generate the corresponding duration time(Minutes).

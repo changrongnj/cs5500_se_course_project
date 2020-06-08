@@ -4,8 +4,12 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+
+import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+import model.DateTime;
 import model.Day;
 import model.Visit;
 
@@ -60,18 +64,19 @@ public class CsvGenerator {
 //    }
 
     // (Andy) Moved from Util class to this class to increase cohesiveness and decrease coupling.
-    // Created as a static class for now, but should be non-static once we set up the controller
-    // class PilotSim to create instances of the necessary objects and call the methods.
     public void writeToCSV(List<Day> dayList) {
 
         // borrow some code from https://stackoverflow.com/questions/3666007/how-to-serialize-object-to-csv-file
 
-        String CSV_SEPARATOR = ",";
+        final String CSV_SEPARATOR = ",";
+        final DayOfWeek SENIOR_DISCOUNT_DAY = DayOfWeek.TUESDAY;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
 
         try {
 
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("products.csv"), "UTF-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream("products.csv"), "UTF-8"));
             StringBuilder oneLine = new StringBuilder();
             oneLine.append("VisitID");
             oneLine.append(CSV_SEPARATOR);
@@ -81,35 +86,42 @@ public class CsvGenerator {
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("Duration(minute)");
             oneLine.append(CSV_SEPARATOR);
-            oneLine.append("IsNiceWeather");
-            oneLine.append(CSV_SEPARATOR);
-            oneLine.append("Temperature");
-            oneLine.append(CSV_SEPARATOR);
+            // oneLine.append("IsNiceWeather");
+            // oneLine.append(CSV_SEPARATOR);
+            // oneLine.append("Temperature");
+            // oneLine.append(CSV_SEPARATOR);
             oneLine.append("HolidayType");
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("DayOfWeek");
+            oneLine.append(CSV_SEPARATOR);
+            oneLine.append("DayDescription");
             bw.write(oneLine.toString());
             bw.newLine();
-            for (Day day : dayList) {  // todo: Need to review if this modification is okay.
+            for (Day day : dayList) {
                 for (Visit visit : day.getVisits())
                 {
+                    DateTime entry = visit.getEntryTime();
                     oneLine = new StringBuilder();
                     oneLine.append(visit.getVisitID());
                     oneLine.append(CSV_SEPARATOR);
                     // here replace the year with 2020
-                    oneLine.append(visit.getEntryTime().getLocalDateTime().format(formatter));
+                    oneLine.append(entry.getLocalDateTime().format(formatter));
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getLeaveTime().getLocalDateTime().format(formatter));
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getTotalTime());
                     oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getEntryTime().getWeather().getWasNiceWeather());
+                    // oneLine.append(visit.getEntryTime().getWeather().getWasNiceWeather());
+                    // oneLine.append(CSV_SEPARATOR);
+                    // oneLine.append(visit.getEntryTime().getWeather().getAverageTemperature());
+                    // oneLine.append(CSV_SEPARATOR);
+                    oneLine.append(entry.getHolidayType());
                     oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getEntryTime().getWeather().getAverageTemperature());
+                    DayOfWeek dayOfWeek = entry.getLocalDateTime().getDayOfWeek();
+                    oneLine.append(dayOfWeek);
                     oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getEntryTime().isHoliday());
-                    oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getEntryTime().getLocalDateTime().getDayOfWeek());
+                    oneLine.append(visit.getAdditionalDescriptors(dayOfWeek, SENIOR_DISCOUNT_DAY));
+                    // Add code for the descriptor.
                     bw.write(oneLine.toString());
                     bw.newLine();
                 }
