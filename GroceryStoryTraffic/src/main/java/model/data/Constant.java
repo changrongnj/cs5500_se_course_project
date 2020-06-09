@@ -21,16 +21,16 @@ public class Constant {
         this.amountOfCustomers.put("Friday", 2500);
         this.amountOfCustomers.put("Saturday", 4000);
         this.amountOfCustomers.put("Sunday", 5000);
-        this.amountOfCustomers.put("MondayBeforeHoliday", 920);
-        this.amountOfCustomers.put("TuesdayBeforeHoliday", 1150);
-        this.amountOfCustomers.put("WednesdayBeforeHoliday", 1380);
-        this.amountOfCustomers.put("ThursdayBeforeHoliday", 1035);
-        this.amountOfCustomers.put("FridayBeforeHoliday", 2875);
-        this.amountOfCustomers.put("SaturdayBeforeHoliday", 4600);
-        this.amountOfCustomers.put("SundayBeforeHoliday", 5750);
         this.amountOfCustomers.put("NiceWeekend", 6300);
-        this.amountOfCustomers.put("Holiday", 5400);
-        this.amountOfCustomers.put("DayBeforeHoliday", 6300);
+        // this.amountOfCustomers.put("MondayBeforeHoliday", 920);
+        // this.amountOfCustomers.put("TuesdayBeforeHoliday", 1150);
+        // this.amountOfCustomers.put("WednesdayBeforeHoliday", 1380);
+        // this.amountOfCustomers.put("ThursdayBeforeHoliday", 1035);
+        // this.amountOfCustomers.put("FridayBeforeHoliday", 2875);
+        // this.amountOfCustomers.put("SaturdayBeforeHoliday", 4600);
+        // this.amountOfCustomers.put("SundayBeforeHoliday", 5750);
+        // this.amountOfCustomers.put("Holiday", 5400);
+        // this.amountOfCustomers.put("DayBeforeHoliday", 6300);
 
         // load entry time distributions
 
