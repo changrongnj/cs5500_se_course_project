@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Static class that contains two public static methods to generate the visit entry information and
+ * the visit duration information.
+ */
 public final class RandomGenerator {
-
-  private RandomGenerator() {}  // Private constructor; cannot create instance.
+  private RandomGenerator() {}
 
   /**
    * Given the following parameters, returns a LocalDateTime instance representing the entry

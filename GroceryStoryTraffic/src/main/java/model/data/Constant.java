@@ -3,16 +3,22 @@ package model.data;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Creates an instance of the Constant class which contains collections of data to represent the
+ * visit volume of a particular day, visit volume distribution over a course of a particular day,
+ * and visit duration distribution over the course of a day.
+ */
 public class Constant {
-
     private Map<String, Integer> amountOfCustomers;
     private Map<String, double[]> entryTimeDist;
     private Map<String, Map<String, double[]>> durationTimeDist;
 
+    /**
+     * Constructs an instance of the Constant class without accepting any parameters.
+     * All data values are pre-loaded upon instantiation.
+     */
     public Constant() {
-
         // load total amount of customers per Day
-
         this.amountOfCustomers = new HashMap<>();
         this.amountOfCustomers.put("Monday", 800);
         this.amountOfCustomers.put("Tuesday", 1000);
@@ -24,23 +30,27 @@ public class Constant {
         this.amountOfCustomers.put("NiceWeekend", 6300);
 
         // load entry time distributions
-
         this.entryTimeDist = new HashMap<>();
-        this.entryTimeDist.put("Monday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1, 0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
-        this.entryTimeDist.put("Wednesday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1, 0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
-        this.entryTimeDist.put("Thursday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1, 0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
-        this.entryTimeDist.put("Friday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1, 0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
-
-        this.entryTimeDist.put("Tuesday", new double[]{0.005, 0.01, 0.02, 0.03, 0.1, 0.1, 0.12, 0.07, 0.05, 0.06, 0.065, 0.15, 0.12, 0.07, 0.03});
-
-        this.entryTimeDist.put("Saturday", new double[]{0.003, 0.005, 0.04, 0.06, 0.07, 0.075, 0.085, 0.082, 0.08, 0.09, 0.1, 0.1, 0.09, 0.06, 0.06});
-        this.entryTimeDist.put("Sunday", new double[]{0.003, 0.005, 0.04, 0.06, 0.07, 0.075, 0.085, 0.082, 0.08, 0.09, 0.1, 0.1, 0.09, 0.06, 0.06});
-
-        this.entryTimeDist.put("NiceSaturday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1, 0.12, 0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});
-        this.entryTimeDist.put("NiceSunday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1, 0.12, 0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});
+        this.entryTimeDist.put("Monday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1,
+            0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
+        this.entryTimeDist.put("Wednesday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1,
+            0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
+        this.entryTimeDist.put("Thursday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1,
+            0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
+        this.entryTimeDist.put("Friday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1,
+            0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
+        this.entryTimeDist.put("Tuesday", new double[]{0.005, 0.01, 0.02, 0.03, 0.1, 0.1, 0.12,
+            0.07, 0.05, 0.06, 0.065, 0.15, 0.12, 0.07, 0.03});
+        this.entryTimeDist.put("Saturday", new double[]{0.003, 0.005, 0.04, 0.06, 0.07, 0.075,
+            0.085, 0.082, 0.08, 0.09, 0.1, 0.1, 0.09, 0.06, 0.06});
+        this.entryTimeDist.put("Sunday", new double[]{0.003, 0.005, 0.04, 0.06, 0.07, 0.075, 0.085,
+            0.082, 0.08, 0.09, 0.1, 0.1, 0.09, 0.06, 0.06});
+        this.entryTimeDist.put("NiceSaturday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1,
+            0.12, 0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});
+        this.entryTimeDist.put("NiceSunday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1, 0.12,
+            0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});
 
         // load duration time distributions
-
         this.durationTimeDist = new HashMap<>();
 
         Map<String, double[]> sixToSeven = new HashMap<>();
@@ -129,14 +139,32 @@ public class Constant {
 
     }
 
+    /**
+     * Returns a Map with key: String and value: Integer representing the amount of customers
+     * on different days of the week.
+     * @return a Map with key: String and value: Integer representing the amount of customers
+     * on different days of the week.
+     */
     public Map<String, Integer> getAmountOfCustomers() {
         return amountOfCustomers;
     }
 
+    /**
+     * Returns a Map with key: String and value: array of double that represents the collection of
+     * entry time distributions for customers on different days of the week.
+     * @return a Map with key: String and value: array of double that represents the collection of
+     * entry time distributions for customers on different days of the week.
+     */
     public Map<String, double[]> getEntryTimeDist() {
         return entryTimeDist;
     }
 
+    /**
+     * Returns a Map with key: String and value: Map that represents the duration distributions at
+     * different intervals of a day for different days of the week.
+     * @return a Map with key: String and value: Map that represents the duration distributions at
+     * different intervals of a day for different days of the week.
+     */
     public Map<String, Map<String, double[]>> getDurationTimeDist() {
         return durationTimeDist;
     }

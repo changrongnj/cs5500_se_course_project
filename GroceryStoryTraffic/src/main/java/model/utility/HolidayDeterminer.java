@@ -69,14 +69,4 @@ public final class HolidayDeterminer {
     }
     return false;
   }
-
-  /*
-  // (Andy): I left this here since it might still be useful in refactoring.
-  // self-defined function to calculate DayOfWeekInMonth
-  public static int calDayOfWeekInMonth(LocalDateTime ldt) {
-    LocalDate monthStart = LocalDate.of(ldt.getYear(), ldt.getMonth(), 1);
-    DayOfWeek dayOfWeek = monthStart.getDayOfWeek();
-    int newStart = 8 - dayOfWeek.getValue();
-    return (ldt.getDayOfMonth() - newStart + 7 - 1) / 7 + 1;
-  }*/
 }

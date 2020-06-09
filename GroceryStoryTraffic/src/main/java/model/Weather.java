@@ -38,28 +38,16 @@ public class Weather {
   }
 
   /**
-   *
-   * @return
-   */
-  @Override
-  public String toString() {
-    return "Weather{" +
-        "wasNiceWeather=" + this.wasNiceWeather +
-        ", averageTemperature=" + this.averageTemperature +
-        '}';
-  }
-
-  /**
-   *
-   * @param o
-   * @return
+   * Returns true if this object has the same field values as the other object.
+   * @param o - The other object being compared to this object.
+   * @return true if this object has the same field values as the other object.
    */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof Weather)) {
+    if (o == null || (this.getClass() != o.getClass())) {
       return false;
     }
     Weather weather = (Weather) o;
@@ -68,11 +56,23 @@ public class Weather {
   }
 
   /**
-   *
-   * @return
+   * Returns a hashCode representation of this instance.
+   * @return a hashCode representation of this instance.
    */
   @Override
   public int hashCode() {
     return Objects.hash(this.getWasNiceWeather(), this.getAverageTemperature());
+  }
+
+  /**
+   * Returns a String representation of this instance.
+   * @return a String representation of this instance.
+   */
+  @Override
+  public String toString() {
+    return "Weather{" +
+        "wasNiceWeather=" + this.wasNiceWeather +
+        ", averageTemperature=" + this.averageTemperature +
+        '}';
   }
 }

@@ -2,21 +2,29 @@ package controller;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
 import model.*;
 import model.data.Constant;
 import model.utility.*;
 import view.CsvGenerator;
+import model.Visit;
 
+/**
+ * Controller class that contains a main method that instantiates all of the required objects.
+ * Does not require any command line arguments and generates a csv document displaying all of the
+ * highlighted visit information per row.
+ */
 public class PilotSim {
     static final int MONTH = 5;
     static final int DAYS_IN_MONTH = 31;
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
 
+    /**
+     * main method that does not require any command line arguments.
+     * @param args - command line arguments; not required for this method.
+     */
     public static void main(String[] args) {
         List<Day> days = new ArrayList<>();
         Constant constant = new Constant();
@@ -25,7 +33,7 @@ public class PilotSim {
         for(int i = 1; i <= DAYS_IN_MONTH; i++) {
 
             Day newDay = new Day();
-            // initialize a LocalDate instance here for determination
+            // Initialize a new date in the target range and determine customer volume that day.
             LocalDate date = LocalDate.of(2020, MONTH, i);
             HolidayType holiday = HolidayDeterminer.getHolidayInfo(date);
             dailyVolume = DistributionDeterminer.getDailyVolume(date, constant);
@@ -33,26 +41,27 @@ public class PilotSim {
             dailyVolume = DistributionDeterminer.applyNiceWeatherVolume(date, dailyVolume, util);
 
             for(int j=0; j < dailyVolume; j++) {
-
-                // now use DistributionDeterminer for getting a random entry time.
+                // Get entry information.
                 LocalDateTime ldt = DistributionDeterminer.getEntryTime(i, date, constant);
 
-                // now use DistributionDeterminer for retrieving a distribution.
-                double[] durationDist = DistributionDeterminer.getDurationDistribution(ldt, constant, util);
+                // Get visit duration distribution for the specified date/time.
+                double[] durationDist = DistributionDeterminer.getDurationDistribution(
+                    ldt, constant, util);
 
+                // Get weather data.
                 Weather weather = util.findWeather(ldt);
 
-                //incorporate weather into datetime class
+                // Get entry information including weather and holiday information.
                 DateTime dateTime = new DateTime(ldt, weather, holiday);
                 Visit visit = new Visit();
                 visit.setVisitID(String.valueOf((i-1)*dailyVolume + j));
                 visit.setEntryTime(dateTime);
 
-                // generate the corresponding duration time(Minutes).
+                // get the visit duration in minutes.
                 int totalMinutes = RandomGenerator.generateDuration(durationDist);
-                visit.setTotalTime(totalMinutes);
+                visit.setDuration(totalMinutes);
 
-                // generate the corresponding leave time.
+                // Get visit leave information.
                 LocalDateTime leaveTime = ldt.plusMinutes(totalMinutes);
                 DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime),
                     HolidayDeterminer.getHolidayInfo(ldt.toLocalDate()));
@@ -63,19 +72,16 @@ public class PilotSim {
             days.add(newDay);
         }
 
-        // sort Visit based on entryTime
-
+        // Sorts all visits by entry date/time information.
         for (Day day : days) {
-            Collections.sort(day.getVisits(), new Comparator<Visit>() {
+            day.getVisits().sort(new Comparator<Visit>() {
                 @Override
                 public int compare(Visit v1, Visit v2) {
-                    return v1.getEntryTime().getLocalDateTime().compareTo(v2.getEntryTime().getLocalDateTime());
+                    return v1.getEntryTime().getLocalDateTime()
+                        .compareTo(v2.getEntryTime().getLocalDateTime());
                 }
             });
         }
-
-        // generate the csv file
         csvGenerator.writeToCSV(days);
-
     }
 }

@@ -11,18 +11,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
+/**
+ * Creates an instance of the Util class that contains automatically loads weather data upon
+ * instantiation. Contains a method to find weather information on a particular date/time, and
+ * another method that checks if the weather type is considered "nice" by an arbitrary standard.
+ */
 public class Util {
-
-    /**
-     * a class containing useful functions for instance initialization
-     * */
-
     private HashMap<String, String> weatherMap;
 
+    /**
+     * Constructs an instance of the Util class without accepting any parameters.
+     * Automatically loads weather information from an external database.
+     */
     public Util() {
 
         // load weather data from json file
-
         JSONObject jsonObject = new JSONObject();
         JSONParser parser = new JSONParser();
 
@@ -42,10 +45,15 @@ public class Util {
             this.weatherMap = new ObjectMapper().readValue(jsonObject.toJSONString(), HashMap.class);
         } catch (IOException e) {
             e.printStackTrace();
-        };
+        }
     }
 
-    // self-defined function to find each hour's weather
+    /**
+     * Given a LocalDateTime instance, returns a Weather instance representing the weather
+     * information at that date and time.
+     * @param ldt - LocalDateTime instance representing the date and time of interest.
+     * @return a Weather instance representing the weather information at that date and time.
+     */
     public Weather findWeather(LocalDateTime ldt) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String key = ldt.format(formatter).substring(0, 13) + ":00:00";
@@ -58,6 +66,12 @@ public class Util {
         return new Weather(isNiceWeather, Double.valueOf(temperature));
     }
 
+    /**
+     * Given a String representing the weather type, returns true if the weather is considered
+     * "nice" and false otherwise.
+     * @param weatherType - String representing the type of weather.
+     * @return true if the weather is considered "nice" and false otherwise.
+     */
     public boolean isNiceWeather(String weatherType) {
         switch (weatherType) {
             case "clear":
@@ -72,5 +86,4 @@ public class Util {
         }
         return true;
     }
-
 }

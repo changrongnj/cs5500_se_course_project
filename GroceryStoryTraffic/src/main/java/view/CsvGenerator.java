@@ -4,77 +4,33 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-
 import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
 import model.DateTime;
 import model.Day;
 import model.Visit;
 
+/**
+ * Creates an instance of the CsvGenerator class that contains one method, writeToCsv, which accepts
+ * a list of Day instances and generates a csv document "products" that contains all of the
+ * individual visit information per row.
+ */
 public class CsvGenerator {
 
-//    static final int MONTH = 5;;
-//    static final int DAILY_VOLUME = 2000;
-
-//    load useful instances here
-//    private static PilotSim pilotSim = new PilotSim();
-//    private static Util util = new Util();
-//    private static final double[] VISIT_DIST = new double[] {0.03, 0.05, 0.06, 0.08, 0.09, 0.11,
-//        0.095, 0.08, 0.07, 0.085, 0.12, 0.095, 0.035};
-
-//    public static void main(String[] args) {
-//
-//        List<Visit> visits = new ArrayList<>();
-//
-//        for(int i=1; i <= 31; i++) {
-//            // int dailyNum = 2000;
-//            for(int j=0; j < DAILY_VOLUME; j++) {
-//                LocalDateTime ldt = RandomGenerator.generateEntryData(i, VISIT_DIST);
-//                Weather weather = util.findWeather(ldt);
-//
-//                //incorporate weather into datetime class
-//                DateTime dateTime = new DateTime(ldt, weather, util.isHoliday(ldt));
-//                Visit visit = new Visit();
-//                visit.setVisitID(String.valueOf((i-1)*DAILY_VOLUME + j));
-//                visit.setEntryTime(dateTime);
-//
-//                // todo (all): Need methods to generate the duration and corresponding leave time.
-//                visits.add(visit);
-//            }
-//        }
-//
-//        // sort Visit based on entryTime
-//        Collections.sort(visits, new Comparator<Visit>() {
-//            @Override
-//            public int compare(Visit v1, Visit v2) {
-//                return v1.getEntryTime().getLocalDateTime().compareTo(v2.getEntryTime().getLocalDateTime());
-//            }
-//        });
-//
-//        // generate the csv file
-//        writeToCSV(visits);
-//
-//        // simple test
-//        for(Visit v: visits) {
-//            System.out.println(v.getEntryTime().getLocalDateTime().toString());
-//            System.out.println(v.getEntryTime().getWeather().getAverageTemperature());
-//        }
-//    }
-
-    // (Andy) Moved from Util class to this class to increase cohesiveness and decrease coupling.
+    /**
+     * Given a list of Day instances that comprise a full month of interest, generate a CSV file
+     * where each row represents the important information of a shopper visit.
+     * @param dayList - List of Day instances for a month of interest.
+     */
     public void writeToCSV(List<Day> dayList) {
-
-        // borrow some code from https://stackoverflow.com/questions/3666007/how-to-serialize-object-to-csv-file
+        // Highly referenced: https://stackoverflow.com/questions/3666007/how-to-serialize-object-to-csv-file
 
         final String CSV_SEPARATOR = ",";
         final DayOfWeek SENIOR_DISCOUNT_DAY = DayOfWeek.TUESDAY;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-
         try {
-
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream("products.csv"), "UTF-8"));
             StringBuilder oneLine = new StringBuilder();
@@ -86,10 +42,6 @@ public class CsvGenerator {
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("Duration(minute)");
             oneLine.append(CSV_SEPARATOR);
-            // oneLine.append("IsNiceWeather");
-            // oneLine.append(CSV_SEPARATOR);
-            // oneLine.append("Temperature");
-            // oneLine.append(CSV_SEPARATOR);
             oneLine.append("HolidayType");
             oneLine.append(CSV_SEPARATOR);
             oneLine.append("DayOfWeek");
@@ -109,19 +61,14 @@ public class CsvGenerator {
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getLeaveTime().getLocalDateTime().format(formatter));
                     oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getTotalTime());
+                    oneLine.append(visit.getDuration());
                     oneLine.append(CSV_SEPARATOR);
-                    // oneLine.append(visit.getEntryTime().getWeather().getWasNiceWeather());
-                    // oneLine.append(CSV_SEPARATOR);
-                    // oneLine.append(visit.getEntryTime().getWeather().getAverageTemperature());
-                    // oneLine.append(CSV_SEPARATOR);
                     oneLine.append(entry.getHolidayType());
                     oneLine.append(CSV_SEPARATOR);
                     DayOfWeek dayOfWeek = entry.getLocalDateTime().getDayOfWeek();
                     oneLine.append(dayOfWeek);
                     oneLine.append(CSV_SEPARATOR);
                     oneLine.append(visit.getAdditionalDescriptors(dayOfWeek, SENIOR_DISCOUNT_DAY));
-                    // Add code for the descriptor.
                     bw.write(oneLine.toString());
                     bw.newLine();
                 }
