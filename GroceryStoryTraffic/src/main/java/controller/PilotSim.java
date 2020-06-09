@@ -33,6 +33,7 @@ public class PilotSim {
             HolidayType holiday = HolidayDeterminer.getHolidayInfo(date);
             dailyVolume = DistributionDeterminer.getDailyVolume(date, constant, util);
             dailyVolume = DistributionDeterminer.applyHolidayVolume(holiday, dailyVolume);
+            dailyVolume = DistributionDeterminer.applyNiceWeatherVolume(date, dailyVolume, util);
 
             for(int j=0; j < dailyVolume; j++) {
 

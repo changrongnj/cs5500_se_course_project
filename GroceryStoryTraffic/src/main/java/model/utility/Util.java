@@ -1,22 +1,15 @@
 package model.utility;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import model.Visit;
 import model.Weather;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.List;
 
 public class Util {
 
