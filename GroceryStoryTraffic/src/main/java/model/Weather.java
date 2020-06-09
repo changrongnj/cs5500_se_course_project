@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Objects;
+
 /**
  * Constructs an instance of the Weather class with the following fields:
  * Boolean representing whether or not the overall weather was nice, and
@@ -35,5 +37,42 @@ public class Weather {
     return this.averageTemperature;
   }
 
-  // May need to add toString, equals(), hashCode() later.
+  /**
+   *
+   * @return
+   */
+  @Override
+  public String toString() {
+    return "Weather{" +
+        "wasNiceWeather=" + this.wasNiceWeather +
+        ", averageTemperature=" + this.averageTemperature +
+        '}';
+  }
+
+  /**
+   *
+   * @param o
+   * @return
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (!(o instanceof Weather)) {
+      return false;
+    }
+    Weather weather = (Weather) o;
+    return Objects.equals(this.getWasNiceWeather(), weather.getWasNiceWeather()) &&
+        Objects.equals(this.getAverageTemperature(), weather.getAverageTemperature());
+  }
+
+  /**
+   *
+   * @return
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(this.getWasNiceWeather(), this.getAverageTemperature());
+  }
 }

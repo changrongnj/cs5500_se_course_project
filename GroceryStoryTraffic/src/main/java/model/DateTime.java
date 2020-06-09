@@ -1,46 +1,90 @@
 package model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
+/**
+ *
+ */
 public class DateTime {
-
-    // localDate class is useful,
-    // if you want to use other classes,
-    // I suggest you convert them into localDatetime at first,
-    // then use my functions
     private LocalDateTime localDateTime;
     private Weather weather;
     private HolidayType holidayType;
 
-    // constructor
+    /**
+     *
+     * @param localDateTime
+     * @param weather
+     * @param holidayType
+     */
     public DateTime(LocalDateTime localDateTime, Weather weather, HolidayType holidayType) {
         this.localDateTime = localDateTime;
         this.weather = weather;
         this.holidayType = holidayType;
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalDateTime getLocalDateTime() {
         return this.localDateTime;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
-    }
-
+    /**
+     *
+     * @return
+     */
     public Weather getWeather() {
         return this.weather;
     }
 
-    public void setWeather(Weather weather) {
-        this.weather = weather;
-    }
-
+    /**
+     *
+     * @return
+     */
     public HolidayType getHolidayType() {
         return this.holidayType;
     }
 
-    public void setHoliday(HolidayType holiday) {
-        this.holidayType = holiday;
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "DateTime{" +
+            "localDateTime=" + this.localDateTime +
+            ", weather=" + this.weather +
+            ", holidayType=" + this.holidayType +
+            '}';
     }
 
+    /**
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof DateTime)) {
+            return false;
+        }
+        DateTime dateTime = (DateTime) o;
+        return Objects.equals(this.getLocalDateTime(), dateTime.getLocalDateTime()) &&
+            Objects.equals(this.getWeather(), dateTime.getWeather()) &&
+            this.getHolidayType() == dateTime.getHolidayType();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.getLocalDateTime(), this.getWeather(), this.getHolidayType());
+    }
 }
