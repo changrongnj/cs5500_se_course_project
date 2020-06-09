@@ -14,32 +14,6 @@ public final class DistributionDeterminer {
     public static int getDailyVolume(LocalDate ld, Constant constant, Util util) {
 
         int DAILY_VOLUME = 0;
-        // Fixed so that getHolidayInfo accepts LocalDate instead.
-        // HolidayType holidayType = HolidayDeterminer.getHolidayInfo(ld);
-        /*if(holidayType == HolidayType.IS_HOLIDAY) {
-            DAILY_VOLUME = constant.getAmountOfCustomers().get("Holiday");
-        } else if(holidayType == HolidayType.DAY_BEFORE_HOLIDAY) {
-            DAILY_VOLUME = constant.getAmountOfCustomers().get("DayBeforeHoliday");
-        } else if(holidayType == HolidayType.WEEK_TO_HOLIDAY) {
-            if(ld.getDayOfWeek() == DayOfWeek.MONDAY) {
-                DAILY_VOLUME = constant.getAmountOfCustomers().get("MondayBeforeHoliday");
-            } else if(ld.getDayOfWeek() == DayOfWeek.TUESDAY) {
-                DAILY_VOLUME = constant.getAmountOfCustomers().get("TuesdayBeforeHoliday");
-            } else if(ld.getDayOfWeek() == DayOfWeek.WEDNESDAY) {
-                DAILY_VOLUME = constant.getAmountOfCustomers().get("WednesdayBeforeHoliday");
-            } else if(ld.getDayOfWeek() == DayOfWeek.THURSDAY) {
-                DAILY_VOLUME = constant.getAmountOfCustomers().get("ThursdayBeforeHoliday");
-            } else if(ld.getDayOfWeek() == DayOfWeek.FRIDAY) {
-                DAILY_VOLUME = constant.getAmountOfCustomers().get("FridayBeforeHoliday");
-            } else if(ld.getDayOfWeek() == DayOfWeek.SATURDAY) {
-                DAILY_VOLUME = constant.getAmountOfCustomers().get("SaturdayBeforeHoliday");
-            } else if(ld.getDayOfWeek() == DayOfWeek.SUNDAY) {
-                DAILY_VOLUME = constant.getAmountOfCustomers().get("SundayBeforeHoliday");
-            } else {
-                DAILY_VOLUME = -1;
-                System.out.println("unexpected day of week");
-            }
-        } else if(holidayType == HolidayType.NON_HOLIDAY) {*/
             if(ld.getDayOfWeek() == DayOfWeek.MONDAY) {
                 DAILY_VOLUME = constant.getAmountOfCustomers().get("Monday");
             } else if(ld.getDayOfWeek() == DayOfWeek.TUESDAY) {
@@ -52,23 +26,9 @@ public final class DistributionDeterminer {
                 DAILY_VOLUME = constant.getAmountOfCustomers().get("Friday");
             } else if(ld.getDayOfWeek() == DayOfWeek.SATURDAY) {
                 DAILY_VOLUME = constant.getAmountOfCustomers().get("Saturday");
-//                if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather()) {
-//                    DAILY_VOLUME = constant.getAmountOfCustomers().get("NiceWeekend");
-//                } else {
-//                    DAILY_VOLUME = constant.getAmountOfCustomers().get("Saturday");
-//                }
             } else if(ld.getDayOfWeek() == DayOfWeek.SUNDAY) {
                 DAILY_VOLUME = constant.getAmountOfCustomers().get("Sunday");
-//                if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather()) {
-//                    DAILY_VOLUME = constant.getAmountOfCustomers().get("NiceWeekend");
-//                } else {
-//                    DAILY_VOLUME = constant.getAmountOfCustomers().get("Sunday");
-//                }
             }
-        /*} else {
-            System.out.println("unexpected holiday type");
-            return -1;
-        }*/
         return DAILY_VOLUME;
     }
 
@@ -94,7 +54,6 @@ public final class DistributionDeterminer {
         final double NICE_WEATHER_FACTOR = 1.40;
 
         if(ld.getDayOfWeek() == DayOfWeek.SATURDAY || ld.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            // todo: is it reasonable of using 12 o'clock's weather to represent the whole day's weather ?
             if(util.findWeather(ld.atTime(12, 0)).getWasNiceWeather())
                 currentVolume *= NICE_WEATHER_FACTOR;
         }
@@ -116,14 +75,8 @@ public final class DistributionDeterminer {
             ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Friday"));
         } else if(ld.getDayOfWeek() == DayOfWeek.SATURDAY) {
             ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Saturday"));
-//            if(util.findWeather(ldt).getWasNiceWeather()) {
-//                ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("NiceSaturday"));
-//            }
         } else if(ld.getDayOfWeek() == DayOfWeek.SUNDAY) {
             ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("Sunday"));
-//            if(util.findWeather(ldt).getWasNiceWeather()) {
-//                ldt = RandomGenerator.generateEntryData(i, constant.getEntryTimeDist().get("NiceSunday"));
-//            }
         }
         return ldt;
     }
@@ -227,23 +180,6 @@ public final class DistributionDeterminer {
             } else {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Saturday");
             }
-//            if(util.findWeather(ldt).getWasNiceWeather()) {
-//                if(ldt.getHour() < 8) {
-//                    durationDist = constant.getDurationTimeDist().get("6-7").get("NiceSaturday");
-//                } else if(ldt.getHour() < 10) {
-//                    durationDist = constant.getDurationTimeDist().get("8-9").get("NiceSaturday");
-//                } else if(ldt.getHour() < 12) {
-//                    durationDist = constant.getDurationTimeDist().get("10-11").get("NiceSaturday");
-//                } else if(ldt.getHour() < 13) {
-//                    durationDist = constant.getDurationTimeDist().get("12").get("NiceSaturday");
-//                } else if(ldt.getHour() < 17) {
-//                    durationDist = constant.getDurationTimeDist().get("13-16").get("NiceSaturday");
-//                } else if(ldt.getHour() < 19) {
-//                    durationDist = constant.getDurationTimeDist().get("17-18").get("NiceSaturday");
-//                } else {
-//                    durationDist = constant.getDurationTimeDist().get("19-20").get("NiceSaturday");
-//                }
-//            }
         } else if(ldt.getDayOfWeek() == DayOfWeek.SUNDAY) {
             if(ldt.getHour() < 8) {
                 durationDist = constant.getDurationTimeDist().get("6-7").get("Sunday");
@@ -260,23 +196,6 @@ public final class DistributionDeterminer {
             } else {
                 durationDist = constant.getDurationTimeDist().get("19-20").get("Sunday");
             }
-//            if(util.findWeather(ldt).getWasNiceWeather()) {
-//                if(ldt.getHour() < 8) {
-//                    durationDist = constant.getDurationTimeDist().get("6-7").get("NiceSunday");
-//                } else if(ldt.getHour() < 10) {
-//                    durationDist = constant.getDurationTimeDist().get("8-9").get("NiceSunday");
-//                } else if(ldt.getHour() < 12) {
-//                    durationDist = constant.getDurationTimeDist().get("10-11").get("NiceSunday");
-//                } else if(ldt.getHour() < 13) {
-//                    durationDist = constant.getDurationTimeDist().get("12").get("NiceSunday");
-//                } else if(ldt.getHour() < 17) {
-//                    durationDist = constant.getDurationTimeDist().get("13-16").get("NiceSunday");
-//                } else if(ldt.getHour() < 19) {
-//                    durationDist = constant.getDurationTimeDist().get("17-18").get("NiceSunday");
-//                } else {
-//                    durationDist = constant.getDurationTimeDist().get("19-20").get("NiceSunday");
-//                }
-//            }
         }
 
         return durationDist;

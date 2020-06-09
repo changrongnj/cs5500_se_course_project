@@ -15,7 +15,7 @@ import view.CsvGenerator;
 public class PilotSim {
     // PilotSim can be our controller class that contains Model and View instances
     // This class will be in charge of putting everything together for a month of data.
-    static final int MONTH = 5;  // Todo: Figure out how to incorporate the month parameter.
+    static final int MONTH = 5;
     static final int DAYS_IN_MONTH = 31;
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
@@ -80,10 +80,5 @@ public class PilotSim {
         // generate the csv file
         csvGenerator.writeToCSV(days);
 
-        // simple test
-        /*for(Visit v: visits) {
-            System.out.println(v.getEntryTime().getLocalDateTime().toString());
-            System.out.println(v.getEntryTime().getWeather().getAverageTemperature());
-        }*/
     }
 }
