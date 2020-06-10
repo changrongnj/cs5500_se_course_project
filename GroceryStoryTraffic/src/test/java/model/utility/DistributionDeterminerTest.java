@@ -1,5 +1,6 @@
 package model.utility;
 
+import java.lang.Math;
 import model.data.Constant;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ import model.HolidayType;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DistributionDeterminerTest {
 
@@ -28,8 +30,16 @@ class DistributionDeterminerTest {
 
     @Test
     void getEntryTimeTest() {
-        LocalDateTime ldt = DistributionDeterminer.getEntryTime(1, ld, constant);
-        System.out.println(ldt);
+        int counter = 0;
+        for (int i = 0; i < 100000; i++) {
+            LocalDateTime ldt = DistributionDeterminer.getEntryTime(1, ld, constant);
+            if (ldt.getHour() == 18) {
+                counter ++;
+            }
+        }
+        double ratio = (double) counter / 100000.0;
+        double diff = Math.abs(ratio - 0.12);
+        assertTrue(diff <= 0.01);
     }
 
     @Test
