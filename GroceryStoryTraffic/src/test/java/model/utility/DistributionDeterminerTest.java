@@ -30,16 +30,15 @@ class DistributionDeterminerTest {
 
     @Test
     void getEntryTimeTest() {
-        int counter = 0;
-        for (int i = 0; i < 100000; i++) {
+        double[] hash = new double[15];
+        for (int i = 0; i < 1000000; i++) {
             LocalDateTime ldt = DistributionDeterminer.getEntryTime(1, ld, constant);
-            if (ldt.getHour() == 18) {
-                counter ++;
-            }
+            hash[ldt.getHour() - 6]++;
         }
-        double ratio = (double) counter / 100000.0;
-        double diff = Math.abs(ratio - 0.12);
-        assertTrue(diff <= 0.01);
+        double[] base = constant.getEntryTimeDist().get("Friday");
+        for(int i=0; i < base.length; i++) {
+            assertTrue(Math.abs(base[i] - hash[i]/1000000) <= 0.01);
+        }
     }
 
     @Test
