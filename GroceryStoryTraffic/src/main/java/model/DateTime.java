@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Creates an instance of the DataTime class that
+ * Creates an instance of the DataTime class that contains getter methods for its three internal
+ * attributes. Includes weather information and holiday information for the date/time.
  */
 public class DateTime {
     private LocalDateTime localDateTime;
