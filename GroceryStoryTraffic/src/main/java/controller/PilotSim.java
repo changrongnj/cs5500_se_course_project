@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import dao.DayDao;
 import model.*;
 import model.data.Constant;
 import model.utility.*;
@@ -83,5 +85,8 @@ public class PilotSim {
             });
         }
         csvGenerator.writeToCSV(days);
+        DayDao.cleanAllVisits();
+        DayDao.addAllVisits(days);
+        DayDao.closeClient();
     }
 }
