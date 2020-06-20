@@ -1,14 +1,14 @@
 package controller;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import dao.DayDao;
 import model.*;
 import model.data.Constant;
-import model.utility.SpecialEventsApplier;
+import model.utility.Modifier;
 import model.utility.*;
 import view.CsvGenerator;
 import model.Visit;
@@ -21,6 +21,7 @@ import model.Visit;
 public class PilotSim {
     static final int MONTH = 5;
     static final int DAYS_IN_MONTH = 31;
+    static final int WEATHER_SAMPLE_TIME = 12;
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
 
@@ -39,39 +40,47 @@ public class PilotSim {
             // Initialize a new date in the target range and determine customer volume that day.
             LocalDate date = LocalDate.of(2020, MONTH, i);
             HolidayType holiday = HolidayDeterminer.getHolidayInfo(date);
-            dailyVolume = DistributionDeterminer.getDailyVolume(date, constant);
-            dailyVolume = SpecialEventsApplier.applyHolidayVolume(holiday, dailyVolume);
-            dailyVolume = DistributionDeterminer.applyNiceWeatherVolume(date, dailyVolume, util);
+            WeatherType weatherType = util.findWeather(date.atTime(WEATHER_SAMPLE_TIME, 0))
+                .getWeatherType();  // Arbitrarily chosen at noontime.
+            DayOfWeek dayOfWeek = date.getDayOfWeek();
 
-            for(int j=0; j < dailyVolume; j++) {
+            // Get baseline volume.
+            dailyVolume = DistributionDeterminer.getDailyVolume(date, constant);
+            // Apply holiday volume modifications.
+            dailyVolume = Modifier.applyHolidayVolume(holiday, dailyVolume);
+            // Apply poor weather volume modifications.
+            dailyVolume = Modifier.applyPoorWeather(weatherType, dailyVolume, dayOfWeek);
+
+            for (int j = 0; j < dailyVolume; j++) {
                 // Get entry information.
                 LocalDateTime ldt = DistributionDeterminer.getEntryTime(i, date, constant);
 
                 // Get visit duration distribution for the specified date/time.
                 double[] durationDist = DistributionDeterminer.getDurationDistribution(
                     ldt, constant, holiday);
-
-                // Get weather data.
                 Weather weather = util.findWeather(ldt);
 
                 // Get entry information including weather and holiday information.
-                DateTime dateTime = new DateTime(ldt, weather, holiday);
-                Visit visit = new Visit();
-                visit.setVisitID(String.valueOf((i-1)*dailyVolume + j));
-                visit.setEntryTime(dateTime);
+                String id = String.valueOf((i-1)*dailyVolume + j);
+                DateTime entryTime = new DateTime(ldt, weather, holiday);
 
                 // get the visit duration in minutes.
                 int totalMinutes = RandomGenerator.generateDuration(durationDist);
-                visit.setDuration(totalMinutes);
 
                 // Get visit leave information.
                 LocalDateTime leaveTime = ldt.plusMinutes(totalMinutes);
                 DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime),
-                    HolidayDeterminer.getHolidayInfo(ldt.toLocalDate()));
-                visit.setLeaveTime(leaveDateTime);
+                    HolidayDeterminer.getHolidayInfo(date));
 
+                // Immutable creation of visit.
+                Visit visit = new Visit(id, entryTime, leaveDateTime, totalMinutes);
                 newDay.addVisit(visit);
             }
+            newDay.mergeVisits(Modifier.applyNiceWeather(weatherType, dailyVolume, dayOfWeek));
+            // Todo: Apply the nice weather effect.
+            // Todo: Apply the lunch hour effect.
+            // Todo: Apply the dinner hour effect.
+            // Todo: Apply the senior discount effect.
             days.add(newDay);
         }
 

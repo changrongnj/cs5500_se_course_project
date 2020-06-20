@@ -27,6 +27,16 @@ public class Day {
   }
 
   /**
+   * Given a list of Visit objects, add all objects to internal collection of Visit instances.
+   * @param visits - List of Visit objects to be added to current collection.
+   */
+  public void mergeVisits(List<Visit> visits) {
+    if (visits != null) {
+      this.visits.addAll(visits);
+    }
+  }
+
+  /**
    * Returns a list of Visit objects representing all of the visits on this day.
    * @return a list of Visit objects representing all of the visits on this day.
    */

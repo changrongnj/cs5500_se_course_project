@@ -35,7 +35,7 @@ public final class RandomGenerator {
 
   /**
    * Given the duration distribution, returns a random number of duration minutes.
-   * @param dist - A doule array representing the distribution of duration.
+   * @param dist - A double array representing the distribution of duration.
    * @return an int representing the duration(in minute) of a visit.
    */
   public static int generateDuration(double[] dist) {
@@ -50,9 +50,7 @@ public final class RandomGenerator {
     }
 
     int idx = samples.get(randomNumberGenerator(samples.size()));
-
     return randomNumberGenerator(intervals[idx][1] - intervals[idx][0] + 1) + intervals[idx][0];
-
   }
 
   /**
