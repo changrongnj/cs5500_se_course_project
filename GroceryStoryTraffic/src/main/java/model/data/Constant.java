@@ -31,6 +31,14 @@ public class Constant {
 
         // load entry time distributions
         this.entryTimeDist = new HashMap<>();
+
+        // This is the updated distribution, split into weekday/weekend.
+        this.entryTimeDist.put("Weekday", new double[]{0.005, 0.025, 0.03, 0.05, 0.07, 0.07, 0.08,
+            0.08, 0.08, 0.09, 0.09, 0.1, 0.1, 0.08, 0.05});
+        this.entryTimeDist.put("Weekend", new double[]{0.003, 0.005, 0.03, 0.05, 0.06, 0.07,
+            0.08, 0.085, 0.09, 0.095, 0.095, 0.095, 0.097, 0.085, 0.06});
+
+        /*  // This is the updated distribution, split into all 7 days of the week.
         this.entryTimeDist.put("Monday", new double[]{0.005, 0.025, 0.03, 0.05, 0.07, 0.07, 0.08,
             0.08, 0.08, 0.09, 0.09, 0.1, 0.1, 0.08, 0.05});
         this.entryTimeDist.put("Wednesday", new double[]{0.005, 0.025, 0.03, 0.05, 0.07, 0.07, 0.08,
@@ -44,56 +52,85 @@ public class Constant {
         this.entryTimeDist.put("Saturday", new double[]{0.003, 0.005, 0.03, 0.05, 0.06, 0.07,
             0.08, 0.085, 0.09, 0.095, 0.095, 0.095, 0.097, 0.085, 0.06});
         this.entryTimeDist.put("Sunday", new double[]{0.003, 0.005, 0.03, 0.05, 0.06, 0.07,
-            0.08, 0.085, 0.09, 0.095, 0.095, 0.095, 0.097, 0.085, 0.06});
+            0.08, 0.085, 0.09, 0.095, 0.095, 0.095, 0.097, 0.085, 0.06});*/
 
+        // Part of previous code. Please delete after review.
         /*this.entryTimeDist.put("NiceSaturday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1,
             0.12, 0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});
         this.entryTimeDist.put("NiceSunday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1, 0.12,
             0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});*/
 
-        // load duration time distributions
+        // Loads duration time distributions
         this.durationTimeDist = new HashMap<>();
         Map<String, double[]> sixToEight = new HashMap<>();
-        sixToEight.put("Monday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        // Updated version: Split into weekday, Friday, and Weekend only.
+        sixToEight.put("Weekday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Friday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Weekend", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Holiday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        this.durationTimeDist.put("6-8", sixToEight);
+
+        // Updated version: split into Monday-Sunday
+        /*sixToEight.put("Monday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
         sixToEight.put("Tuesday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
         sixToEight.put("Wednesday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
         sixToEight.put("Thursday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
         sixToEight.put("Friday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
         sixToEight.put("Saturday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
-        sixToEight.put("Sunday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
-        this.durationTimeDist.put("6-8", sixToEight);
+        sixToEight.put("Sunday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});*/
 
         Map<String, double[]> eightToOne = new HashMap<>();
-        eightToOne.put("Monday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
+        // Updated: Split into weekday, Friday, and weekend.
+        eightToOne.put("Weekday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
+        eightToOne.put("Friday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
+        eightToOne.put("Weekend", new double[]{0, 0.2, 0.35, 0.3, 0.15, 0});
+        eightToOne.put("Holiday", new double[]{0, 0.2, 0.35, 0.3, 0.15, 0});
+        this.durationTimeDist.put("8-13", eightToOne);
+
+        // Updated: Split into Monday-Sunday
+        /*eightToOne.put("Monday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
         eightToOne.put("Tuesday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
         eightToOne.put("Wednesday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
         eightToOne.put("Thursday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
         eightToOne.put("Friday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
         eightToOne.put("Saturday", new double[]{0, 0.2, 0.35, 0.3, 0.15, 0});
-        eightToOne.put("Sunday", new double[]{0, 0.2, 0.35, 0.3, 0.15, 0});
-        this.durationTimeDist.put("8-13", eightToOne);
+        eightToOne.put("Sunday", new double[]{0, 0.2, 0.35, 0.3, 0.15, 0});*/
 
         Map<String, double[]> oneToSeven = new HashMap<>();
-        oneToSeven.put("Monday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
+        // Updated: Split into weekday, Friday, and weekend.
+        oneToSeven.put("Weekday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
+        oneToSeven.put("Friday", new double[]{0.2, 0.35, 0.3, 0.1, 0.05, 0});
+        oneToSeven.put("Weekend", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});
+        oneToSeven.put("Holiday", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});
+        this.durationTimeDist.put("13-19", oneToSeven);
+
+        // Updated: Split into 7 days a week.
+        /*oneToSeven.put("Monday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
         oneToSeven.put("Tuesday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
         oneToSeven.put("Wednesday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
         oneToSeven.put("Thursday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
         oneToSeven.put("Friday", new double[]{0.2, 0.35, 0.3, 0.1, 0.05, 0});
         oneToSeven.put("Saturday", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});
-        oneToSeven.put("Sunday", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});
-        this.durationTimeDist.put("13-19", oneToSeven);
+        oneToSeven.put("Sunday", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});*/
 
         // Todo: Verify range. Spreadsheet did not include data between 19:00-20:00
         // Temporarily included data under 20:00-20:59 range.
         Map<String, double[]> sevenToNine = new HashMap<>();
-        sevenToNine.put("Monday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
+        // Updated: Split into weekday, Friday, weekend.
+        sevenToNine.put("Weekday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
+        sevenToNine.put("Friday", new double[]{0.15, 0.3, 0.35, 0.1, 0.05, 0.05});
+        sevenToNine.put("Weekend", new double[]{0, 0.1, 0.2, 0.25, 0.30, .15});
+        sevenToNine.put("Holiday", new double[]{0, 0.1, 0.2, 0.25, 0.30, .15});
+        this.durationTimeDist.put("19-21", sevenToNine);
+
+        // Updated: Split into Monday-Sunday
+        /*sevenToNine.put("Monday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
         sevenToNine.put("Tuesday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
         sevenToNine.put("Wednesday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
         sevenToNine.put("Thursday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
         sevenToNine.put("Friday", new double[]{0.15, 0.3, 0.35, 0.1, 0.05, 0.05});
         sevenToNine.put("Saturday", new double[]{0, 0.1, 0.2, 0.25, 0.30, .15});
-        sevenToNine.put("Sunday", new double[]{0, 0.1, 0.2, 0.25, 0.30, .15});
-        this.durationTimeDist.put("19-21", sevenToNine);
+        sevenToNine.put("Sunday", new double[]{0, 0.1, 0.2, 0.25, 0.30, .15});*/
 
         // Todo: Below = previous code. Keeping for reference, please delete when ready.
         /*Map<String, double[]> sixToSeven = new HashMap<>();

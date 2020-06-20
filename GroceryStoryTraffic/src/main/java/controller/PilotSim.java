@@ -49,7 +49,7 @@ public class PilotSim {
 
                 // Get visit duration distribution for the specified date/time.
                 double[] durationDist = DistributionDeterminer.getDurationDistribution(
-                    ldt, constant, util);
+                    ldt, constant, holiday);
 
                 // Get weather data.
                 Weather weather = util.findWeather(ldt);
@@ -86,8 +86,9 @@ public class PilotSim {
             });
         }
         csvGenerator.writeToCSV(days);
-        DayDao.cleanAllVisits();
-        DayDao.addAllVisits(days);
-        DayDao.closeClient();
+        // Commenting out for now to test main for other functionality.
+        // DayDao.cleanAllVisits();
+        // DayDao.addAllVisits(days);
+        // DayDao.closeClient();
     }
 }

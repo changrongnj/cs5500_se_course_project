@@ -35,6 +35,7 @@ public final class DistributionDeterminer {
             DAILY_VOLUME = data.getAmountOfCustomers().get("Thursday");
         } else if(dayOfWeek == DayOfWeek.FRIDAY) {
             DAILY_VOLUME = data.getAmountOfCustomers().get("Friday");
+            System.out.println("Amount of customers on Friday:" + DAILY_VOLUME);
         } else if(dayOfWeek == DayOfWeek.SATURDAY) {
             DAILY_VOLUME = data.getAmountOfCustomers().get("Saturday");
         } else if(dayOfWeek == DayOfWeek.SUNDAY) {
@@ -72,7 +73,17 @@ public final class DistributionDeterminer {
     public static LocalDateTime getEntryTime(int id, LocalDate date, Constant data) {
         LocalDateTime ldt;
         DayOfWeek dayOfWeek = date.getDayOfWeek();
-        if(dayOfWeek == DayOfWeek.MONDAY) {
+        // Todo (all): Review refactor. Modified to just weekday/weekend split for entry times.
+        if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Weekend"));
+        } else {
+            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Weekday"));
+        }
+        return ldt;
+
+
+        // Todo: Part of previous code. May remove if we proceed with just weekday/weekend split.
+        /*if(dayOfWeek == DayOfWeek.MONDAY) {
             ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Monday"));
         } else if(dayOfWeek == DayOfWeek.TUESDAY) {
             ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Tuesday"));
@@ -86,8 +97,7 @@ public final class DistributionDeterminer {
             ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Saturday"));
         } else  {
             ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Sunday"));
-        }
-        return ldt;
+        }*/
     }
 
     /**
@@ -95,15 +105,29 @@ public final class DistributionDeterminer {
      * duration distribution from the given Constant instance.
      * @param ldt - LocalDateTime instance representing a visit on a specified date and time.
      * @param data - Constant instance containing all duration distributions.
-     * @param util - Util instance for determining weather conditions.
+     * @param holiday - HolidayType representing holiday modifier.
      * @return the appropriate duration distribution from the given Constant instance.
      */
-    public static double[] getDurationDistribution(LocalDateTime ldt, Constant data, Util util) {
-        double[] durationDist = new double[0];
+    public static double[] getDurationDistribution(LocalDateTime ldt, Constant data,
+        HolidayType holiday) {
+
+        double[] durationDist;
         int shoppingHour = ldt.getHour();
         DayOfWeek dayOfWeek = ldt.getDayOfWeek();
 
-        if(dayOfWeek == DayOfWeek.MONDAY) {
+        if (holiday != HolidayType.NON_HOLIDAY) {
+            durationDist = getDistributionSubset("Holiday", data, shoppingHour);
+        } else if (dayOfWeek == DayOfWeek.FRIDAY) {
+            durationDist = getDistributionSubset("Friday", data, shoppingHour);
+        } else if(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+            durationDist = getDistributionSubset("Weekday", data, shoppingHour);
+        } else {
+            durationDist = getDistributionSubset("Weekday", data, shoppingHour);
+        }
+
+        // Todo: Review original code, split into 7 days of the week.
+        /*
+        if (dayOfWeek == DayOfWeek.MONDAY) {
             durationDist = getDistributionSubset("Monday", data, shoppingHour);
         } else if(dayOfWeek == DayOfWeek.TUESDAY) {
             durationDist = getDistributionSubset("Tuesday", data, shoppingHour);
@@ -117,7 +141,7 @@ public final class DistributionDeterminer {
             durationDist = getDistributionSubset("Saturday", data, shoppingHour);
         } else if(dayOfWeek == DayOfWeek.SUNDAY) {
             durationDist = getDistributionSubset("Sunday", data, shoppingHour);
-        }
+        }*/
         return durationDist;
     }
 
