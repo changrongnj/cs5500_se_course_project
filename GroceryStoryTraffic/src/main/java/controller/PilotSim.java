@@ -8,6 +8,7 @@ import java.util.List;
 import dao.DayDao;
 import model.*;
 import model.data.Constant;
+import model.utility.SpecialEventsApplier;
 import model.utility.*;
 import view.CsvGenerator;
 import model.Visit;
@@ -39,7 +40,7 @@ public class PilotSim {
             LocalDate date = LocalDate.of(2020, MONTH, i);
             HolidayType holiday = HolidayDeterminer.getHolidayInfo(date);
             dailyVolume = DistributionDeterminer.getDailyVolume(date, constant);
-            dailyVolume = DistributionDeterminer.applyHolidayVolume(holiday, dailyVolume);
+            dailyVolume = SpecialEventsApplier.applyHolidayVolume(holiday, dailyVolume);
             dailyVolume = DistributionDeterminer.applyNiceWeatherVolume(date, dailyVolume, util);
 
             for(int j=0; j < dailyVolume; j++) {

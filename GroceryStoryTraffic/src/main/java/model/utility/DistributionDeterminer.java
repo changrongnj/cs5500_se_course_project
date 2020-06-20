@@ -44,30 +44,6 @@ public final class DistributionDeterminer {
     }
 
     /**
-     * Given a a HolidayType and an int representing the current customer volume, returns an int
-     * representing the total customer volume after applying holiday considerations.
-     * @param holiday - HolidayType representing the holiday modification to consider.
-     * @param currentVolume - int representing the unmodified customer volume
-     * @return an int representing the total customer volume after applying holiday considerations.
-     */
-    public static int applyHolidayVolume(HolidayType holiday, int currentVolume) {
-        final double HOLIDAY_FACTOR = 1.20;
-        final double DAY_BEFORE_HOLIDAY_FACTOR = 1.40;
-        final double WEEK_TO_HOLIDAY_FACTOR = 1.15;
-
-        switch (holiday) {
-            case IS_HOLIDAY:
-                return (int) (currentVolume * HOLIDAY_FACTOR);
-            case DAY_BEFORE_HOLIDAY:
-                return (int) (currentVolume * DAY_BEFORE_HOLIDAY_FACTOR);
-            case WEEK_TO_HOLIDAY:
-                return (int) (currentVolume * WEEK_TO_HOLIDAY_FACTOR);
-            default:
-                return currentVolume;
-        }
-    }
-
-    /**
      * Given a LocalDate instance representing the date and an int representing the current daily
      * volume, returns an int representing the daily volume after applying weather conditions.
      * @param date - LocalDate instance representing the current date.
@@ -157,7 +133,20 @@ public final class DistributionDeterminer {
      */
     private static double[] getDistributionSubset(String key, Constant data, int hour) {
         double[] distributionSubset;
-        if(hour < 8) {
+        if (hour < 8) {
+            distributionSubset = data.getDurationTimeDist().get("6-8").get(key);
+        } else if(hour < 13) {
+            distributionSubset = data.getDurationTimeDist().get("8-13").get(key);
+        } else if(hour < 19) {
+            distributionSubset = data.getDurationTimeDist().get("13-19").get(key);
+        } else {
+            distributionSubset = data.getDurationTimeDist().get("19-21").get(key);
+        }
+        return distributionSubset;
+
+        // Todo: Kept previous code for reference. Please delete when ready.
+        /*
+        if (hour < 8) {
             distributionSubset = data.getDurationTimeDist().get("6-7").get(key);
         } else if(hour < 10) {
             distributionSubset = data.getDurationTimeDist().get("8-9").get(key);
@@ -171,7 +160,6 @@ public final class DistributionDeterminer {
             distributionSubset = data.getDurationTimeDist().get("17-18").get(key);
         } else {
             distributionSubset = data.getDurationTimeDist().get("19-20").get(key);
-        }
-        return distributionSubset;
+        }*/
     }
 }

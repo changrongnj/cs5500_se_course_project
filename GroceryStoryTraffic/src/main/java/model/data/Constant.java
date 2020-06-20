@@ -20,40 +20,83 @@ public class Constant {
     public Constant() {
         // load total amount of customers per Day
         this.amountOfCustomers = new HashMap<>();
-        this.amountOfCustomers.put("Monday", 800);
-        this.amountOfCustomers.put("Tuesday", 1000);
-        this.amountOfCustomers.put("Wednesday", 1200);
-        this.amountOfCustomers.put("Thursday", 900);
-        this.amountOfCustomers.put("Friday", 2500);
+        this.amountOfCustomers.put("Monday", 620);
+        this.amountOfCustomers.put("Tuesday", 770);  // Changed to 770
+        this.amountOfCustomers.put("Wednesday", 930);
+        this.amountOfCustomers.put("Thursday", 700);
+        this.amountOfCustomers.put("Friday", 2200);  // Changed to 2200.
         this.amountOfCustomers.put("Saturday", 4000);
         this.amountOfCustomers.put("Sunday", 5000);
         this.amountOfCustomers.put("NiceWeekend", 6300);
 
         // load entry time distributions
         this.entryTimeDist = new HashMap<>();
-        this.entryTimeDist.put("Monday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1,
-            0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
-        this.entryTimeDist.put("Wednesday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1,
-            0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
-        this.entryTimeDist.put("Thursday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1,
-            0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
-        this.entryTimeDist.put("Friday", new double[]{0.005, 0.025, 0.03, 0.05, 0.075, 0.08, 0.1,
-            0.08, 0.06, 0.065, 0.07, 0.11, 0.12, 0.08, 0.05});
-        this.entryTimeDist.put("Tuesday", new double[]{0.005, 0.01, 0.02, 0.03, 0.1, 0.1, 0.12,
-            0.07, 0.05, 0.06, 0.065, 0.15, 0.12, 0.07, 0.03});
-        this.entryTimeDist.put("Saturday", new double[]{0.003, 0.005, 0.04, 0.06, 0.07, 0.075,
-            0.085, 0.082, 0.08, 0.09, 0.1, 0.1, 0.09, 0.06, 0.06});
-        this.entryTimeDist.put("Sunday", new double[]{0.003, 0.005, 0.04, 0.06, 0.07, 0.075, 0.085,
-            0.082, 0.08, 0.09, 0.1, 0.1, 0.09, 0.06, 0.06});
-        this.entryTimeDist.put("NiceSaturday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1,
+        this.entryTimeDist.put("Monday", new double[]{0.005, 0.025, 0.03, 0.05, 0.07, 0.07, 0.08,
+            0.08, 0.08, 0.09, 0.09, 0.1, 0.1, 0.08, 0.05});
+        this.entryTimeDist.put("Wednesday", new double[]{0.005, 0.025, 0.03, 0.05, 0.07, 0.07, 0.08,
+            0.08, 0.08, 0.09, 0.09, 0.1, 0.1, 0.08, 0.05});
+        this.entryTimeDist.put("Thursday", new double[]{0.005, 0.025, 0.03, 0.05, 0.07, 0.07, 0.08,
+            0.08, 0.08, 0.09, 0.09, 0.1, 0.1, 0.08, 0.05});
+        this.entryTimeDist.put("Friday", new double[]{0.005, 0.025, 0.03, 0.05, 0.07, 0.07, 0.08,
+            0.08, 0.08, 0.09, 0.09, 0.1, 0.1, 0.08, 0.05});
+        this.entryTimeDist.put("Tuesday", new double[]{0.005, 0.025, 0.03, 0.05, 0.07, 0.07, 0.08,
+            0.08, 0.08, 0.09, 0.09, 0.1, 0.1, 0.08, 0.05});
+        this.entryTimeDist.put("Saturday", new double[]{0.003, 0.005, 0.03, 0.05, 0.06, 0.07,
+            0.08, 0.085, 0.09, 0.095, 0.095, 0.095, 0.097, 0.085, 0.06});
+        this.entryTimeDist.put("Sunday", new double[]{0.003, 0.005, 0.03, 0.05, 0.06, 0.07,
+            0.08, 0.085, 0.09, 0.095, 0.095, 0.095, 0.097, 0.085, 0.06});
+
+        /*this.entryTimeDist.put("NiceSaturday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1,
             0.12, 0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});
         this.entryTimeDist.put("NiceSunday", new double[]{0.001, 0.004, 0.01, 0.05, 0.06, 0.1, 0.12,
-            0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});
+            0.08, 0.06, 0.07, 0.085, 0.13, 0.15, 0.05, 0.03});*/
 
         // load duration time distributions
         this.durationTimeDist = new HashMap<>();
+        Map<String, double[]> sixToEight = new HashMap<>();
+        sixToEight.put("Monday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Tuesday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Wednesday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Thursday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Friday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Saturday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        sixToEight.put("Sunday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
+        this.durationTimeDist.put("6-8", sixToEight);
 
-        Map<String, double[]> sixToSeven = new HashMap<>();
+        Map<String, double[]> eightToOne = new HashMap<>();
+        eightToOne.put("Monday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
+        eightToOne.put("Tuesday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
+        eightToOne.put("Wednesday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
+        eightToOne.put("Thursday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
+        eightToOne.put("Friday", new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
+        eightToOne.put("Saturday", new double[]{0, 0.2, 0.35, 0.3, 0.15, 0});
+        eightToOne.put("Sunday", new double[]{0, 0.2, 0.35, 0.3, 0.15, 0});
+        this.durationTimeDist.put("8-13", eightToOne);
+
+        Map<String, double[]> oneToSeven = new HashMap<>();
+        oneToSeven.put("Monday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
+        oneToSeven.put("Tuesday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
+        oneToSeven.put("Wednesday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
+        oneToSeven.put("Thursday", new double[]{0.25, 0.4, 0.25, 0.05, 0.05, 0});
+        oneToSeven.put("Friday", new double[]{0.2, 0.35, 0.3, 0.1, 0.05, 0});
+        oneToSeven.put("Saturday", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});
+        oneToSeven.put("Sunday", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});
+        this.durationTimeDist.put("13-19", oneToSeven);
+
+        // Todo: Verify range. Spreadsheet did not include data between 19:00-20:00
+        // Temporarily included data under 20:00-20:59 range.
+        Map<String, double[]> sevenToNine = new HashMap<>();
+        sevenToNine.put("Monday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
+        sevenToNine.put("Tuesday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
+        sevenToNine.put("Wednesday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
+        sevenToNine.put("Thursday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
+        sevenToNine.put("Friday", new double[]{0.15, 0.3, 0.35, 0.1, 0.05, 0.05});
+        sevenToNine.put("Saturday", new double[]{0, 0.1, 0.2, 0.25, 0.30, .15});
+        sevenToNine.put("Sunday", new double[]{0, 0.1, 0.2, 0.25, 0.30, .15});
+        this.durationTimeDist.put("19-21", sevenToNine);
+
+        // Todo: Below = previous code. Keeping for reference, please delete when ready.
+        /*Map<String, double[]> sixToSeven = new HashMap<>();
         sixToSeven.put("Monday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
         sixToSeven.put("Tuesday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
         sixToSeven.put("Wednesday", new double[]{0.35, 0.55, 0.1, 0, 0, 0});
@@ -135,7 +178,7 @@ public class Constant {
         NineteenToTwenty.put("Sunday", new double[]{0, 0.02, 0.13, 0.2, 0.4, 0.25});
         NineteenToTwenty.put("NiceSaturday", new double[]{0, 0.02, 0.13, 0.2, 0.4, 0.25});
         NineteenToTwenty.put("NiceSunday", new double[]{0, 0.02, 0.13, 0.2, 0.4, 0.25});
-        this.durationTimeDist.put("19-20", NineteenToTwenty);
+        this.durationTimeDist.put("19-20", NineteenToTwenty);*/
 
     }
 
