@@ -109,10 +109,13 @@ public class Visit {
    */
   public String getAdditionalDescriptors(DayOfWeek thisDay, DayOfWeek seniorDay) {
     if (thisDay == DayOfWeek.SATURDAY || thisDay == DayOfWeek.SUNDAY) {
-      if (this.entryTime.getWeather().getWasNiceWeather()) {
-        return "NICE_WEEKEND";
-      } else {
-        return "REGULAR_WEEKEND";
+      switch(this.entryTime.getWeather().getWeatherType()) {
+        case IS_NICE:
+          return "NICE_WEEKEND";
+        case IS_POOR:
+          return "POOR_WEEKEND";
+        default:
+          return "REGULAR_WEEKEND";
       }
     } else if (thisDay == seniorDay) {
       return "SENIOR_DISCOUNT_WEEKDAY";

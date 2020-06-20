@@ -8,16 +8,16 @@ import java.util.Objects;
  * Double representing the average temperature during store operation hours.
  */
 public class Weather {
-  private Boolean wasNiceWeather;
+  private WeatherType weatherType;
   private Double averageTemperature;
 
   /**
    * Constructs a new instance of the Weather class with the following parameters:
-   * @param wasNiceWeather - Boolean representing whether or not the weather was nice overall.
+   * @param wasNiceWeather - WeatherType representing one of three weather conditions of interest.
    * @param averageTemperature - Double representing the average temperature during store hours.
    */
-  public Weather(Boolean wasNiceWeather, Double averageTemperature) {
-    this.wasNiceWeather = wasNiceWeather;
+  public Weather(WeatherType wasNiceWeather, Double averageTemperature) {
+    this.weatherType = wasNiceWeather;
     this.averageTemperature = averageTemperature;
   }
 
@@ -25,8 +25,8 @@ public class Weather {
    * Returns a Boolean indicating whether or not the weather was nice overall.
    * @return a Boolean indicating whether or not the weather was nice overall.
    */
-  public Boolean getWasNiceWeather() {
-    return this.wasNiceWeather;
+  public WeatherType getWeatherType() {
+    return this.weatherType;
   }
 
   /**
@@ -51,7 +51,7 @@ public class Weather {
       return false;
     }
     Weather weather = (Weather) o;
-    return Objects.equals(this.getWasNiceWeather(), weather.getWasNiceWeather()) &&
+    return Objects.equals(this.getWeatherType(), weather.getWeatherType()) &&
         Objects.equals(this.getAverageTemperature(), weather.getAverageTemperature());
   }
 
@@ -61,7 +61,7 @@ public class Weather {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(this.getWasNiceWeather(), this.getAverageTemperature());
+    return Objects.hash(this.getWeatherType(), this.getAverageTemperature());
   }
 
   /**
@@ -71,7 +71,7 @@ public class Weather {
   @Override
   public String toString() {
     return "Weather{" +
-        "wasNiceWeather=" + this.wasNiceWeather +
+        "wasNiceWeather=" + this.getWeatherType() +
         ", averageTemperature=" + this.averageTemperature +
         '}';
   }

@@ -1,6 +1,9 @@
 package model.utility;
 
+import java.util.List;
 import model.HolidayType;
+import model.Visit;
+import model.WeatherType;
 
 public final class SpecialEventsApplier {
   private SpecialEventsApplier() {}
@@ -34,9 +37,26 @@ public final class SpecialEventsApplier {
 
   }
 
+  // Checking for poor weather.
+  // Should be called before visit generation.
+  public static int applyPoorWeatherVolume(WeatherType weather, int currentVolume) {
+    final double POOR_WEATHER_FACTOR = 0.7;
+    if (weather == WeatherType.IS_POOR) {
+      return (int) (currentVolume * POOR_WEATHER_FACTOR);
+    } else {
+      return currentVolume;
+    }
+  }
 
-  // Should have bad weather, nice, weather, OR neutral weather.
-  public static void applyWeatherEffect() {
-
+  // Should be called after baseline visit generation.
+  public static List<Visit> applyNiceWeatherEffect(WeatherType weatherType, List<Visit> visits) {
+    switch (weatherType) {
+      case IS_NICE:
+        System.out.println();
+      case IS_POOR:
+        System.out.println();
+      default:
+        return visits;
+    }
   }
 }

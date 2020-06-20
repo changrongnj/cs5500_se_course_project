@@ -1,6 +1,7 @@
 package model.utility;
 
 import model.HolidayType;
+import model.WeatherType;
 import model.data.Constant;
 
 import java.time.DayOfWeek;
@@ -35,7 +36,6 @@ public final class DistributionDeterminer {
             DAILY_VOLUME = data.getAmountOfCustomers().get("Thursday");
         } else if(dayOfWeek == DayOfWeek.FRIDAY) {
             DAILY_VOLUME = data.getAmountOfCustomers().get("Friday");
-            System.out.println("Amount of customers on Friday:" + DAILY_VOLUME);
         } else if(dayOfWeek == DayOfWeek.SATURDAY) {
             DAILY_VOLUME = data.getAmountOfCustomers().get("Saturday");
         } else if(dayOfWeek == DayOfWeek.SUNDAY) {
@@ -55,7 +55,7 @@ public final class DistributionDeterminer {
     public static int applyNiceWeatherVolume(LocalDate date, int currentVolume, Util util) {
         final double NICE_WEATHER_FACTOR = 1.40;
         if(date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            if(util.findWeather(date.atTime(12, 0)).getWasNiceWeather())
+            if(util.findWeather(date.atTime(12, 0)).getWeatherType() == WeatherType.IS_NICE)
                 currentVolume *= NICE_WEATHER_FACTOR;
         }
         return currentVolume;

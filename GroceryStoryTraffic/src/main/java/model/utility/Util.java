@@ -2,6 +2,7 @@ package model.utility;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import model.Weather;
+import model.WeatherType;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -60,30 +61,26 @@ public class Util {
         String[] ans = weatherMap.get(key).split("-");
         String weatherType = ans[0];
         String temperature = ans[1];
-        Boolean isNiceWeather = isNiceWeather(weatherType);
+        WeatherType weather = determineWeatherType(weatherType);
         String[] tmp = temperature.split("\\.");
         temperature = tmp[0] + "." + tmp[1].substring(0, Math.min(2, tmp[1].length()));
-        return new Weather(isNiceWeather, Double.valueOf(temperature));
+        return new Weather(weather, Double.valueOf(temperature));
     }
 
     /**
-     * Given a String representing the weather type, returns true if the weather is considered
-     * "nice" and false otherwise.
-     * @param weatherType - String representing the type of weather.
-     * @return true if the weather is considered "nice" and false otherwise.
+     * Given a String representing different weather conditions, returns a WeatherType representing
+     * one of three weather conditions (nice, poor, neutral)
+     * @param weatherType - String representing different weather conditions..
+     * @return a WeatherType representing one of three weather conditions (nice, poor, neutral)
      */
-    public boolean isNiceWeather(String weatherType) {
+    public WeatherType determineWeatherType(String weatherType) {
         switch (weatherType) {
             case "clear":
-            case "clouds":
-                return true;
+                return WeatherType.IS_NICE;
             case "drizzle":
-            case "haze":
-            case "mist":
             case "rain":
-            case "smoke":
-                return false;
+                return WeatherType.IS_POOR;
         }
-        return true;
+        return WeatherType.IS_NEUTRAL;
     }
 }
