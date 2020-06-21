@@ -44,22 +44,22 @@ public final class DistributionDeterminer {
         return DAILY_VOLUME;
     }
 
-    /**
-     * Given a LocalDate instance representing the date and an int representing the current daily
-     * volume, returns an int representing the daily volume after applying weather conditions.
-     * @param date - LocalDate instance representing the current date.
-     * @param currentVolume - int representing the unmodified volume of customers.
-     * @param util - Util instance containing weather data calculations.
-     * @return an int representing the daily volume after applying weather conditions.
-     */
-    public static int applyNiceWeatherVolume(LocalDate date, int currentVolume, Util util) {
-        final double NICE_WEATHER_FACTOR = 1.40;
-        if(date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            if(util.findWeather(date.atTime(12, 0)).getWeatherType() == WeatherType.IS_NICE)
-                currentVolume *= NICE_WEATHER_FACTOR;
-        }
-        return currentVolume;
-    }
+//    /**
+//     * Given a LocalDate instance representing the date and an int representing the current daily
+//     * volume, returns an int representing the daily volume after applying weather conditions.
+//     * @param date - LocalDate instance representing the current date.
+//     * @param currentVolume - int representing the unmodified volume of customers.
+//     * @param util - Util instance containing weather data calculations.
+//     * @return an int representing the daily volume after applying weather conditions.
+//     */
+//    public static int applyNiceWeatherVolume(LocalDate date, int currentVolume, Util util) {
+//        final double NICE_WEATHER_FACTOR = 1.40;
+//        if(date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
+//            if(util.findWeather(date.atTime(12, 0)).getWeatherType() == WeatherType.IS_NICE)
+//                currentVolume *= NICE_WEATHER_FACTOR;
+//        }
+//        return currentVolume;
+//    }
 
     /**
      * Given an int representing the visit id, a LocalDate instance representing the date, and a

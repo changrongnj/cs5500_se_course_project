@@ -21,7 +21,7 @@ public class Constant {
         // load total amount of customers per Day
         this.amountOfCustomers = new HashMap<>();
         this.amountOfCustomers.put("Monday", 620);
-        this.amountOfCustomers.put("Tuesday", 770);  // Changed to 770
+        this.amountOfCustomers.put("Tuesday", 650);  // Changed to 770 // Rong: I changed it back to 650.
         this.amountOfCustomers.put("Wednesday", 930);
         this.amountOfCustomers.put("Thursday", 700);
         this.amountOfCustomers.put("Friday", 2200);  // Changed to 2200.
@@ -113,8 +113,7 @@ public class Constant {
         oneToSeven.put("Saturday", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});
         oneToSeven.put("Sunday", new double[]{0, 0.1, 0.15, 0.25, 0.30, .2});*/
 
-        // Todo: Verify range. Spreadsheet did not include data between 19:00-20:00
-        // Temporarily included data under 20:00-20:59 range.
+        // Temporarily included data under 19:00-20:59 range.
         Map<String, double[]> sevenToNine = new HashMap<>();
         // Updated: Split into weekday, Friday, weekend.
         sevenToNine.put("Weekday", new double[]{0.3, 0.45, 0.2, 0.05, 0, 0});
