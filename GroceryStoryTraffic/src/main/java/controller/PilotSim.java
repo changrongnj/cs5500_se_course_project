@@ -25,6 +25,8 @@ public class PilotSim {
     private static final DayOfWeek SENIOR_DISCOUNT_DAY = DayOfWeek.WEDNESDAY;
     private static final int SENIOR_DISCOUNT_START = 13;
     private static final int SENIOR_DISCOUNT_END = 15;
+    private static final int LUNCH_PEAK = 12;
+    private static final int DINNER_PEAK = 16;
 
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
@@ -106,7 +108,8 @@ public class PilotSim {
             // Todo: Apply the meal hour effect.
             if (holiday != HolidayType.IS_HOLIDAY && !CheckDayOfWeek.isWeekend(dayOfWeek)) {
                 // Apply the meal rush effects.
-                VisitParameters mealRush = Modifier.applyMealRush(dailyVolume);
+                VisitParameters mealRush = Modifier.applyMealRush(dailyVolume, LUNCH_PEAK,
+                    DINNER_PEAK);
                 String prefixID = "M";
                 List<Visit> newVisits = getExtraVisits(i, mealRush, prefixID, holiday, date);
                 newDay.mergeVisits(newVisits);

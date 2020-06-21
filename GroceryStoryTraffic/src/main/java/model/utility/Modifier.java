@@ -54,13 +54,16 @@ public final class Modifier {
 
 
   // Should have either lunch AND dinner effects or neither effect.
-  // Todo: Need to pass parameters reflecting the lunch start/end, dinner lunch/end.
+  // Todo: Need to pass parameters reflecting the lunch hour and dinner hour.
   // Todo: Consider separating lunch and dinner effects.
   // Todo: need to change entryDist to be possible for :30.  Not priority I think...
-  public static VisitParameters applyMealRush(int currentVolume) {
+  public static VisitParameters applyMealRush(int currentVolume, int lunch, int dinner) {
     final double MEAL_BOOST = 0.3;
+    final int STORE_OPENING = 6;
     double[] durationDist = {1.0, 0, 0, 0, 0, 0};
     double[] entryDist = {0, 0, 0, 0, 0, 0, .4, 0, 0, 0, .6, 0, 0, 0, 0};
+    entryDist[lunch - STORE_OPENING] = 0.4;
+    entryDist[dinner - STORE_OPENING] = 0.6;
     int additionalVolume = (int) (currentVolume * MEAL_BOOST);
     return new VisitParameters(additionalVolume, entryDist, durationDist);
   }
