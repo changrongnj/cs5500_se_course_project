@@ -74,7 +74,7 @@ public final class DistributionDeterminer {
         LocalDateTime ldt;
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         // Todo (all): Review refactor. Modified to just weekday/weekend split for entry times.
-        if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+        if (CheckDayOfWeek.isWeekend(dayOfWeek)) {
             ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Weekend"));
         } else {
             ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Weekday"));
@@ -119,7 +119,7 @@ public final class DistributionDeterminer {
             durationDist = getDistributionSubset("Holiday", data, shoppingHour);
         } else if (dayOfWeek == DayOfWeek.FRIDAY) {
             durationDist = getDistributionSubset("Friday", data, shoppingHour);
-        } else if(dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
+        } else if(CheckDayOfWeek.isWeekend(dayOfWeek)) {
             durationDist = getDistributionSubset("Weekday", data, shoppingHour);
         } else {
             durationDist = getDistributionSubset("Weekday", data, shoppingHour);

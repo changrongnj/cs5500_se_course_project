@@ -36,15 +36,11 @@ public final class Modifier {
     final double[] entryDist = {0.003, 0.005, 0.03, 0.05, 0.06, 0.07,
             0.08, 0.085, 0.09, 0.095, 0.095, 0.095, 0.097, 0.085, 0.06};
     final double[] durationDist = {0, 0.1 , 0.2, 0.25, 0.3, 0.15};
-    int additionalVolume;
-    switch (holiday) {
-      case DAY_BEFORE_HOLIDAY:
-        additionalVolume = (int) (currentVolume * DAY_BEFORE_HOLIDAY_BOOST);
-      case WEEK_TO_HOLIDAY:
-        additionalVolume = (int) (currentVolume * WEEK_TO_HOLIDAY_BOOST);
-      default:
-        additionalVolume = 0;
-    }
+
+    // Tertiary structure to determine which boost to apply. Only two possible cases.
+    double boost = (holiday == HolidayType.DAY_BEFORE_HOLIDAY) ?
+        DAY_BEFORE_HOLIDAY_BOOST : WEEK_TO_HOLIDAY_BOOST;
+    int additionalVolume = (int) (currentVolume * boost);
     return new VisitParameters(additionalVolume, entryDist, durationDist);
   }
 
@@ -69,18 +65,20 @@ public final class Modifier {
     return new VisitParameters(additionalVolume, entryDist, durationDist);
   }
 
-
-  // Todo: Need to figure out what parameters to pass to determine start/end time of discount.
-  // Todo: Need to check that this is indeed the discount day.
-  // Todo: Same as above, think about how to auto change distribution instead manually locating hour and entry to distribution.
-  public static VisitParameters applySeniorDiscount(int currentVolume) {
-    double[] seniorDurationDist = {0, 0, 0, .45, .5, .05};
-    double[] seniorVisitDist = {};  // Todo: Need to figure out this part from passed parameters.
+  // Todo (review): We make two assumptions for now:
+  // 1) Start/end hours are full hours.
+  // 2) Senior discounts are always two hours
+  public static VisitParameters applySeniorDiscount(int currentVolume, int startHour, int endHour) {
     final double SENIOR_BOOST = 0.3;
+    final int STORE_OPENING = 6;
     double[] durationDist = {0, 0, 0, .45, .5, .05};
-    double[] entryDist = {0, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 0,0, 0, 0, 0, 0};
+    double[] entryDist = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    // Update the specified entry time based on start/end hours from parameters.
+    for (int i = startHour - STORE_OPENING; i < endHour - STORE_OPENING; i++) {
+      entryDist[i] = 0.5;
+    }
     int additionalVolume = (int) (currentVolume * SENIOR_BOOST);
     return new VisitParameters(additionalVolume, entryDist, durationDist);
-
   }
 }

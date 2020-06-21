@@ -27,7 +27,7 @@ public class CsvGenerator {
         // Highly referenced: https://stackoverflow.com/questions/3666007/how-to-serialize-object-to-csv-file
 
         final String CSV_SEPARATOR = ",";
-        final DayOfWeek SENIOR_DISCOUNT_DAY = DayOfWeek.TUESDAY;
+        final DayOfWeek SENIOR_DISCOUNT_DAY = DayOfWeek.WEDNESDAY;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         try {

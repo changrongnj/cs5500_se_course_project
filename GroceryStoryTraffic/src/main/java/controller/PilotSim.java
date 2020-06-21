@@ -23,6 +23,8 @@ public class PilotSim {
     private static final int DAYS_IN_MONTH = 31;
     private static final int WEATHER_SAMPLE_TIME = 12;
     private static final DayOfWeek SENIOR_DISCOUNT_DAY = DayOfWeek.WEDNESDAY;
+    private static final int SENIOR_DISCOUNT_START = 13;
+    private static final int SENIOR_DISCOUNT_END = 15;
 
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
@@ -94,17 +96,30 @@ public class PilotSim {
             }
 
             // Todo: Apply the nice weather effect.
-            if (weatherType == WeatherType.IS_NICE) {
-                if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
-                    VisitParameters niceWeather = Modifier.applyNiceWeather(dailyVolume);
-                    String prefixID = "W";
-                    List<Visit> newVisits = getExtraVisits(i, niceWeather, prefixID, holiday, date);
-                    newDay.mergeVisits(newVisits);
-                }
+            if (weatherType == WeatherType.IS_NICE && CheckDayOfWeek.isWeekend(dayOfWeek)) {
+                VisitParameters niceWeather = Modifier.applyNiceWeather(dailyVolume);
+                String prefixID = "W";
+                List<Visit> newVisits = getExtraVisits(i, niceWeather, prefixID, holiday, date);
+                newDay.mergeVisits(newVisits);
             }
 
             // Todo: Apply the meal hour effect.
+            if (holiday != HolidayType.IS_HOLIDAY && !CheckDayOfWeek.isWeekend(dayOfWeek)) {
+                // Apply the meal rush effects.
+                VisitParameters mealRush = Modifier.applyMealRush(dailyVolume);
+                String prefixID = "M";
+                List<Visit> newVisits = getExtraVisits(i, mealRush, prefixID, holiday, date);
+                newDay.mergeVisits(newVisits);
+            }
+
             // Todo: Apply the senior discount effect.
+            if (holiday != HolidayType.IS_HOLIDAY && dayOfWeek == SENIOR_DISCOUNT_DAY) {
+                VisitParameters seniorTime = Modifier.applySeniorDiscount(dailyVolume,
+                    SENIOR_DISCOUNT_START, SENIOR_DISCOUNT_END);
+                String prefixID = "S";
+                List<Visit> visits = getExtraVisits(i, seniorTime, prefixID, holiday, date);
+                newDay.mergeVisits(visits);
+            }
             days.add(newDay);
         }
 
