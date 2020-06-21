@@ -19,9 +19,11 @@ import model.Visit;
  * highlighted visit information per row.
  */
 public class PilotSim {
-    static final int MONTH = 5;
-    static final int DAYS_IN_MONTH = 31;
-    static final int WEATHER_SAMPLE_TIME = 12;
+    private static final int MONTH = 5;
+    private static final int DAYS_IN_MONTH = 31;
+    private static final int WEATHER_SAMPLE_TIME = 12;
+    private static final DayOfWeek SENIOR_DISCOUNT_DAY = DayOfWeek.WEDNESDAY;
+
     private static CsvGenerator csvGenerator = new CsvGenerator();
     private static Util util = new Util();
 
@@ -85,40 +87,26 @@ public class PilotSim {
             // add event data (except Holiday and bad weather)
             // Todo: Apply day/week before holiday effect.
             if (holiday == HolidayType.DAY_BEFORE_HOLIDAY || holiday == HolidayType.WEEK_TO_HOLIDAY ) {
-                Modifier.ResultType beforeHolidayInfo = Modifier.applyBeforeHoliday(holiday, dailyVolume);
-                additionalVolume = beforeHolidayInfo.additionalVolume;
-                double[] entryDist = beforeHolidayInfo.entryDist;
-                double[] durationDist = beforeHolidayInfo.durationDist;
+                VisitParameters beforeHoliday = Modifier.applyBeforeHoliday(holiday, dailyVolume);
                 String prefixID = "H";
-                Day newVisits = AdditionalDataGenerator(i, additionalVolume, entryDist, durationDist, prefixID, holiday, date);
-                // Rong: not quite sure about data type. Hope the additionalDataGenerator return a list of new visits
-                // I found day class is a list of visits... please help to fix.
+                List<Visit> newVisits = getExtraVisits(i, beforeHoliday, prefixID, holiday, date);
                 newDay.mergeVisits(newVisits);
             }
 
             // Todo: Apply the nice weather effect.
             if (weatherType == WeatherType.IS_NICE) {
                 if (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY) {
-                    Modifier.ResultType niceWeatherInfo = Modifier.applyNiceWeather(dailyVolume);
-                    additionalVolume = niceWeatherInfo.additionalVolume;
-                    double[] entryDist = niceWeatherInfo.entryDist;
-                    double[] durationDist = niceWeatherInfo.durationDist;
+                    VisitParameters niceWeather = Modifier.applyNiceWeather(dailyVolume);
                     String prefixID = "W";
-                    Day newVisits = AdditionalDataGenerator(i, additionalVolume, entryDist, durationDist, prefixID, holiday, date);
-                    // Rong: not quite sure about data type. Hope the additionalDataGenerator return a list of new visits
-                    // I found day class is a list of visits... please help to fix.
+                    List<Visit> newVisits = getExtraVisits(i, niceWeather, prefixID, holiday, date);
                     newDay.mergeVisits(newVisits);
                 }
             }
 
-
             // Todo: Apply the meal hour effect.
             // Todo: Apply the senior discount effect.
-
-
             days.add(newDay);
         }
-
 
         // Sorts all visits by entry date/time information.
         for (Day day : days) {
@@ -140,20 +128,23 @@ public class PilotSim {
     /**
      * generate additional data for events
      * @param day
-     * @param volume
-     * @param entryDist
-     * @param durationDist
+     * @param visitParameters
      * @param prefix
      * @param holiday
      * @param date
      * @return should return a list of additional visits data, which can be directly merged to the normal data
      */
-    public static Day AdditionalDataGenerator(int day, int volume, double[] entryDist, double[] durationDist,
+    public static List<Visit> getExtraVisits(int day, VisitParameters visitParameters,
                                           String prefix, HolidayType holiday, LocalDate date) {
-        Day newVisits = new Day();
+
+        int volume = visitParameters.getAdditionalVolume();
+        double[] entryDist = visitParameters.getEntryDist();
+        double[] durationDist = visitParameters.getDurationDist();
+
+        List<Visit> newVisits = new ArrayList<>();
         for (int i = 0; i < volume; i++) {
             // Get entry information.
-            LocalDateTime ldt = RandomGenerator.generateEntryData(day, entryDist);;
+            LocalDateTime ldt = RandomGenerator.generateEntryData(day, entryDist);
 
             // Get visit duration distribution for the specified date/time.
             Weather weather = util.findWeather(ldt);
@@ -173,10 +164,8 @@ public class PilotSim {
 
             // Immutable creation of visit.
             Visit visit = new Visit(id, entryTime, leaveDateTime, totalMinutes);
-            newVisits.addVisit(visit);
+            newVisits.add(visit);
         }
         return newVisits;
     }
-
-
 }
