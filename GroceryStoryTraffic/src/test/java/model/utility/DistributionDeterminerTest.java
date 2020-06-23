@@ -20,7 +20,7 @@ class DistributionDeterminerTest {
 
     @Test
     void getDailyVolumeTest() {
-        assertEquals(DistributionDeterminer.getDailyVolume(ld, constant), 2500);
+        assertEquals(DistributionDeterminer.getDailyVolume(ld, constant), 2200);
     }
 
     @Test
@@ -30,7 +30,7 @@ class DistributionDeterminerTest {
             LocalDateTime ldt = DistributionDeterminer.getEntryTime(1, ld, constant);
             hash[ldt.getHour() - 6]++;
         }
-        double[] base = constant.getEntryTimeDist().get("Friday");
+        double[] base = constant.getEntryTimeDist().get("Weekday");
         for(int i=0; i < base.length; i++) {
             assertTrue(Math.abs(base[i] - hash[i]/1000000) <= 0.01);
         }
@@ -40,7 +40,7 @@ class DistributionDeterminerTest {
     void getDurationDistributionTest() {
         LocalDateTime ldt = ld.atTime(12, 1);
         assertArrayEquals(DistributionDeterminer.getDurationDistribution(ldt, constant,
-            HolidayType.NON_HOLIDAY), new double[]{0.45, 0.3, 0.2, 0.05, 0, 0});
+            HolidayType.NON_HOLIDAY), new double[]{0.3, 0.5, 0.15, 0.05, 0, 0});
     }
 
 }

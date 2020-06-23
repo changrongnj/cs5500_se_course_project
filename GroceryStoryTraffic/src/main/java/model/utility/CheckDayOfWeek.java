@@ -4,15 +4,18 @@ import java.time.DayOfWeek;
 import model.WeatherType;
 
 /**
- *
+ * Static class containing two static methods:
+ * isWeekend(DayOfWeek) that returns true if the provided argument is a weekend.
+ * getDescriptors(DayOfWeek, DayOfWeek, WeatherType) that returns a String describing the particular
+ * day based on these parameters.
  */
 public final class CheckDayOfWeek {
   private CheckDayOfWeek() {}
 
   /**
-   *
-   * @param dayOfWeek
-   * @return
+   * Given a DayOfWeek instance, returns true if it is a weekend, false otherwise.
+   * @param dayOfWeek - DayOfWeek instance representing a day.
+   * @return true if day of week is a weekend, false otherwise.
    */
   public static boolean isWeekend(DayOfWeek dayOfWeek) {
     return (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY);

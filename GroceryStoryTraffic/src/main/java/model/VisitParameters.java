@@ -14,7 +14,7 @@ public class VisitParameters {
 
   /**
    * Constructs an instance of the VisitParameters class that accepts the following three
-   * parameters that are essential for Visit construction:
+   * parameters that are essential for additional visits construction:
    * @param volume: int representing the additional volume applied from events effect.
    * @param entry: array of double types representing the entry distribution.
    * @param duration: array of double types representing the duration distribution.

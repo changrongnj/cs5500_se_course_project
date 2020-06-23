@@ -21,10 +21,10 @@ public class Constant {
         // load total amount of customers per Day
         this.amountOfCustomers = new HashMap<>();
         this.amountOfCustomers.put("Monday", 620);
-        this.amountOfCustomers.put("Tuesday", 650);  // Changed to 770 // Rong: I changed it back to 650.
+        this.amountOfCustomers.put("Tuesday", 650);
         this.amountOfCustomers.put("Wednesday", 930);
         this.amountOfCustomers.put("Thursday", 700);
-        this.amountOfCustomers.put("Friday", 2200);  // Changed to 2200.
+        this.amountOfCustomers.put("Friday", 2200);
         this.amountOfCustomers.put("Saturday", 4000);
         this.amountOfCustomers.put("Sunday", 5000);
         this.amountOfCustomers.put("NiceWeekend", 6300);
