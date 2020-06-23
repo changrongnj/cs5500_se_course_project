@@ -17,14 +17,14 @@ import java.util.HashMap;
  * instantiation. Contains a method to find weather information on a particular date/time, and
  * another method that checks if the weather type is considered "nice" by an arbitrary standard.
  */
-public class Util {
+public class WeatherParser {
     private HashMap<String, String> weatherMap;
 
     /**
      * Constructs an instance of the Util class without accepting any parameters.
      * Automatically loads weather information from an external database.
      */
-    public Util() {
+    public WeatherParser() {
 
         // load weather data from json file
         JSONObject jsonObject = new JSONObject();
@@ -79,6 +79,7 @@ public class Util {
                 return WeatherType.IS_NICE;
             case "drizzle":
             case "rain":
+            case "hail":
                 return WeatherType.IS_POOR;
         }
         return WeatherType.IS_NEUTRAL;

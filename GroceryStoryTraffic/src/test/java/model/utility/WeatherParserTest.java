@@ -7,13 +7,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-class UtilTest {
+class WeatherParserTest {
 
     @Test
     void findWeatherTest() {
-        Util util = new Util();
+        WeatherParser weatherParser = new WeatherParser();
         LocalDateTime ldt = LocalDateTime.of(2020, 3, 31, 14, 0);
-        Weather weather = util.findWeather(ldt);
+        Weather weather = weatherParser.findWeather(ldt);
         assertEquals(weather.getWeatherType(), WeatherType.IS_NICE);
         assertEquals(weather.getAverageTemperature().intValue(), 70);
     }

@@ -3,9 +3,17 @@ package model.utility;
 import java.time.DayOfWeek;
 import model.WeatherType;
 
+/**
+ *
+ */
 public final class CheckDayOfWeek {
   private CheckDayOfWeek() {}
 
+  /**
+   *
+   * @param dayOfWeek
+   * @return
+   */
   public static boolean isWeekend(DayOfWeek dayOfWeek) {
     return (dayOfWeek == DayOfWeek.SATURDAY || dayOfWeek == DayOfWeek.SUNDAY);
   }

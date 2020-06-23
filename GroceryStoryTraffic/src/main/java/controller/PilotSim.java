@@ -29,7 +29,7 @@ public class PilotSim {
     private static final int DINNER_PEAK = 16;
 
     private static CsvGenerator csvGenerator = new CsvGenerator();
-    private static Util util = new Util();
+    private static WeatherParser weatherParser = new WeatherParser();
 
     /**
      * main method that does not require any command line arguments.
@@ -47,7 +47,7 @@ public class PilotSim {
             // Initialize a new date in the target range and determine customer volume that day.
             LocalDate date = LocalDate.of(2020, MONTH, i);
             HolidayType holiday = HolidayDeterminer.getHolidayInfo(date);
-            WeatherType weatherType = util.findWeather(date.atTime(WEATHER_SAMPLE_TIME, 0))
+            WeatherType weatherType = weatherParser.findWeather(date.atTime(WEATHER_SAMPLE_TIME, 0))
                 .getWeatherType();  // Arbitrarily chosen at noontime.
             DayOfWeek dayOfWeek = date.getDayOfWeek();
 
@@ -68,7 +68,7 @@ public class PilotSim {
                 // Get visit duration distribution for the specified date/time.
                 double[] durationDist = DistributionDeterminer.getDurationDistribution(
                         ldt, constant, holiday);
-                Weather weather = util.findWeather(ldt);
+                Weather weather = weatherParser.findWeather(ldt);
 
                 // add pre-fix "N" representing normal daily volume ID
                 String id = String.valueOf( "N" + (i-1)*dailyVolume + j);
@@ -80,7 +80,7 @@ public class PilotSim {
 
                 // Get visit leave information.
                 LocalDateTime leaveTime = ldt.plusMinutes(totalMinutes);
-                DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime),
+                DateTime leaveDateTime = new DateTime(leaveTime, weatherParser.findWeather(leaveTime),
                         HolidayDeterminer.getHolidayInfo(date));
 
                 // Immutable creation of visit.
@@ -165,7 +165,7 @@ public class PilotSim {
             LocalDateTime ldt = RandomGenerator.generateEntryData(day, entryDist);
 
             // Get visit duration distribution for the specified date/time.
-            Weather weather = util.findWeather(ldt);
+            Weather weather = weatherParser.findWeather(ldt);
 
             // id add pre-code representing normal data, day/week before holiday, niceWeather, mealPeak, seniorDiscount
             String id = String.valueOf(prefix + (day-1) * volume + i);
@@ -177,7 +177,7 @@ public class PilotSim {
 
             // Get visit leave information.
             LocalDateTime leaveTime = ldt.plusMinutes(totalMinutes);
-            DateTime leaveDateTime = new DateTime(leaveTime, util.findWeather(leaveTime),
+            DateTime leaveDateTime = new DateTime(leaveTime, weatherParser.findWeather(leaveTime),
                     HolidayDeterminer.getHolidayInfo(date));
 
             // Immutable creation of visit.
