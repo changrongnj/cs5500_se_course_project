@@ -21,8 +21,8 @@ public class DateTimeTest {
 
   @Before
   public void setUp() {
-    weather1 = new Weather(true, 65.0);
-    weather2 = new Weather(false, 65.0);
+    weather1 = new Weather(WeatherType.IS_NICE, 65.0);
+    weather2 = new Weather(WeatherType.IS_NEUTRAL, 65.0);
 
     date1 = LocalDateTime.of(2020, 5, 1, 6, 12);
     date2 = LocalDateTime.of(2020, 5, 1, 6, 20);
@@ -69,9 +69,8 @@ public class DateTimeTest {
 
   @Test
   public void testToString() {
-    String expected = "DateTime{localDateTime=2020-05-01T06:12,"
-        + " weather=Weather{wasNiceWeather=true, averageTemperature=65.0},"
-        + " holidayType=NON_HOLIDAY}";
+    String expected = "DateTime{localDateTime=2020-05-01T06:12, weather=Weather{weatherType=IS_NICE,"
+        + " averageTemperature=65.0}, holidayType=NON_HOLIDAY}";
     assertEquals(test1.toString(), expected);
   }
 }

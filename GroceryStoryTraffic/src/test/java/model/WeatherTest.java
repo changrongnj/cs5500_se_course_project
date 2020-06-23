@@ -10,18 +10,20 @@ public class WeatherTest {
   Weather test2;
   Weather test3;
   Weather test4;
+  Weather test5;
 
   @Before
   public void setUp() {
-    test1 = new Weather(true, 65.0);
-    test2 = new Weather(true, 65.0);
-    test3 = new Weather(false, 65.0);
-    test4 = new Weather(true, 64.0);
+    test1 = new Weather(WeatherType.IS_NICE, 65.0);
+    test2 = new Weather(WeatherType.IS_NICE, 65.0);
+    test3 = new Weather(WeatherType.IS_NEUTRAL, 65.0);
+    test4 = new Weather(WeatherType.IS_POOR, 65.0);
+    test5 = new Weather(WeatherType.IS_NICE, 64.0);
   }
 
   @Test
-  public void getWasNiceWeather() {
-    assertTrue(test1.getWasNiceWeather());
+  public void getWeatherType() {
+    assertEquals(test1.getWeatherType(), WeatherType.IS_NICE);
   }
 
   @Test
@@ -35,6 +37,7 @@ public class WeatherTest {
     assertEquals(test1, test2);
     assertNotEquals(test1, test3);
     assertNotEquals(test1, test4);
+    assertNotEquals(test1, test5);
     assertNotEquals(test1, null);
     assertNotEquals(test1, 0.0);
   }
@@ -46,7 +49,8 @@ public class WeatherTest {
 
   @Test
   public void testToString() {
-    String expected = "Weather{wasNiceWeather=true, averageTemperature=65.0}";
+    // Todo: Need to fix output.
+    String expected = "Weather{weatherType=IS_NICE, averageTemperature=65.0}";
     assertEquals(test1.toString(), expected);
   }
 }

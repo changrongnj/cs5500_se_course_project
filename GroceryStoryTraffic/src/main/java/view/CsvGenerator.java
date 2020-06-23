@@ -10,6 +10,7 @@ import java.util.*;
 import model.DateTime;
 import model.Day;
 import model.Visit;
+import model.utility.CheckDayOfWeek;
 
 /**
  * Creates an instance of the CsvGenerator class that contains one method, writeToCsv, which accepts
@@ -68,7 +69,8 @@ public class CsvGenerator {
                     DayOfWeek dayOfWeek = entry.getLocalDateTime().getDayOfWeek();
                     oneLine.append(dayOfWeek);
                     oneLine.append(CSV_SEPARATOR);
-                    oneLine.append(visit.getAdditionalDescriptors(dayOfWeek, SENIOR_DISCOUNT_DAY));
+                    oneLine.append(CheckDayOfWeek.getDescriptors(
+                        dayOfWeek, SENIOR_DISCOUNT_DAY, entry.getWeather().getWeatherType()));
                     bw.write(oneLine.toString());
                     bw.newLine();
                 }

@@ -24,11 +24,6 @@ class DistributionDeterminerTest {
     }
 
     @Test
-    void applyHolidayVolumeTest() {
-        assertEquals(DistributionDeterminer.applyHolidayVolume(HolidayType.IS_HOLIDAY, 1000), 1200);
-    }
-
-    @Test
     void getEntryTimeTest() {
         double[] hash = new double[15];
         for (int i = 0; i < 1000000; i++) {
@@ -44,7 +39,8 @@ class DistributionDeterminerTest {
     @Test
     void getDurationDistributionTest() {
         LocalDateTime ldt = ld.atTime(12, 1);
-        assertArrayEquals(DistributionDeterminer.getDurationDistribution(ldt, constant, util), new double[]{0.45, 0.3, 0.2, 0.05, 0, 0});
+        assertArrayEquals(DistributionDeterminer.getDurationDistribution(ldt, constant,
+            HolidayType.NON_HOLIDAY), new double[]{0.45, 0.3, 0.2, 0.05, 0, 0});
     }
 
 }

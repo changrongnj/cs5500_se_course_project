@@ -1,6 +1,7 @@
 package model.utility;
 
 import model.Weather;
+import model.WeatherType;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -13,7 +14,7 @@ class UtilTest {
         Util util = new Util();
         LocalDateTime ldt = LocalDateTime.of(2020, 3, 31, 14, 0);
         Weather weather = util.findWeather(ldt);
-        assertEquals(weather.getWasNiceWeather(), true);
+        assertEquals(weather.getWeatherType(), WeatherType.IS_NICE);
         assertEquals(weather.getAverageTemperature().intValue(), 70);
     }
 }

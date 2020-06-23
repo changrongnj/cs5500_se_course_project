@@ -1,6 +1,5 @@
 package model;
 
-import java.time.DayOfWeek;
 import java.util.Objects;
 
 /**
@@ -60,14 +59,6 @@ public class Visit {
   }
 
   /**
-   * Given a DateTime instance, sets the internal attribute to this instance.
-   * @param entryTime - DateTime instance representing the new entry time information.
-   */
-  public void setEntryTime(DateTime entryTime) {
-    this.entryTime = entryTime;
-  }
-
-  /**
    * Returns a DateTime instance representing the leave information.
    * @return a DateTime instance representing the leave information.
    */
@@ -76,51 +67,11 @@ public class Visit {
   }
 
   /**
-   * Given a DateTime instance, set the internal attribute to this new instance.
-   * @param leaveTime - DateTime instance representing the new leave information.
-   */
-  public void setLeaveTime(DateTime leaveTime) {
-    this.leaveTime = leaveTime;
-  }
-
-  /**
    * Returns an Integer representation the visit duration.
    * @return an Integer representation the visit duration.
    */
   public int getDuration() {
     return this.duration;
-  }
-
-  /**
-   * Given an int, set the internal attribute to this new value.
-   * @param duration - int representing the new duration value.
-   */
-  public void setDuration(int duration) {
-    this.duration = duration;
-  }
-
-  /**
-   * Given the current day of wek and the expected senior discount day per week, returns a String
-   * representing additional descriptions for a visit.
-   * @param thisDay - DayOfWeek representing the current day.
-   * @param seniorDay - DayOfWeek representing the senior discount day.
-   * @return a String representing additional descriptions for a visit.
-   */
-  public String getAdditionalDescriptors(DayOfWeek thisDay, DayOfWeek seniorDay) {
-    if (thisDay == DayOfWeek.SATURDAY || thisDay == DayOfWeek.SUNDAY) {
-      switch(this.entryTime.getWeather().getWeatherType()) {
-        case IS_NICE:
-          return "NICE_WEEKEND";
-        case IS_POOR:
-          return "POOR_WEEKEND";
-        default:
-          return "REGULAR_WEEKEND";
-      }
-    } else if (thisDay == seniorDay) {
-      return "SENIOR_DISCOUNT_WEEKDAY";
-    } else {
-      return "REGULAR_WEEKDAY";
-    }
   }
 
   /**

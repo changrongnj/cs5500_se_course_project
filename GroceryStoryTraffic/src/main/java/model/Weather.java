@@ -13,11 +13,11 @@ public class Weather {
 
   /**
    * Constructs a new instance of the Weather class with the following parameters:
-   * @param wasNiceWeather - WeatherType representing one of three weather conditions of interest.
+   * @param weatherType - WeatherType representing one of three weather conditions of interest.
    * @param averageTemperature - Double representing the average temperature during store hours.
    */
-  public Weather(WeatherType wasNiceWeather, Double averageTemperature) {
-    this.weatherType = wasNiceWeather;
+  public Weather(WeatherType weatherType, Double averageTemperature) {
+    this.weatherType = weatherType;
     this.averageTemperature = averageTemperature;
   }
 
@@ -51,8 +51,8 @@ public class Weather {
       return false;
     }
     Weather weather = (Weather) o;
-    return Objects.equals(this.getWeatherType(), weather.getWeatherType()) &&
-        Objects.equals(this.getAverageTemperature(), weather.getAverageTemperature());
+    return Objects.equals(this.weatherType, weather.weatherType) &&
+        Objects.equals(this.averageTemperature, weather.averageTemperature);
   }
 
   /**
@@ -61,7 +61,7 @@ public class Weather {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(this.getWeatherType(), this.getAverageTemperature());
+    return Objects.hash(this.weatherType, this.averageTemperature);
   }
 
   /**
@@ -71,7 +71,7 @@ public class Weather {
   @Override
   public String toString() {
     return "Weather{" +
-        "wasNiceWeather=" + this.getWeatherType() +
+        "weatherType=" + this.weatherType +
         ", averageTemperature=" + this.averageTemperature +
         '}';
   }

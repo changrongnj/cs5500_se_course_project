@@ -28,8 +28,8 @@ public class DayTest {
 
   @Before
   public void setUp() {
-    weather1 = new Weather(true, 65.0);
-    weather2 = new Weather(false, 65.0);
+    weather1 = new Weather(WeatherType.IS_NICE, 65.0);
+    weather2 = new Weather(WeatherType.IS_POOR, 65.0);
 
     date1 = LocalDateTime.of(2020, 5, 1, 6, 12);
     date2 = LocalDateTime.of(2020, 5, 1, 6, 20);
@@ -64,9 +64,9 @@ public class DayTest {
   @Test
   public void getVisits() {
     String expected = "[Visit{visitID='1', entryTime=DateTime{localDateTime=2020-05-01T06:12,"
-        + " weather=Weather{wasNiceWeather=true, averageTemperature=65.0},"
+        + " weather=Weather{weatherType=IS_NICE, averageTemperature=65.0},"
         + " holidayType=NON_HOLIDAY}, leaveTime=DateTime{localDateTime=2020-05-01T06:30,"
-        + " weather=Weather{wasNiceWeather=true, averageTemperature=65.0},"
+        + " weather=Weather{weatherType=IS_NICE, averageTemperature=65.0},"
         + " holidayType=NON_HOLIDAY}, duration=18}]";
     assertEquals(test1.getVisits().toString(), expected);
   }
@@ -88,11 +88,12 @@ public class DayTest {
 
   @Test
   public void testToString() {
-    String expected = "Day{visits=[Visit{visitID='1', entryTime=DateTime{"
-        + "localDateTime=2020-05-01T06:12, weather=Weather{wasNiceWeather=true,"
-        + " averageTemperature=65.0}, holidayType=NON_HOLIDAY},"
-        + " leaveTime=DateTime{localDateTime=2020-05-01T06:30,"
-        + " weather=Weather{wasNiceWeather=true, averageTemperature=65.0},"
+    // Todo: Fix expected
+    String expected = "Day{visits=[Visit{visitID='1',"
+        + " entryTime=DateTime{localDateTime=2020-05-01T06:12,"
+        + " weather=Weather{weatherType=IS_NICE, averageTemperature=65.0},"
+        + " holidayType=NON_HOLIDAY}, leaveTime=DateTime{localDateTime=2020-05-01T06:30,"
+        + " weather=Weather{weatherType=IS_NICE, averageTemperature=65.0},"
         + " holidayType=NON_HOLIDAY}, duration=18}]}";
     assertEquals(test1.toString(), expected);
   }

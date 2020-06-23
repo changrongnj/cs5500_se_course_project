@@ -2,7 +2,6 @@ package model;
 
 import static org.junit.Assert.*;
 
-import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,8 +27,8 @@ public class VisitTest {
 
   @Before
   public void setUp() {
-    weather1 = new Weather(true, 65.0);
-    weather2 = new Weather(false, 65.0);
+    weather1 = new Weather(WeatherType.IS_NICE, 65.0);
+    weather2 = new Weather(WeatherType.IS_NEUTRAL, 65.0);
 
     date1 = LocalDateTime.of(2020, 5, 1, 6, 12);
     date2 = LocalDateTime.of(2020, 5, 1, 6, 20);
@@ -66,37 +65,13 @@ public class VisitTest {
   }
 
   @Test
-  public void setEntryTime() {
-    test1.setEntryTime(entry2);
-    assertEquals(test1.getEntryTime(), entry2);
-  }
-
-  @Test
   public void getLeaveTime() {
     assertEquals(test1.getLeaveTime(), leave1);
   }
 
   @Test
-  public void setLeaveTime() {
-    test1.setLeaveTime(leave2);
-    assertEquals(test1.getLeaveTime(), leave2);
-  }
-
-  @Test
   public void getDuration() {
     assertEquals(test1.getDuration(), 18);
-  }
-
-  @Test
-  public void setDuration() {
-    test1.setDuration(20);
-    assertEquals(test1.getDuration(), 20);
-  }
-
-  @Test
-  public void getAdditionalDescriptors() {
-    String expected = "REGULAR_WEEKDAY";
-    assertEquals(test1.getAdditionalDescriptors(DayOfWeek.FRIDAY, DayOfWeek.TUESDAY), expected);
   }
 
   @Test
@@ -120,9 +95,9 @@ public class VisitTest {
   @Test
   public void testToString() {
     String expected = "Visit{visitID='1', entryTime=DateTime{localDateTime=2020-05-01T06:12,"
-        + " weather=Weather{wasNiceWeather=true, averageTemperature=65.0},"
+        + " weather=Weather{weatherType=IS_NICE, averageTemperature=65.0},"
         + " holidayType=NON_HOLIDAY}, leaveTime=DateTime{localDateTime=2020-05-01T06:30,"
-        + " weather=Weather{wasNiceWeather=true, averageTemperature=65.0},"
+        + " weather=Weather{weatherType=IS_NICE, averageTemperature=65.0},"
         + " holidayType=NON_HOLIDAY}, duration=18}";
     assertEquals(test1.toString(), expected);
   }
