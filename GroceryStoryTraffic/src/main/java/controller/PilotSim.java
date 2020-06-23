@@ -1,4 +1,5 @@
 package controller;
+import dao.DayDao;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -39,7 +40,6 @@ public class PilotSim {
         List<Day> days = new ArrayList<>();
         Constant constant = new Constant();
         int dailyVolume;
-        int additionalVolume;
 
         for(int i = 1; i <= DAYS_IN_MONTH; i++) {
 
@@ -71,7 +71,7 @@ public class PilotSim {
                 Weather weather = weatherParser.findWeather(ldt);
 
                 // add pre-fix "N" representing normal daily volume ID
-                String id = String.valueOf( "N" + (i-1)*dailyVolume + j);
+                String id = "N" + (i - 1) * dailyVolume + j;
                 // Get entry information including weather and holiday information.
                 DateTime entryTime = new DateTime(ldt, weather, holiday);
 
@@ -137,20 +137,23 @@ public class PilotSim {
             });
         }
         csvGenerator.writeToCSV(days);
-        // Commenting out for now to test main for other functionality.
-        //DayDao.cleanAllVisits();
-        //DayDao.addAllVisits(days);
-        //DayDao.closeClient();
+
+        // Calls Database (MongoDB) functions. May comment out to test code functionality.
+        DayDao.cleanAllVisits();
+        DayDao.addAllVisits(days);
+        DayDao.closeClient();
     }
 
     /**
-     * generate additional data for events
-     * @param day
-     * @param visitParameters
-     * @param prefix
-     * @param holiday
-     * @param date
-     * @return should return a list of additional visits data, which can be directly merged to the normal data
+     * Given the following parameters, returns a list of Visit objects representing the additional
+     * visits due to special modifiers of a particular day.
+     * @param day - int representing the day of the month.
+     * @param visitParameters - VisitParameters instance representing information for extra visits.
+     * @param prefix - String representing prefix to visit id.
+     * @param holiday - HolidayType representing holiday modifier.
+     * @param date - LocalDate instance representing date of day of interest.
+     * @return a list of Visit objects representing the additional visits due to special modifiers
+     * of a particular day.
      */
     public static List<Visit> getExtraVisits(int day, VisitParameters visitParameters,
                                           String prefix, HolidayType holiday, LocalDate date) {
