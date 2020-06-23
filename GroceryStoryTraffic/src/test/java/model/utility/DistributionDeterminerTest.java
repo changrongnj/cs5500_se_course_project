@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class DistributionDeterminerTest {
+    // Todo: Need to fix this test since we changed the baseline volume.
 
     private LocalDate ld = LocalDate.of(2020, 5, 15);
     private Constant constant = new Constant();
-    private Util util = new Util();
 
     @Test
     void getDailyVolumeTest() {

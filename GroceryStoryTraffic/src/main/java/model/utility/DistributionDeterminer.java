@@ -1,7 +1,6 @@
 package model.utility;
 
 import model.HolidayType;
-import model.WeatherType;
 import model.data.Constant;
 
 import java.time.DayOfWeek;

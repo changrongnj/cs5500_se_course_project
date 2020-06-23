@@ -14,10 +14,15 @@ public class Visit {
   private int duration;
 
   /**
-   * Overloaded constructor that does not take any parameters upon creation of an instance.
-   * Requires manual setting of all four internal attributes.
+   * Overloaded constructor that takes the following three parameters to create a visit without id.
+   * @param entryTime - DateTime instance representing the entry information.
+   * @param leaveTime - DateTime instance representing the leave information.
+   * @param duration - int representing the duration of visit.
    */
-  public Visit() {
+  public Visit(DateTime entryTime, DateTime leaveTime, int duration) {
+    this.entryTime = entryTime;
+    this.leaveTime = leaveTime;
+    this.duration = duration;
   }
 
   /**

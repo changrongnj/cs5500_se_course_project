@@ -3,6 +3,8 @@ package model;
 import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,11 +46,14 @@ public class DayTest {
     visit1 = new Visit("1", entry1, leave1, 18);
     visit2 = new Visit("1", leave1, leave2, 18);
 
+    List<Visit> visitList = new ArrayList<>();
+    visitList.add(visit1);
+
     test1 = new Day();
     test1.addVisit(visit1);
 
     test2 = new Day();
-    test2.addVisit(visit1);
+    test2.mergeVisits(visitList);
 
     test3 = new Day();
     test3.addVisit(visit2);

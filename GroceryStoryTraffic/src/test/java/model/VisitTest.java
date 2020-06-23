@@ -41,7 +41,9 @@ public class VisitTest {
     leave2 = new DateTime(date4, weather1, HolidayType.NON_HOLIDAY);
 
     test1 = new Visit("1", entry1, leave1, 18);
-    test2 = new Visit("1", entry1, leave1, 18);
+    test2 = new Visit(entry1, leave1, 18);
+    test2.setVisitID("1");
+
     test3 = new Visit("2", entry1, leave1, 18);
     test4 = new Visit("1", entry2, leave1, 10);
     test5 = new Visit("1", entry1, leave2, 47);
