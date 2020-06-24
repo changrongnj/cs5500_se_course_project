@@ -1,5 +1,10 @@
 package model;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
 import java.util.Objects;
 
 /**
@@ -7,9 +12,14 @@ import java.util.Objects;
  * visit information. Contains two overloaded constructors that either take no parameters, or take
  * all four parameters corresponding to its internal attributes.
  */
+@Entity("Visits")
 public class Visit {
+  @Id
+  private ObjectId id = new ObjectId();
   private String visitID;
+  @Embedded
   private DateTime entryTime;
+  @Embedded
   private DateTime leaveTime;
   private int duration;
 
