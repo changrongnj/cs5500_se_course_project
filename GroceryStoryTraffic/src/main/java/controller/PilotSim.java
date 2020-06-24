@@ -1,12 +1,13 @@
 package controller;
-import dao.DayDao;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import dao.MetaDao;
 import model.*;
 import model.data.Constant;
 import model.utility.Modifier;
@@ -139,9 +140,27 @@ public class PilotSim {
         csvGenerator.writeToCSV(days);
 
         // Calls Database (MongoDB) functions. May comment out to test code functionality.
-        DayDao.cleanAllVisits();
-        DayDao.addAllVisits(days);
-        DayDao.closeClient();
+
+        //truncate previous results
+        MetaDao.truncateData();
+
+        // initialize a DataSet object
+        DataSet ds = new DataSet();
+
+        // assign its corresponding Visits
+        List<Visit> visits = new ArrayList<>();
+        for(Day d:days) {
+            visits.addAll(d.getVisits());
+        }
+        ds.setVisits(visits);
+
+        // set its Month
+        ds.setMonth(Month.MAY);
+
+        // insert it into database
+        List<DataSet> dataSets = new ArrayList<>();
+        dataSets.add(ds);
+        MetaDao.addAllDataSets(dataSets);
     }
 
     /**
