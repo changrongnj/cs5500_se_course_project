@@ -14,7 +14,7 @@ import model.HolidayType;
  * Holiday data information has a pre-specified start year.
  */
 public class HolidayRelatedDates {
-  private static final int START_YEAR = 2016;
+  private static final int START_YEAR = 2019;
   private HashMap<Integer, HashMap<HolidayType, List<LocalDate>>> holidayMap;
 
   /**
@@ -66,72 +66,9 @@ public class HolidayRelatedDates {
    */
   private List<List<LocalDate>> generateHolidaysPerYear() {
     List<List<LocalDate>> holidaysPerYear = new ArrayList<>();
-    holidaysPerYear.add(this.generate2016holidays());
-    holidaysPerYear.add(this.generate2017holidays());
-    holidaysPerYear.add(this.generate2018holidays());
     holidaysPerYear.add(this.generate2019holidays());
     holidaysPerYear.add(this.generate2020holidays());
     return holidaysPerYear;
-  }
-
-  /**
-   * Returns a List of LocalDate objects representing the federal holidays in year 2016.
-   * @return a List of LocalDate objects representing the federal holidays in year 2016.
-   */
-  private List<LocalDate> generate2016holidays() {
-    final int YEAR = 2016;
-    List<LocalDate> dates = new ArrayList<>();
-    dates.add(LocalDate.of(YEAR, 1, 1));  // May need to include 1/2 for Holiday Observance
-    dates.add(LocalDate.of(YEAR, 1, 18));  // MLK
-    dates.add(LocalDate.of(YEAR, 2, 15));  // President's Day
-    dates.add(LocalDate.of(YEAR, 5, 30));  // Memorial Day
-    dates.add(LocalDate.of(YEAR, 7, 4));  // Independence Day
-    dates.add(LocalDate.of(YEAR, 9, 5));  // Labor Day
-    dates.add(LocalDate.of(YEAR, 10, 10));  // Columbus Day
-    dates.add(LocalDate.of(YEAR, 11, 11));  // Veteran's Day
-    dates.add(LocalDate.of(YEAR, 11, 24));  // Thanksgiving Day
-    dates.add(LocalDate.of(YEAR, 12, 25));  // Christmas. 12/26 Observed.
-    return dates;
-  }
-
-  /**
-   * Returns a List of LocalDate objects representing the federal holidays in year 2017.
-   * @return a List of LocalDate objects representing the federal holidays in year 2017.
-   */
-  private List<LocalDate> generate2017holidays() {
-    final int YEAR = 2017;
-    List<LocalDate> dates = new ArrayList<>();
-    dates.add(LocalDate.of(YEAR, 1, 1));  // May need to include 1/2 for Holiday Observance
-    dates.add(LocalDate.of(YEAR, 1, 16));  // MLK
-    dates.add(LocalDate.of(YEAR, 2, 20));  // President's Day
-    dates.add(LocalDate.of(YEAR, 5, 29));  // Memorial Day
-    dates.add(LocalDate.of(YEAR, 7, 4));  // Independence Day
-    dates.add(LocalDate.of(YEAR, 9, 4));  // Labor Day
-    dates.add(LocalDate.of(YEAR, 10, 9));  // Columbus Day
-    dates.add(LocalDate.of(YEAR, 11, 11));  // Veteran's. May need to include 11/10 for Observed
-    dates.add(LocalDate.of(YEAR, 11, 23));  // Thanksgiving
-    dates.add(LocalDate.of(YEAR, 12, 25));  // Christmas
-    return dates;
-  }
-
-  /**
-   * Returns a List of LocalDate objects representing the federal holidays in year 2018.
-   * @return a List of LocalDate objects representing the federal holidays in year 2018.
-   */
-  private List<LocalDate> generate2018holidays() {
-    final int YEAR = 2018;
-    List<LocalDate> dates = new ArrayList<>();
-    dates.add(LocalDate.of(YEAR, 1, 1));  // May need to include 1/2 for Holiday Observance
-    dates.add(LocalDate.of(YEAR, 1, 15));  // MLK
-    dates.add(LocalDate.of(YEAR, 2, 19));  // President's Day
-    dates.add(LocalDate.of(YEAR, 5, 28));  // Memorial Day
-    dates.add(LocalDate.of(YEAR, 7, 4));  // Independence Day
-    dates.add(LocalDate.of(YEAR, 9, 3));  // Labor Day
-    dates.add(LocalDate.of(YEAR, 10, 8));  // Columbus Day
-    dates.add(LocalDate.of(YEAR, 11, 11));  // Veteran's. May need to include 11/12 for Observed
-    dates.add(LocalDate.of(YEAR, 11, 22));  // Thanksgiving
-    dates.add(LocalDate.of(YEAR, 12, 25));  // Christmas
-    return dates;
   }
 
   /**
