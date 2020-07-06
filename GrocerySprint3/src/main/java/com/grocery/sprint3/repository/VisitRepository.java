@@ -3,6 +3,7 @@ package com.grocery.sprint3.repository;
 import com.grocery.sprint3.model.DateTime;
 import com.grocery.sprint3.model.Visit;
 import java.util.List;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface VisitRepository extends MongoRepository<Visit, String> {
