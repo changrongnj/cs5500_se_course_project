@@ -17,18 +17,18 @@ public class Visit {
   private ObjectId id = new ObjectId();
   private String visitID;
   // Need to find @Embedded version
-  private DateTime entryTime;
+  private String entryTime;
   // Need to find @Embedded version
-  private DateTime leaveTime;
-  private int duration;
+  private String leaveTime;
+  private Integer duration;
 
   /**
    * Overloaded constructor that takes the following three parameters to create a visit without id.
    * @param entryTime - DateTime instance representing the entry information.
    * @param leaveTime - DateTime instance representing the leave information.
-   * @param duration - int representing the duration of visit.
+   * @param duration - Integer representing the duration of visit.
    */
-  public Visit(DateTime entryTime, DateTime leaveTime, int duration) {
+  public Visit(String entryTime, String leaveTime, Integer duration) {
     this.entryTime = entryTime;
     this.leaveTime = leaveTime;
     this.duration = duration;
@@ -39,13 +39,32 @@ public class Visit {
    * @param visitID - String representing the unique visit.
    * @param entryTime - DateTime instance representing the entry information.
    * @param leaveTime - DateTime instance representing the leave information.
-   * @param duration - int representing the duration of visit.
+   * @param duration - Integer representing the duration of visit.
    */
-  public Visit(String visitID, DateTime entryTime, DateTime leaveTime, int duration) {
+  public Visit(String visitID, String entryTime, String leaveTime, Integer duration) {
     this.visitID = visitID;
     this.entryTime = entryTime;
     this.leaveTime = leaveTime;
     this.duration = duration;
+  }
+
+  // Overloaded empty visit.
+  public Visit() {}
+
+  /**
+   * Returns an ObjectId representing the actual object ID
+   * @return an ObjectId representing the actual object ID
+   */
+  public ObjectId getId() {
+    return id;
+  }
+
+  /**
+   * Given an ObjectId instance, sets the internal attribute to new value.
+   * @param id - new ObjectId instance.
+   */
+  public void setId(ObjectId id) {
+    this.id = id;
   }
 
   /**
@@ -68,7 +87,7 @@ public class Visit {
    * Returns a DateTime instance representing the entry time information.
    * @return a DateTime instance representing the entry time information.
    */
-  public DateTime getEntryTime() {
+  public String getEntryTime() {
     return this.entryTime;
   }
 
@@ -76,7 +95,7 @@ public class Visit {
    * Sets the new entry time to the given parameter
    * @param entryTime - DateTime instance representing new entry time information.
    */
-  public void setEntryTime(DateTime entryTime) {
+  public void setEntryTime(String entryTime) {
     this.entryTime = entryTime;
   }
 
@@ -84,7 +103,7 @@ public class Visit {
    * Returns a DateTime instance representing the leave information.
    * @return a DateTime instance representing the leave information.
    */
-  public DateTime getLeaveTime() {
+  public String getLeaveTime() {
     return this.leaveTime;
   }
 
@@ -93,7 +112,7 @@ public class Visit {
    * Sets the new LeaveTime to the given parameter
    * @param leaveTime - DateTime instance representing leave time information.
    */
-  public void setLeaveTime(DateTime leaveTime) {
+  public void setLeaveTime(String leaveTime) {
     this.leaveTime = leaveTime;
   }
 
@@ -101,15 +120,15 @@ public class Visit {
    * Returns an Integer representation the visit duration.
    * @return an Integer representation the visit duration.
    */
-  public int getDuration() {
+  public Integer getDuration() {
     return this.duration;
   }
 
   /**
    * Sets the duration attribute to given parameter
-   * @param duration - int representing new duration.
+   * @param duration - Integer representing new duration.
    */
-  public void setDuration(int duration) {
+  public void setDuration(Integer duration) {
     this.duration = duration;
   }
 }
