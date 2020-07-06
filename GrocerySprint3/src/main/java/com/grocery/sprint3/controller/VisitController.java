@@ -23,7 +23,7 @@ public class VisitController {
 
   @GetMapping(path="/all")
   public List<Visit> getAllVisits() {
-    return visitRepo.findAll();
+    return (List<Visit>) visitRepo.findAll();
   }
 
   @GetMapping(path="/{visitID}")
