@@ -1,10 +1,5 @@
 package com.grocery.sprint3.service;
 
-import com.grocery.sprint3.model.Visit;
-import com.grocery.sprint3.repository.VisitRepository;
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class VisitAnalyzerServiceImpl implements VisitAnalyzerService {
 /*
   @Autowired
