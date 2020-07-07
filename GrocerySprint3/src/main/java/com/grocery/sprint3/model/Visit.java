@@ -2,7 +2,6 @@ package com.grocery.sprint3.model;
 
 import org.bson.types.ObjectId;
 
-import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,9 +15,7 @@ public class Visit {
   @Id
   private ObjectId id = new ObjectId();
   private String visitID;
-  // Need to find @Embedded version
   private String entryTime;
-  // Need to find @Embedded version
   private String leaveTime;
   private Integer duration;
   private String holiday;
@@ -56,7 +53,10 @@ public class Visit {
     this.dayOfWeek = dayOfWeek;
   }
 
-  // Overloaded empty visit.
+  /**
+   * Overloaded constructor that does not accept any parameters and relies on setters to update
+   * internal attributes.
+   */
   public Visit() {}
 
   /**

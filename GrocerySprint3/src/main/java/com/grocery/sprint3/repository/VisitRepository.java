@@ -2,7 +2,6 @@ package com.grocery.sprint3.repository;
 
 import com.grocery.sprint3.model.Visit;
 import java.util.List;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
