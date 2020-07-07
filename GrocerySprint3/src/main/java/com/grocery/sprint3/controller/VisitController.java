@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller class for handling certain queries for the visits collection.
+ */
 @RestController
 @RequestMapping(path="/visits")  // localhost:8080/visits
 public class VisitController {
@@ -23,7 +26,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/all
-   *
    * Returns all visits in the collection without modifying the native ordering.
    * @return all visits in the collection without modifying the native ordering.
    */
@@ -34,7 +36,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/all/ordered/entry
-   *
    * Returns all visits in order of entry time.
    * @return all visits in order of entry time.
    */
@@ -45,7 +46,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/single/{visitID}
-   *
    * Returns a single visit matching the provided visitID
    * @param id - String representing the visit ID.
    * @return a single visit matching the provided visitID
@@ -57,7 +57,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/partial/prefix/{idPrefix}|{start}|{end}
-   *
    * Returns a subset of visits that match the provided prefix within the provided interval.
    * @param prefix - String representing the prefix of interest (single letter)
    * @param start - String representing the starting date/time (yyyy-mm-ddThh:mm)
@@ -73,7 +72,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/partial/entry/interval/{start}|{end}
-   *
    * Returns a subset of visits with entry times between the given interval.
    * @param start - String representing start of interval (yyyy-mm-ddThh:mm)
    * @param end - String representing end of interval (yyyy-mm-ddThh:mm)
@@ -87,7 +85,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/partial/leave/interval/{start}|{end}
-   *
    * Returns a subset of visits with leave times between the given interval.
    * @param start - String representing start of interval (yyyy-mm-ddThh:mm)
    * @param end - String representing end of interval (yyyy-mm-ddThh:mm)
@@ -101,7 +98,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/partial/duration/interval/{min}|{max}
-   *
    * Returns a subset of visits with shopping durations in between the specified interval
    * @param min - Integer representing the minimum shopping duration
    * @param max - Integer representing the maximum shopping duration
@@ -115,7 +111,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/partial/duration/LTE/{max}
-   *
    * Returns a subset of visits with shopping durations less than or equal the target time.
    * @param max - Integer representing the maximum shopping duration
    * @return a subset of visits with shopping durations less than or equal the target time.
@@ -127,7 +122,6 @@ public class VisitController {
 
   /**
    * Postman GET command: localhost:8080/visits/partial/duration/GTE/{min}
-   *
    * Returns a subset of visits with shopping durations greater than or equal the target time.
    * @param min - Integer representing the minimum shopping duration
    * @return a subset of visits with shopping durations greater than or equal the target time.
@@ -139,7 +133,6 @@ public class VisitController {
 
   /**
    * Postman POST command: localhost:8080/visits/add/single    plus 6 parameters
-   *
    * Returns a String message to indicate successful addition to collection.
    * @param visitID - String representing the unique visit ID (prefix + digits)
    * @param entryTime - String representing the entry time (yyyy-mm-ddThh:mm)
