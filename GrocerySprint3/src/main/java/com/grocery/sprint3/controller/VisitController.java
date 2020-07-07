@@ -132,7 +132,7 @@ public class VisitController {
   }
 
   /**
-   * Postman POST command: localhost:8080/visits/add/single    plus 6 parameters
+   * Postman POST command: localhost:8080/visits/add/single?visitID={param}&entryTime={param}&leaveTime={param}&duration={param}&holiday={param}&dayOfWeek={param}
    * Returns a String message to indicate successful addition to collection.
    * @param visitID - String representing the unique visit ID (prefix + digits)
    * @param entryTime - String representing the entry time (yyyy-mm-ddThh:mm)
