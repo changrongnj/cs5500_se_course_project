@@ -1,6 +1,9 @@
 package dao;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import java.util.ArrayList;
 import model.DataSet;
 import model.Visit;
 import org.mongodb.morphia.Datastore;
@@ -30,7 +33,24 @@ public final class MetaDao {
     }
 
     private static void addAllVisits(List<Visit> visits) {
-        datastore.save(visits);
+        // datastore.save(visits);  // Previous code.
+
+        // (Todo: James please review) I brought back the code from your earlier commit in DayDao
+        // Todo: Because storing all of the values as a String is much easier to work with in
+        // Todo: Postman due to my limited knowledge. We can definitely change it back later if
+        // Todo: That is preferred. - Andy
+        List<DBObject> mongoObjs = new ArrayList<>();
+        for(Visit v : visits) {
+            DBObject visitObj = new BasicDBObject()
+                .append("VisitID", v.getVisitID())
+                .append("EntryTime",v.getEntryTime().getLocalDateTime().toString())
+                .append("LeaveTime", v.getLeaveTime().getLocalDateTime().toString())
+                .append("Duration", v.getDuration())
+                .append("Holiday", v.getEntryTime().getHolidayType().toString())
+                .append("DayofWeek", v.getEntryTime().getLocalDateTime().getDayOfWeek().toString());
+            mongoObjs.add(visitObj);
+        }
+        datastore.getCollection(Visit.class).insert(mongoObjs);  // Insert the visits.
         System.out.printf("successfully insert %d visits\n", visits.size());
     }
 
