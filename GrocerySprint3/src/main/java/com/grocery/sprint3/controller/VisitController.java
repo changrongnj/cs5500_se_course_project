@@ -39,8 +39,9 @@ public class VisitController {
   // Post
   @PostMapping(path="/add")
   public @ResponseBody String saveOrUpdateVisit(@RequestParam String visitID,
-      @RequestParam String entryTime, @RequestParam String leaveTime, @RequestParam int duration) {
-    visitRepo.save(new Visit(visitID, entryTime, leaveTime, duration));
+      @RequestParam String entryTime, @RequestParam String leaveTime, @RequestParam int duration,
+      @RequestParam String holiday, @RequestParam String dayOfWeek) {
+    visitRepo.save(new Visit(visitID, entryTime, leaveTime, duration, holiday, dayOfWeek));
     return "Visit added successfully";
   }
 }

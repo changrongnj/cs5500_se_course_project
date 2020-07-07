@@ -21,6 +21,8 @@ public class Visit {
   // Need to find @Embedded version
   private String leaveTime;
   private Integer duration;
+  private String holiday;
+  private String dayOfWeek;
 
   /**
    * Overloaded constructor that takes the following three parameters to create a visit without id.
@@ -28,10 +30,13 @@ public class Visit {
    * @param leaveTime - DateTime instance representing the leave information.
    * @param duration - Integer representing the duration of visit.
    */
-  public Visit(String entryTime, String leaveTime, Integer duration) {
+  public Visit(String entryTime, String leaveTime, Integer duration, String holiday,
+      String dayOfWeek) {
     this.entryTime = entryTime;
     this.leaveTime = leaveTime;
     this.duration = duration;
+    this.holiday = holiday;
+    this.dayOfWeek = dayOfWeek;
   }
 
   /**
@@ -41,11 +46,14 @@ public class Visit {
    * @param leaveTime - DateTime instance representing the leave information.
    * @param duration - Integer representing the duration of visit.
    */
-  public Visit(String visitID, String entryTime, String leaveTime, Integer duration) {
+  public Visit(String visitID, String entryTime, String leaveTime, Integer duration, String holiday,
+      String dayOfWeek) {
     this.visitID = visitID;
     this.entryTime = entryTime;
     this.leaveTime = leaveTime;
     this.duration = duration;
+    this.holiday = holiday;
+    this.dayOfWeek = dayOfWeek;
   }
 
   // Overloaded empty visit.
@@ -130,5 +138,37 @@ public class Visit {
    */
   public void setDuration(Integer duration) {
     this.duration = duration;
+  }
+
+  /**
+   * Returns a String representing the holiday information.
+   * @return a String representing the holiday information.
+   */
+  public String getHoliday() {
+    return holiday;
+  }
+
+  /**
+   * Given a String, sets the holiday information attribute to new value.
+   * @param holiday - String representing new holiday information.
+   */
+  public void setHoliday(String holiday) {
+    this.holiday = holiday;
+  }
+
+  /**
+   * Returns a String representing the day of week.
+   * @return a String representing the day of week.
+   */
+  public String getDayOfWeek() {
+    return dayOfWeek;
+  }
+
+  /**
+   * Given a String, sets the dayOfWeek attribute to the new value.
+   * @param dayOfWeek - String representing the new day of week.
+   */
+  public void setDayOfWeek(String dayOfWeek) {
+    this.dayOfWeek = dayOfWeek;
   }
 }

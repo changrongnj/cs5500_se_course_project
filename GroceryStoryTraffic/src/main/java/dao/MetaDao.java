@@ -42,12 +42,12 @@ public final class MetaDao {
         List<DBObject> mongoObjs = new ArrayList<>();
         for(Visit v : visits) {
             DBObject visitObj = new BasicDBObject()
-                .append("VisitID", v.getVisitID())
-                .append("EntryTime",v.getEntryTime().getLocalDateTime().toString())
-                .append("LeaveTime", v.getLeaveTime().getLocalDateTime().toString())
-                .append("Duration", v.getDuration())
-                .append("Holiday", v.getEntryTime().getHolidayType().toString())
-                .append("DayofWeek", v.getEntryTime().getLocalDateTime().getDayOfWeek().toString());
+                .append("visitID", v.getVisitID())
+                .append("entryTime",v.getEntryTime().getLocalDateTime().toString())
+                .append("leaveTime", v.getLeaveTime().getLocalDateTime().toString())
+                .append("duration", v.getDuration())
+                .append("holiday", v.getEntryTime().getHolidayType().toString())
+                .append("dayOfWeek", v.getEntryTime().getLocalDateTime().getDayOfWeek().toString());
             mongoObjs.add(visitObj);
         }
         datastore.getCollection(Visit.class).insert(mongoObjs);  // Insert the visits.
