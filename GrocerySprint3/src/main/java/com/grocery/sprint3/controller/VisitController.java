@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path="/visits")
+@RequestMapping(path="/visits")  // localhost:8080/visits
 public class VisitController {
 
   @Qualifier("visitRepository")
   @Autowired
   private VisitRepository visitRepo;
 
-  @GetMapping(path="/all")
+  @GetMapping(path="/all")  // localhost:8080/visits/all
   public List<Visit> getAllVisits() {
     return (List<Visit>) visitRepo.findAll();
   }
@@ -36,6 +36,7 @@ public class VisitController {
     return visitRepo.findAllByOrderByEntryTime();
   }
 
+  // Post
   @PostMapping(path="/add")
   public @ResponseBody String saveOrUpdateVisit(@RequestParam String visitID,
       @RequestParam String entryTime, @RequestParam String leaveTime, @RequestParam int duration) {
