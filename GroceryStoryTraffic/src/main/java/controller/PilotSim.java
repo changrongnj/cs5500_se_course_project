@@ -142,6 +142,7 @@ public class PilotSim {
         // Calls Database (MongoDB) functions. May comment out to test code functionality.
 
         //truncate previous results
+        // Todo: Maybe modify in UI to make this an option.
         MetaDao.truncateData();
 
         // initialize a DataSet object
