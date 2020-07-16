@@ -2,35 +2,85 @@ package com.grocery.sprint3.repository;
 
 import com.grocery.sprint3.model.Visit;
 import java.util.List;
-import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
+/**
+ * An interface that declares query methods for the visits collection that extends the
+ * CrudRepository.
+ */
 @Component("visitRepository")
 public interface VisitRepository extends CrudRepository<Visit, String> {
 
-  // Find a specific visit by its ID
+  /**
+   * Given a String representing a visit ID, return a Visit if it  matches that id exactly.
+   * @param id - String representing a visit ID
+   * @return a Visit if it  matches that id exactly.
+   */
   Visit findAllByVisitID(String id);
 
-  // Find all visits that contain an ID prefix
+  /**
+   * Given the following parameters, return a List of Visit objects that contain the prefix and
+   * have an entry time between the specified start/end time frame.
+   * @param prefix - String representing the prefix to a subset of visit IDs
+   * @param start - String representing the start of the target interval (yyyy-mm-ddThh:mm)
+   * @param end - String representing the end of the target interval (yyyy-mm-ddThh:mm)
+   * @return a List of Visit objects that contain the prefix and are between the specified
+   * start/end time frame.
+   */
   List<Visit> findAllByVisitIDContainingAndEntryTimeIsBetweenOrderByEntryTime(String prefix,
       String start, String end);
 
-  // Find all visits with entry times in between the specified interval.
+  /**
+   * Given the following parameters, returns a List of Visit objects that have an entry time within
+   * the specified interval.
+   * @param start - String representing the start of the target interval (yyyy-mm-ddThh:mm)
+   * @param end - String representing the end of the target interval (yyyy-mm-ddThh:mm)
+   * @return a List of Visit objects that have an entry time within the specified interval.
+   */
   List<Visit> findAllByEntryTimeIsBetweenOrderByEntryTime(String start, String end);
 
   // Finds all visits with leave times in between the specified interval
+
+  /**
+   * Given the following parameters, returns a List of Visit objects that have a leave time within
+   * the specific interval.
+   * @param start - String representing the start of the target interval (yyyy-mm-ddThh:mm)
+   * @param end - String representing the end of the target interval (yyyy-mm-ddThh:mm)
+   * @return a List of Visit objects that have a leave time within the specific interval.
+   */
   List<Visit> findAllByLeaveTimeIsBetweenOrderByLeaveTime(String start, String end);
 
-  // finds all visits with shopping durations within the constraints.
+  /**
+   * Given the following parameters, returns a List of Visit instances that have a duration within
+   * the provided interval.
+   * @param min - Integer representing the minimum duration of target interval.
+   * @param max - Integer representing the maximum duration of target interval
+   * @return a List of Visit instances that have a duration within the provided interval.
+   */
   List<Visit> findAllByDurationBetweenOrderByEntryTime(Integer min, Integer max);
 
-  // Finds all visits with shopping durations of at least min minutes.
+  /**
+   * Given the following parameter, returns a List of Visit objects that contain a duration of at
+   * least the provided value.
+   * @param min - Integer representing the minimum duration of search target
+   * @return a List of Visit objects that contain a duration of at least the provided value.
+   */
   List<Visit> findAllByDurationGreaterThanEqualOrderByEntryTime(Integer min);
 
-  // Finds all visits with shopping durations of at most max minutes.
+  /**
+   * Given the following parameter, returns a List of Visit objects that contain a duration of at
+   * most the provided value.
+   * @param max - Integer representing the minimum duration of search target
+   * @return a List of Visit objects that contain a duration of at most the provided value.
+   */
   List<Visit> findAllByDurationLessThanEqualOrderByEntryTime(Integer max);
 
   // Finds all visits by order of entry time.
+
+  /**
+   * Returns a List of Visits ordered by Entry Time
+   * @return a List of Visits ordered by Entry Time
+   */
   List<Visit> findAllByOrderByEntryTime();
 }

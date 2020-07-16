@@ -194,7 +194,7 @@ public class PilotSim {
             Weather weather = weatherParser.findWeather(ldt);
 
             // id add pre-code representing normal data, day/week before holiday, niceWeather, mealPeak, seniorDiscount
-            String id = String.valueOf(prefix + (day-1) * volume + i);
+            String id = String.valueOf(prefix + "0" + i);
             // Get entry information including weather and holiday information.
             DateTime entryTime = new DateTime(ldt, weather, holiday);
 
