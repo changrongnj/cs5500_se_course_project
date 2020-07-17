@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * visit information. Contains two overloaded constructors that either take no parameters, or take
  * all four parameters corresponding to its internal attributes.
  */
-@Document("Visits")
+@Document(collection = "Visits")
 public class Visit {
   @Id
   private ObjectId id = new ObjectId();

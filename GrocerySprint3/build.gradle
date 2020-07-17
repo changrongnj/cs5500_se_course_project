@@ -13,6 +13,8 @@ repositories {
 }
 
 dependencies {
+	compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '3.0.1.RELEASE'
+	compile group: 'org.mongodb', name: 'bson', version: '3.11.2'
 	compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.0.1.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
