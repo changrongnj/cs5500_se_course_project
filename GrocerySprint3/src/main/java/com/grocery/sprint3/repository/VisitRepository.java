@@ -2,14 +2,17 @@ package com.grocery.sprint3.repository;
 
 import com.grocery.sprint3.model.Visit;
 import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  * An interface that declares query methods for the visits collection that extends the
  * CrudRepository.
  */
 @Component("visitRepository")
+@Repository
 public interface VisitRepository extends CrudRepository<Visit, String> {
 
   /**

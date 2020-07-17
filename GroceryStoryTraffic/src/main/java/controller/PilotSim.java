@@ -158,6 +158,9 @@ public class PilotSim {
         // set its Month
         ds.setMonth(Month.MAY);
 
+        // set its generated time
+        ds.setGeneratedTime(LocalDateTime.now());
+
         // insert it into database
         List<DataSet> dataSets = new ArrayList<>();
         dataSets.add(ds);
