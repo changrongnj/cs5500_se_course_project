@@ -3,6 +3,7 @@ var express = require("express");
     mongoose = require("mongoose");
     bodyParser = require("body-parser");
     visitRoute = require("./routes/visits");
+    cors = require('cors');
 
 mongoose.connect("mongodb://localhost/CS5500", function (err, db) {
     if(err) {
@@ -20,6 +21,7 @@ mongoose.connect("mongodb://localhost/CS5500", function (err, db) {
 });
 
 app.use(bodyParser.json());
+app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use("/visits", visitRoute);
 
 app.listen(8080, process.env.IP, function () {
