@@ -1,6 +1,6 @@
-var express = require("express");
-var router = express.Router();
-var Visit = require("../models/visit");
+const express = require("express");
+      router = express.Router();
+      Visit = require("../models/visit");
 
 // Postman GET command: localhost:8080/visits/all
 router.get("/all/unordered", function (req, res) {

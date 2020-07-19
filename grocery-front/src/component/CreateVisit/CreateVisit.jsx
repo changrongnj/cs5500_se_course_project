@@ -33,8 +33,6 @@ class CreateVisit extends React.Component {
     };
 
     createVisit = (state) => {
-        console.log(this.state.entryTime);
-        console.log(this.state.leaveTime);
         this.state.service
             .createVisit({
                 visitID:this.state.visitID,
