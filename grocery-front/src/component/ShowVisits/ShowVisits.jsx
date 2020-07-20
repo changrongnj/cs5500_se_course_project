@@ -1,5 +1,6 @@
 import React from "react";
 import VisitService from "../../service/VisitService";
+import "./ShowVisits.css";
 
 class ShowVisits extends React.Component {
 
@@ -12,6 +13,10 @@ class ShowVisits extends React.Component {
         };
     }
 
+    // fetchAllVisits = () => {
+    //     this.state.service.findAllVisits().then(results => {this.setState({visits:results, isLoading:false})});
+    // };
+
     fetchAllVisits = async () => {
         let data = await fetch("http://localhost:8080/visits/all/unordered", {
             method: "GET",
@@ -22,14 +27,17 @@ class ShowVisits extends React.Component {
         this.setState({visits:visits, isLoading:false});
     };
 
+    componentDidMount = () => {
+        this.fetchAllVisits();
+    };
+
     renderVisits() {
         return this.state.visits.map((visit) => {
             return (
                 <tr key={visit.visitID}>
                     <td>{visit.visitID}</td>
-                    <td>{visit.entryDate}</td>
-                    <td>{visit.entryTime}</td>
-                    <td>{visit.leaveTime}</td>
+                    <td>{visit.entryTime.split(":00.000Z")[0].replace("T", " ")}</td>
+                    <td>{visit.leaveTime.split(":00.000Z")[0].replace("T", " ")}</td>
                     <td>{visit.duration}</td>
                     <td>{visit.holiday}</td>
                     <td>{visit.dayOfWeek}</td>
@@ -37,10 +45,6 @@ class ShowVisits extends React.Component {
             )
         })
     }
-
-    componentDidMount = () => {
-        this.fetchAllVisits();
-    };
 
     renderHeader() {
         console.log(this.state.visits);
@@ -54,8 +58,8 @@ class ShowVisits extends React.Component {
         if(!this.state.isLoading) {
             return (
                 <div>
-                    <h1>All Visits</h1>
-                    <table>
+                    <h1 id="title">All Visits</h1>
+                    <table id="visits">
                         <tbody>
                         <tr>{this.renderHeader()}</tr>
                         {this.renderVisits()}
