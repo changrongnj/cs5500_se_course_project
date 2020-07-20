@@ -13,18 +13,8 @@ class ShowVisits extends React.Component {
         };
     }
 
-    // fetchAllVisits = () => {
-    //     this.state.service.findAllVisits().then(results => {this.setState({visits:results, isLoading:false})});
-    // };
-
-    fetchAllVisits = async () => {
-        let data = await fetch("http://localhost:8080/visits/all/unordered", {
-            method: "GET",
-            credentials: "include"
-        });
-        let visits = await data.json();
-        console.log(visits);
-        this.setState({visits:visits, isLoading:false});
+    fetchAllVisits = () => {
+        this.state.service.findAllVisits().then(results => {this.setState({visits:results, isLoading:false})});
     };
 
     componentDidMount = () => {
