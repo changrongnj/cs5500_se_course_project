@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import VisitService from "../../service/VisitService";
 import "./CreateVisit.css";
@@ -33,8 +34,12 @@ class CreateVisit extends React.Component {
     };
 
     createVisit = (state) => {
-        console.log(this.state.entryTime);
-        console.log(this.state.leaveTime);
+        for (let key in this.state) {
+            if (this.state[key] === null){
+                alert("information is incomplete!");
+                return <Redirect to='/new' />
+            }
+        }
         this.state.service
             .createVisit({
                 visitID:this.state.visitID,

@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var visitSchema = new mongoose.Schema({
+const visitSchema = new mongoose.Schema({
     visitID:String,
     entryTime:Date,
     leaveTime:Date,

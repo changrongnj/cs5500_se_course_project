@@ -1,25 +1,20 @@
-var express = require("express");
-    app = express();
-    mongoose = require("mongoose");
-    bodyParser = require("body-parser");
-    visitRoute = require("./routes/visits");
-    cors = require('cors');
+const express = require("express");
+      app = express();
+      mongoose = require("mongoose");
+      bodyParser = require("body-parser");
+      visitRoute = require("./routes/visits");
+      cors = require('cors');
+      seedDB = require('./seeds');
 
-mongoose.connect("mongodb://localhost/CS5500", function (err, db) {
+mongoose.connect("mongodb://localhost/CS5500", function (err, _) {
     if(err) {
         console.log(err);
     } else {
         console.log("successfully connected to the database!");
-        db.dropDatabase(function (err, result) {
-            if(err) {
-                console.log(err);
-            } else {
-                console.log("successfully refresh the database!");
-            }
-        });
     }
 });
 
+seedDB();
 app.use(bodyParser.json());
 app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use("/visits", visitRoute);
