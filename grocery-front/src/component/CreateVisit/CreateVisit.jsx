@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
 import VisitService from "../../service/VisitService";
 import "./CreateVisit.css";
@@ -15,7 +14,8 @@ class CreateVisit extends React.Component {
             entryTime:null,
             leaveTime:null,
             holiday:null,
-            dayOfWeek:null
+            dayOfWeek:null,
+            reload:false
         };
     }
 
@@ -37,7 +37,8 @@ class CreateVisit extends React.Component {
         for (let key in this.state) {
             if (this.state[key] === null){
                 alert("information is incomplete!");
-                return <Redirect to='/new' />
+                this.setState({reload:true});
+                return;
             }
         }
         this.state.service
@@ -50,11 +51,15 @@ class CreateVisit extends React.Component {
                 dayOfWeek:this.state.dayOfWeek
             })
             .then(visit => {
-                console.log(visit)
+                console.log(visit);
+                this.props.history.push("/show");
             });
     };
 
     render() {
+        if (this.state.reload === true) {
+            window.location.reload();
+        }
         return (
             <div className="container">
                 <div className="block">
