@@ -2,16 +2,19 @@ package com.grocery.sprint3.controller;
 
 import com.grocery.sprint3.model.Visit;
 import com.grocery.sprint3.repository.VisitRepository;
+
+import java.time.DayOfWeek;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import com.grocery.sprint3.service.HolidayService;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller class for handling certain queries for the visits collection.
@@ -23,6 +26,9 @@ public class VisitController {
   @Qualifier("visitRepository")
   @Autowired
   private VisitRepository visitRepo;
+
+  @Autowired
+  HolidayService holidayService;
 
   /**
    * Postman GET command: localhost:8080/visits/all
@@ -131,6 +137,40 @@ public class VisitController {
     return visitRepo.findAllByDurationGreaterThanEqualOrderByEntryTime(min);
   }
 
+
+  @PostMapping(path="/add/single")
+  public String saveOrUpdateVisit(@RequestBody String data) {
+
+    try {
+      JSONObject json = new JSONObject(data);
+      String visitID = json.getString("visitID");
+      String entryTime = json.getString("entryTime");
+      String leaveTime = json.getString("leaveTime");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+      LocalDateTime et = LocalDateTime.parse(entryTime, formatter);
+      LocalDateTime lt = LocalDateTime.parse(leaveTime, formatter);
+      int duration = (int) Duration.between(et, lt).toMinutes();
+      DayOfWeek dayOfWeek = et.getDayOfWeek();
+
+      String holiday = holidayService.CheckHoliday(et.toLocalDate());
+
+      System.out.println(et.toString());
+      System.out.println(lt.toString());
+      System.out.println(duration);
+      System.out.println(holiday);
+      System.out.println(dayOfWeek);
+      System.out.print("\n");
+
+      visitRepo.save(new Visit(visitID, et, lt, duration, holiday, dayOfWeek));
+
+    } catch (JSONException e) {
+      e.printStackTrace();
+      return "json parsing error";
+    }
+
+    return "Visit added successfully";
+  }
+
   /**
    * Postman POST command: localhost:8080/visits/add/single?visitID={param}&entryTime={param}&leaveTime={param}&duration={param}&holiday={param}&dayOfWeek={param}
    * Returns a String message to indicate successful addition to collection.
@@ -142,11 +182,15 @@ public class VisitController {
    * @param dayOfWeek - String representing day of the week (CAPS)
    * @return a String message indicating successful addition to collection.
    */
-  @PostMapping(path="/add/single")
-  public @ResponseBody String saveOrUpdateVisit(@RequestParam String visitID,
-      @RequestParam String entryTime, @RequestParam String leaveTime,
-      @RequestParam Integer duration, @RequestParam String holiday, @RequestParam String dayOfWeek) {
-    visitRepo.save(new Visit(visitID, entryTime, leaveTime, duration, holiday, dayOfWeek));
-    return "Visit added successfully";
-  }
+//  public @ResponseBody String saveOrUpdateVisit(@RequestParam String visitID,
+//                                                @RequestParam String entryTime, @RequestParam String leaveTime,
+//                                                @RequestParam Integer duration, @RequestParam String holiday, @RequestParam String dayOfWeek) {
+//
+
+//
+//    visitRepo.save(new Visit(visitID, entryTime, leaveTime, duration, holiday, dayOfWeek));
+//
+//    return "Visit added successfully";
+//  }
+
 }
