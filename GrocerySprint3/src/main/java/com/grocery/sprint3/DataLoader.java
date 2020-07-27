@@ -26,6 +26,8 @@ public class DataLoader implements ApplicationRunner {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
 
+        visitRepository.deleteAll();
+
         visitRepository.save(new Visit(
                 "1",
                 LocalDateTime.parse("2020-07-16T09:10:00Z", formatter),

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping(path="/visits")  // localhost:8080/visits
+@CrossOrigin(allowCredentials="true")
 public class VisitController {
 
   @Qualifier("visitRepository")
@@ -35,7 +36,7 @@ public class VisitController {
    * Returns all visits in the collection without modifying the native ordering.
    * @return all visits in the collection without modifying the native ordering.
    */
-  @CrossOrigin(origins = "http://localhost:3000")
+
   @GetMapping(path="/all/unordered")
   public List<Visit> getAllVisits() {
     return (List<Visit>) visitRepo.findAll();
@@ -147,7 +148,7 @@ public class VisitController {
       String visitID = json.getString("visitID");
       String entryTime = json.getString("entryTime");
       String leaveTime = json.getString("leaveTime");
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm'Z'");
       LocalDateTime et = LocalDateTime.parse(entryTime, formatter);
       LocalDateTime lt = LocalDateTime.parse(leaveTime, formatter);
       int duration = (int) Duration.between(et, lt).toMinutes();
