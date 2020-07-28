@@ -14,6 +14,7 @@ class VisitService {
     findAllVisits = () =>
         fetch(this.findAllVisitsUrl, {
             method: "GET",
+            headers: {"Accept":"application/json"},
             credentials: "include"
         })
             .then(res => res.json())
@@ -22,11 +23,11 @@ class VisitService {
     createVisit = visit =>
         fetch(this.createVisitUrl, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {"Accept":"application/json", "Content-Type": "application/json" },
             body: JSON.stringify(visit),
             credentials: "include"
         })
-            .then(res => res.json())
+            .then(res => Promise.resolve(res))
             .catch(err => alert(err.message));
 
 }
