@@ -49,5 +49,19 @@ public class DataLoader implements ApplicationRunner {
                 30,
                 "non-holiday",
                 DayOfWeek.SATURDAY));
+        visitRepository.save(new Visit(
+                "4",
+                LocalDateTime.parse("2020-02-01T12:10:00Z", formatter),
+                LocalDateTime.parse("2020-02-01T12:30:00Z", formatter),
+                20,
+                "non-holiday",
+                DayOfWeek.SATURDAY));
+        visitRepository.save(new Visit(
+                "5",
+                LocalDateTime.parse("2020-02-02T13:10:00Z", formatter),
+                LocalDateTime.parse("2020-02-02T13:40:00Z", formatter),
+                30,
+                "non-holiday",
+                DayOfWeek.SUNDAY));
     }
 }

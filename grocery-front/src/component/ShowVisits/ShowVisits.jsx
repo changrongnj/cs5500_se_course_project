@@ -1,6 +1,7 @@
 import React from "react";
 import VisitService from "../../service/VisitService";
 import "./ShowVisits.css";
+import Plot from 'react-plotly.js';
 import {InputGroup, FormControl, DropdownButton, Dropdown} from "react-bootstrap";
 
 class ShowVisits extends React.Component {
@@ -15,18 +16,21 @@ class ShowVisits extends React.Component {
             minDuration:null,
             maxDuration:null,
             startDate:null,
-            endDate:null
+            endDate:null,
+            Xs:[],
+            Ys:[]
         };
     }
 
-    fetchAllVisits = () => {
-        this.state.service.findAllVisits().then(results => {this.setState({visits:results, isLoading:false})});
+    fetchAllVisits = async () => {
+        await this.state.service.findAllVisits().then(results => {this.setState({visits:results, isLoading:false})});
+        this.countVisits();
     };
 
     sortByEntryTime = () => {
         this.setState({sortType:"SortByEntryTime", visit:this.state.visits.sort(function (a, b) {
                 return new Date(a.entryTime) - new Date(b.entryTime);
-            })})
+            })});
     };
 
     updateForm = event => {
@@ -36,7 +40,7 @@ class ShowVisits extends React.Component {
         });
     };
 
-    applyFilter = () => {
+    applyFilter = async () => {
         console.log(this.state.visits);
         console.log(this.state);
         let results = [];
@@ -56,8 +60,32 @@ class ShowVisits extends React.Component {
             }
             results.push(visit);
         }
-        this.setState({visits:results});
+        await this.setState({visits:results});
         console.log(this.state.visits);
+        this.countVisits();
+    };
+
+    countVisits = () => {
+        let Xs = [];
+        let Ys = [];
+        let map = [];
+        for(let i=0; i < 121; i++) {
+            map.push(0);
+        }
+        for(let i=0; i < this.state.visits.length; i++) {
+            let visit = this.state.visits[i];
+            let duration = parseInt(visit.duration);
+            if(duration < 0 || duration > 120) {
+                continue;
+            }
+            map[duration] += 1;
+        }
+        // console.log(map);
+        for(let i=0; i < map.length; i++) {
+            Xs.push(i);
+            Ys.push(map[i]);
+        }
+        this.setState({Xs:Xs, Ys:Ys});
     };
 
     componentDidMount = () => {
@@ -120,6 +148,20 @@ class ShowVisits extends React.Component {
                         {this.renderVisits()}
                         </tbody>
                     </table>}
+                    <div>
+                        <Plot
+                            data={[
+                                {
+                                    x: this.state.Xs,
+                                    y: this.state.Ys,
+                                    type: 'scatter',
+                                    // mode: 'lines+markers',
+                                    marker: {color: 'green'},
+                                }
+                            ]}
+                            layout={{yaxis:{dtick: 1}, width: 720, height: 480, title: 'Duration Distribution'} }
+                        />
+                    </div>
                 </div>
             )
         } else {
