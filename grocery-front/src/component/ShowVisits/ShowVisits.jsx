@@ -148,7 +148,7 @@ class ShowVisits extends React.Component {
                         {this.renderVisits()}
                         </tbody>
                     </table>}
-                    <div>
+                    <div id="chart">
                         <Plot
                             data={[
                                 {
@@ -159,7 +159,7 @@ class ShowVisits extends React.Component {
                                     marker: {color: 'green'},
                                 }
                             ]}
-                            layout={{yaxis:{dtick: 1}, width: 720, height: 480, title: 'Duration Distribution'} }
+                            layout={{yaxis:{dtick: 1}, width: 720, height: 480, title: 'Duration Distribution'}}
                         />
                     </div>
                 </div>
