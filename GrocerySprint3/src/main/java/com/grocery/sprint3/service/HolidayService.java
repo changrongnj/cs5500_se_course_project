@@ -15,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Service
 @CacheConfig(cacheNames = "holidays")
@@ -37,22 +39,27 @@ public class HolidayService {
         headers.add("Accept", "application/json");
         HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
 
-//        String response = restTemplate.getForObject(url, String.class);
-
         Object response = restTemplate.exchange(url, HttpMethod.GET, entity , String.class);
 
-        System.out.println(response.toString());
+        Pattern pattern = Pattern.compile("\"response\":\\{.*},\\[Date");
+
+        Matcher m = pattern.matcher(response.toString());
+
+        if(!m.find())
+            return "non-holiday";
+
+        String found = m.group(0).replace("\"response\":", "").replace(",[Date", "");
 
         try {
-            JSONArray holidays = new JSONObject(response).getJSONObject("response").getJSONArray("holidays");
+            JSONArray holidays = new JSONObject(found).getJSONArray("holidays");
             if(holidays.length() < 1)
                 return "non-holiday";
             return holidays.getJSONObject(0).getString("name");
         } catch (JSONException e) {
             e.printStackTrace();
+            return "non-holiday";
         }
 
-        return "non-holiday";
     }
 
 }
