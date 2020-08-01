@@ -139,7 +139,6 @@ public class VisitController {
     return visitRepo.findAllByDurationGreaterThanEqualOrderByEntryTime(min);
   }
 
-
   @PostMapping(path="/add/single")
   public String saveOrUpdateVisit(@RequestBody String data) {
 

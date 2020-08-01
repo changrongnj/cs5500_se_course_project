@@ -5,6 +5,8 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import model.DataSet;
+import model.Entry;
+import model.HolidayType;
 import model.Visit;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -28,8 +30,28 @@ public final class MetaDao {
     }
 
     public static void truncateData() {
+        datastore.getCollection(Entry.class).drop();
         datastore.getCollection(Visit.class).drop();
         datastore.getCollection(DataSet.class).drop();
+    }
+
+    // Here we use addAllEntries instead to match Visit class of back-end
+    public static void addAllEntries(List<Visit> visits) {
+        //Entry class is corresponding to "Visit" class from back-end
+        List<Entry> mongoObjs = new ArrayList<>();
+        for(Visit v : visits) {
+            if(v.getEntryTime().getHolidayType().equals(HolidayType.NON_HOLIDAY)) {
+                Entry entry = new Entry(
+                        v.getVisitID(),
+                        v.getEntryTime().getLocalDateTime(),
+                        v.getLeaveTime().getLocalDateTime(),
+                        v.getDuration(),
+                        "non-holiday", v.getEntryTime().getLocalDateTime().getDayOfWeek());
+                mongoObjs.add(entry);
+            }
+        }
+        // use ORM here
+        datastore.save(mongoObjs);
     }
 
     private static void addAllVisits(List<Visit> visits) {
