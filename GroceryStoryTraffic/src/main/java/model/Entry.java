@@ -1,12 +1,9 @@
 package model;
 
 import org.bson.types.ObjectId;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Serialized;
 
-import javax.print.attribute.standard.MediaSize;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -37,5 +34,6 @@ public class Entry {
         this.duration = duration;
         this.holiday = holiday;
         this.dayOfWeek = dayOfWeek;
+
     }
 }
