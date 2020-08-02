@@ -18,7 +18,9 @@ class ShowVisits extends React.Component {
             startDate:null,
             endDate:null,
             Xs:[],
-            Ys:[]
+            Ys:[],
+            page:0,
+            capacity:5
         };
     }
 
@@ -33,11 +35,32 @@ class ShowVisits extends React.Component {
             })});
     };
 
-    updateForm = event => {
-        // console.log(event.target.value);
-        this.setState({
+    updateForm = async (event) => {
+        await this.setState({
             [event.target.name]: event.target.value
         });
+    };
+
+    updateCapacity = async (event) => {
+        await this.setState({
+            [event.target.name]: event.target.value
+        });
+        await this.setState({page : 0});
+    };
+
+
+    nextPage = () => {
+        console.log("jump to the next page!");
+        if(this.state.page < Math.floor(this.state.visits.length / this.state.capacity)) {
+            this.setState({page:this.state.page+1});
+        }
+    };
+
+    prevPage = () => {
+        console.log("jump to the previous page!");
+        if(this.state.page > 0) {
+            this.setState({page:this.state.page-1});
+        }
     };
 
     applyFilter = async () => {
@@ -93,7 +116,7 @@ class ShowVisits extends React.Component {
     };
 
     renderVisits() {
-        return this.state.visits.map((visit) => {
+        return this.state.visits.slice(this.state.capacity*this.state.page, this.state.capacity*(this.state.page+1)).map((visit) => {
             return (
                 <tr key={visit.visitID}>
                     <td>{visit.visitID}</td>
@@ -148,6 +171,72 @@ class ShowVisits extends React.Component {
                         {this.renderVisits()}
                         </tbody>
                     </table>}
+                    <div className="row">
+                        <div className="col-sm">
+                            <div
+                                style={{
+                                    padding: "2.25em",
+                                    float: "left",
+                                    justifyContent: "center",
+                                    verticalAlign: "middle",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                    display: "flex",
+                                    flex: 1,
+                                    marginBottom: "1em"}}
+                            >
+                                <div className="input-group mb-3">
+                                    <div className="input-group-prepend">
+                                        <label className="input-group-text" htmlFor="inputGroupSelect01">Entry Number: </label>
+                                    </div>
+                                    <select name="capacity"
+                                            className="custom-select"
+                                            id="inputGroupSelect01"
+                                            onChange={this.updateCapacity.bind(this)}
+                                            value={this.state.capacity}>
+                                        <option value="5">5</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-sm">
+                            <div
+                                style={{
+                                    float: "right",
+                                    justifyContent: "center",
+                                    verticalAlign: "middle",
+                                    alignItems: "center",
+                                    textAlign: "center",
+                                    display: "flex",
+                                    flex:1,
+                                    marginBottom: "1em"}}
+                            >
+                                {(this.state.page > 0) &&
+                                <button
+                                    type="button"
+                                    style={{ marginTop: "2em", color: "#4CAF50"}}
+                                    className="btn btn-link"
+                                    onClick={this.prevPage}
+                                >
+                                    <strong>prev</strong>
+                                </button>}
+                                <button type="button" style={{ marginTop: "2em" }} disabled>
+                                    {"Page " + (this.state.page + 1).toString()}
+                                </button>
+                                {(this.state.page < Math.floor(this.state.visits.length / this.state.capacity)) &&
+                                <button
+                                    type="button"
+                                    style={{ marginTop: "2em", color: "#4CAF50"}}
+                                    className="btn btn-link"
+                                    onClick={this.nextPage}
+                                >
+                                    <strong>next</strong>
+                                </button>}
+                            </div>
+                        </div>
+                    </div>
                     <div id="chart">
                         <Plot
                             data={[
@@ -159,7 +248,7 @@ class ShowVisits extends React.Component {
                                     marker: {color: 'green'},
                                 }
                             ]}
-                            layout={{yaxis:{dtick: 1}, width: 720, height: 480, title: 'Duration Distribution'}}
+                            layout={{ width: 720, height: 480, title: 'Duration Distribution'}}
                         />
                     </div>
                 </div>

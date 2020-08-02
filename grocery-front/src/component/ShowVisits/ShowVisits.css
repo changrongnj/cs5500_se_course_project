@@ -21,7 +21,7 @@
 
 #visits td, #visits th {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 2px;
 }
 
 #visits tr:nth-child(even){background-color: #f2f2f2;}
@@ -29,9 +29,19 @@
 #visits tr:hover {background-color: #ddd;}
 
 #visits th {
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding-top: 4px;
+    padding-bottom: 4px;
     text-align: center;
     background-color: #4CAF50;
     color: white;
+}
+
+#add-on-1 {
+     background-color:#f2f2f2;
+     border:0
+}
+
+#add-on-2 {
+    background-color:#f2f2f2;
+    border:0
 }

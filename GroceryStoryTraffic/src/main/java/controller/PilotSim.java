@@ -153,18 +153,21 @@ public class PilotSim {
         for(Day d:days) {
             visits.addAll(d.getVisits());
         }
-        ds.setVisits(visits);
 
-        // set its Month
-        ds.setMonth(Month.MAY);
+        MetaDao.addAllEntries(visits);
 
-        // set its generated time
-        ds.setGeneratedTime(LocalDateTime.now());
-
-        // insert it into database
-        List<DataSet> dataSets = new ArrayList<>();
-        dataSets.add(ds);
-        MetaDao.addAllDataSets(dataSets);
+//        ds.setVisits(visits);
+//
+//        // set its Month
+//        ds.setMonth(Month.MAY);
+//
+//        // set its generated time
+//        ds.setGeneratedTime(LocalDateTime.now());
+//
+//        // insert it into database
+//        List<DataSet> dataSets = new ArrayList<>();
+//        dataSets.add(ds);
+//        MetaDao.addAllDataSets(dataSets);
     }
 
     /**
