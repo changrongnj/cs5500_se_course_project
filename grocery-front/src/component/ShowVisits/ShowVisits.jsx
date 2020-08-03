@@ -26,7 +26,6 @@ class ShowVisits extends React.Component {
 
     fetchAllVisits = async () => {
         await this.state.service.findAllVisits().then(results => {this.setState({visits:results, isLoading:false})});
-        this.countVisits();
     };
 
     sortByEntryTime = () => {
@@ -64,9 +63,12 @@ class ShowVisits extends React.Component {
     };
 
     applyFilter = async () => {
-        console.log(this.state.visits);
-        console.log(this.state);
+
+        await this.fetchAllVisits();
         let results = [];
+        let startDate = new Date(this.state.startDate+"T00:00:00");
+        let endDate = new Date(this.state.endDate+"T23:59:59");
+
         for(let i=0; i < this.state.visits.length; i++) {
             let visit = this.state.visits[i];
             if(this.state.minDuration !== null && visit.duration < this.state.minDuration) {
@@ -75,16 +77,17 @@ class ShowVisits extends React.Component {
             if(this.state.maxDuration !== null && visit.duration > this.state.maxDuration) {
                 continue;
             }
-            if(this.state.startDate !== null && new Date(visit.entryTime) < new Date(this.state.startDate)) {
+            if(this.state.startDate !== null && new Date(visit.entryTime) < startDate) {
                 continue;
             }
-            if(this.state.endDate !== null && new Date(visit.leaveTime) > new Date(this.state.endDate)) {
+            if(this.state.startDate !== null && new Date(visit.entryTime) > endDate) {
                 continue;
             }
+
             results.push(visit);
+
         }
         await this.setState({visits:results});
-        console.log(this.state.visits);
         this.countVisits();
     };
 
@@ -112,7 +115,7 @@ class ShowVisits extends React.Component {
     };
 
     componentDidMount = () => {
-        this.fetchAllVisits();
+        this.fetchAllVisits().then(this.countVisits);
     };
 
     renderVisits() {
