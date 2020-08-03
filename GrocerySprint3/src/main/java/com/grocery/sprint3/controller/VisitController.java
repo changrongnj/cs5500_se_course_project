@@ -64,54 +64,63 @@ public class VisitController {
   }
 
   /**
-   * Postman GET command: localhost:8080/visits/partial/prefix/{idPrefix}|{start}|{end}
+   * Postman GET command: localhost:8080/visits/partial/prefix/{idPrefix}in{start}to{end}
    * Returns a subset of visits that match the provided prefix within the provided interval.
    * @param prefix - String representing the prefix of interest (single letter)
-   * @param start - String representing the starting date/time (yyyy-mm-ddThh:mm)
-   * @param end - String representing the ending date/time (yyyy-mm-ddThh:mm)
+   * @param start - String representing the starting date/time (yyyy-MM-dd HH:mm)
+   * @param end - String representing the ending date/time (yyyy-MM-dd HH:mm)
    * @return a subset of visits that match the provided prefix within the provided interval.
    */
-  @GetMapping(path="/partial/prefix/{idPrefix}|{start}|{end}")
+  @GetMapping(path="/partial/prefix/{idPrefix}in{start}to{end}")
   public List<Visit> getVisitByPrefix(@PathVariable("idPrefix") String prefix,
       @PathVariable("start") String start, @PathVariable("end") String end) {
-    return visitRepo.findAllByVisitIDContainingAndEntryTimeIsBetweenOrderByEntryTime(prefix, start,
-        end);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    LocalDateTime entry = LocalDateTime.parse(start, formatter);
+    LocalDateTime leave = LocalDateTime.parse(end, formatter);
+    return visitRepo.findAllByVisitIDContainingAndEntryTimeIsBetweenOrderByEntryTime(prefix, entry,
+        leave);
   }
 
   /**
-   * Postman GET command: localhost:8080/visits/partial/entry/interval/{start}|{end}
+   * Postman GET command: localhost:8080/visits/partial/entry/interval/{start}to{end}
    * Returns a subset of visits with entry times between the given interval.
-   * @param start - String representing start of interval (yyyy-mm-ddThh:mm)
-   * @param end - String representing end of interval (yyyy-mm-ddThh:mm)
+   * @param start - String representing start of interval (yyyy-MM-dd HH:mm)
+   * @param end - String representing end of interval (yyyy-MM-dd HH:mm)
    * @return a subset of visits with entry times between the given interval.
    */
-  @GetMapping(path="partial/entry/interval/{start}|{end}")
+  @GetMapping(path="partial/entry/interval/{start}to{end}")
   public List<Visit> findAllByEntryTimeIsBetween(@PathVariable("start") String start,
       @PathVariable("end") String end) {
-    return visitRepo.findAllByEntryTimeIsBetweenOrderByEntryTime(start, end);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    LocalDateTime entry = LocalDateTime.parse(start, formatter);
+    LocalDateTime leave = LocalDateTime.parse(end, formatter);
+    return visitRepo.findAllByEntryTimeIsBetweenOrderByEntryTime(entry, leave);
   }
 
   /**
-   * Postman GET command: localhost:8080/visits/partial/leave/interval/{start}|{end}
+   * Postman GET command: localhost:8080/visits/partial/leave/interval/{start}to{end}
    * Returns a subset of visits with leave times between the given interval.
-   * @param start - String representing start of interval (yyyy-mm-ddThh:mm)
-   * @param end - String representing end of interval (yyyy-mm-ddThh:mm)
+   * @param start - String representing start of interval (yyyy-MM-dd HH:mm)
+   * @param end - String representing end of interval (yyyy-MM-dd HH:mm)
    * @return a subset of visits with leave times between the given interval.
    */
-  @GetMapping(path="partial/leave/interval/{start}|{end}")
+  @GetMapping(path="partial/leave/interval/{start}to{end}")
   public List<Visit> findAllByLeaveTimeIsBetween(@PathVariable("start") String start,
       @PathVariable("end") String end) {
-    return visitRepo.findAllByLeaveTimeIsBetweenOrderByLeaveTime(start, end);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    LocalDateTime entry = LocalDateTime.parse(start, formatter);
+    LocalDateTime leave = LocalDateTime.parse(end, formatter);
+    return visitRepo.findAllByLeaveTimeIsBetweenOrderByLeaveTime(entry, leave);
   }
 
   /**
-   * Postman GET command: localhost:8080/visits/partial/duration/interval/{min}|{max}
+   * Postman GET command: localhost:8080/visits/partial/duration/interval/{min}to{max}
    * Returns a subset of visits with shopping durations in between the specified interval
    * @param min - Integer representing the minimum shopping duration
    * @param max - Integer representing the maximum shopping duration
    * @return a subset of visits with shopping durations in between the specified interval
    */
-  @GetMapping(path="partial/duration/interval/{min}|{max}")
+  @GetMapping(path="partial/duration/interval/{min}to{max}")
   public List<Visit> findAllByDurationIsBetween(@PathVariable("min") Integer min,
       @PathVariable("max") Integer max){
     return visitRepo.findAllByDurationBetweenOrderByEntryTime(min, max);

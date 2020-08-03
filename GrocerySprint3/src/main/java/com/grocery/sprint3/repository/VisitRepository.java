@@ -1,6 +1,7 @@
 package com.grocery.sprint3.repository;
 
 import com.grocery.sprint3.model.Visit;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -32,7 +33,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * start/end time frame.
    */
   List<Visit> findAllByVisitIDContainingAndEntryTimeIsBetweenOrderByEntryTime(String prefix,
-      String start, String end);
+      LocalDateTime start, LocalDateTime end);
 
   /**
    * Given the following parameters, returns a List of Visit objects that have an entry time within
@@ -41,7 +42,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * @param end - String representing the end of the target interval (yyyy-mm-ddThh:mm)
    * @return a List of Visit objects that have an entry time within the specified interval.
    */
-  List<Visit> findAllByEntryTimeIsBetweenOrderByEntryTime(String start, String end);
+  List<Visit> findAllByEntryTimeIsBetweenOrderByEntryTime(LocalDateTime start, LocalDateTime end);
 
   // Finds all visits with leave times in between the specified interval
 
@@ -52,7 +53,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * @param end - String representing the end of the target interval (yyyy-mm-ddThh:mm)
    * @return a List of Visit objects that have a leave time within the specific interval.
    */
-  List<Visit> findAllByLeaveTimeIsBetweenOrderByLeaveTime(String start, String end);
+  List<Visit> findAllByLeaveTimeIsBetweenOrderByLeaveTime(LocalDateTime start, LocalDateTime end);
 
   /**
    * Given the following parameters, returns a List of Visit instances that have a duration within

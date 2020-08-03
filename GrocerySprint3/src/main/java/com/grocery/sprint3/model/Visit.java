@@ -41,8 +41,8 @@ public class Visit {
 
   /**
    * Overloaded constructor that takes the following three parameters to create a visit without id.
-   * @param entryTime - DateTime instance representing the entry information.
-   * @param leaveTime - DateTime instance representing the leave information.
+   * @param entryTime - LocalDateTime instance representing the entry information.
+   * @param leaveTime - LocalDateTime instance representing the leave information.
    * @param duration - Integer representing the duration of visit.
    */
   public Visit(LocalDateTime entryTime, LocalDateTime leaveTime, Integer duration, String holiday,

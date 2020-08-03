@@ -1,6 +1,5 @@
 package com.grocery.sprint3;
 
-import com.grocery.sprint3.model.Visit;
 import com.grocery.sprint3.repository.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,8 +7,6 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Component
