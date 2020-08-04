@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.grocery.sprint3.service.HolidayService;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,6 +148,11 @@ public class VisitController {
     return visitRepo.findAllByDurationGreaterThanEqualOrderByEntryTime(min);
   }
 
+  /**
+   *
+   * @param data - String containing the visit data
+   * @return a String indicating successful/unsuccessful addition of visit.
+   */
   @PostMapping(path="/add/single")
   public String saveOrUpdateVisit(@RequestBody String data) {
 
@@ -181,27 +185,4 @@ public class VisitController {
 
     return "Visit added successfully";
   }
-
-  /**
-   * Postman POST command: localhost:8080/visits/add/single?visitID={param}&entryTime={param}&leaveTime={param}&duration={param}&holiday={param}&dayOfWeek={param}
-   * Returns a String message to indicate successful addition to collection.
-   * @param visitID - String representing the unique visit ID (prefix + digits)
-   * @param entryTime - String representing the entry time (yyyy-mm-ddThh:mm)
-   * @param leaveTime - String representing the leave time (yyyy-mm-ddThh:mm)
-   * @param duration - Integer representing the shopping duration.
-   * @param holiday - String representing the holiday type (CAPS_UNDERSCORE)
-   * @param dayOfWeek - String representing day of the week (CAPS)
-   * @return a String message indicating successful addition to collection.
-   */
-//  public @ResponseBody String saveOrUpdateVisit(@RequestParam String visitID,
-//                                                @RequestParam String entryTime, @RequestParam String leaveTime,
-//                                                @RequestParam Integer duration, @RequestParam String holiday, @RequestParam String dayOfWeek) {
-//
-
-//
-//    visitRepo.save(new Visit(visitID, entryTime, leaveTime, duration, holiday, dayOfWeek));
-//
-//    return "Visit added successfully";
-//  }
-
 }

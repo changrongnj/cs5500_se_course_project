@@ -24,19 +24,16 @@ public class Visit {
   private ObjectId id = new ObjectId();
   private String visitID;
 
-//  private String entryTime;
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
   private LocalDateTime entryTime;
 
-//  private String leaveTime;
   @JsonDeserialize(using = LocalDateTimeDeserializer.class)
   @JsonSerialize(using = LocalDateTimeSerializer.class)
   private LocalDateTime leaveTime;
 
   private Integer duration;
   private String holiday;
-//  private String dayOfWeek;
   private DayOfWeek dayOfWeek;
 
   /**
@@ -44,6 +41,8 @@ public class Visit {
    * @param entryTime - LocalDateTime instance representing the entry information.
    * @param leaveTime - LocalDateTime instance representing the leave information.
    * @param duration - Integer representing the duration of visit.
+   * @param holiday - String representing holiday information.
+   * @param dayOfWeek - DayOfWeek instance representing day of the week.
    */
   public Visit(LocalDateTime entryTime, LocalDateTime leaveTime, Integer duration, String holiday,
                DayOfWeek dayOfWeek) {
@@ -53,21 +52,15 @@ public class Visit {
     this.holiday = holiday;
     this.dayOfWeek = dayOfWeek;
   }
-//  public Visit(String entryTime, String leaveTime, Integer duration, String holiday,
-//      String dayOfWeek) {
-//    this.entryTime = entryTime;
-//    this.leaveTime = leaveTime;
-//    this.duration = duration;
-//    this.holiday = holiday;
-//    this.dayOfWeek = dayOfWeek;
-//  }
 
   /**
    * Overloaded constructor that takes the following four parameters to create a complete visit.
    * @param visitID - String representing the unique visit.
-   * @param entryTime - DateTime instance representing the entry information.
-   * @param leaveTime - DateTime instance representing the leave information.
+   * @param entryTime - LocalDateTime instance representing the entry information.
+   * @param leaveTime - LocalDateTime instance representing the leave information.
    * @param duration - Integer representing the duration of visit.
+   * @param holiday - String representing holiday information.
+   * @param dayOfWeek - DayOfWeek instance representing day of the week.
    */
   public Visit(String visitID, LocalDateTime entryTime, LocalDateTime leaveTime, Integer duration, String holiday,
                DayOfWeek dayOfWeek) {
@@ -78,15 +71,6 @@ public class Visit {
     this.holiday = holiday;
     this.dayOfWeek = dayOfWeek;
   }
-//  public Visit(String visitID, String entryTime, String leaveTime, Integer duration, String holiday,
-//      String dayOfWeek) {
-//    this.visitID = visitID;
-//    this.entryTime = entryTime;
-//    this.leaveTime = leaveTime;
-//    this.duration = duration;
-//    this.holiday = holiday;
-//    this.dayOfWeek = dayOfWeek;
-//  }
 
   /**
    * Overloaded constructor that does not accept any parameters and relies on setters to update
@@ -127,49 +111,38 @@ public class Visit {
   }
 
   /**
-   * Returns a DateTime instance representing the entry time information.
-   * @return a DateTime instance representing the entry time information.
+   * Returns a LocalDateTime instance representing the entry time information.
+   * @return a LocalDateTime instance representing the entry time information.
    */
   public LocalDateTime getEntryTime() {
     return this.entryTime;
   }
-//  public String getEntryTime() {
-//    return this.entryTime;
-//  }
 
   /**
    * Sets the new entry time to the given parameter
-   * @param entryTime - DateTime instance representing new entry time information.
+   * @param entryTime - LocalDateTime instance representing new entry time information.
    */
   public void setEntryTime(LocalDateTime entryTime) {
     this.entryTime = entryTime;
   }
-//  public void setEntryTime(String entryTime) {
-//    this.entryTime = entryTime;
-//  }
+
 
   /**
-   * Returns a DateTime instance representing the leave information.
-   * @return a DateTime instance representing the leave information.
+   * Returns a LocalDateTime instance representing the leave information.
+   * @return a LocalDateTime instance representing the leave information.
    */
   public LocalDateTime getLeaveTime() {
     return this.leaveTime;
   }
-//  public String getLeaveTime() {
-//    return this.leaveTime;
-//  }
 
 
   /**
    * Sets the new LeaveTime to the given parameter
-   * @param leaveTime - DateTime instance representing leave time information.
+   * @param leaveTime - LocalDateTime instance representing leave time information.
    */
   public void setLeaveTime(LocalDateTime leaveTime) {
     this.leaveTime = leaveTime;
   }
-//  public void setLeaveTime(String leaveTime) {
-//    this.leaveTime = leaveTime;
-//  }
 
   /**
    * Returns an Integer representation the visit duration.
@@ -204,24 +177,18 @@ public class Visit {
   }
 
   /**
-   * Returns a String representing the day of week.
-   * @return a String representing the day of week.
+   * Returns a DayOfWeek instance representing the day of week.
+   * @return a DayOfWeek instance  representing the day of week.
    */
   public DayOfWeek getDayOfWeek() {
     return dayOfWeek;
   }
-//  public String getDayOfWeek() {
-//    return dayOfWeek;
-//  }
 
   /**
-   * Given a String, sets the dayOfWeek attribute to the new value.
-   * @param dayOfWeek - String representing the new day of week.
+   * Given a DayOfWeek instance, sets the dayOfWeek attribute to the new value.
+   * @param dayOfWeek - DayOfWeek instance representing the new day of week.
    */
   public void setDayOfWeek(DayOfWeek dayOfWeek) {
     this.dayOfWeek = dayOfWeek;
   }
-//  public void setDayOfWeek(String dayOfWeek) {
-//    this.dayOfWeek = dayOfWeek;
-//  }
 }

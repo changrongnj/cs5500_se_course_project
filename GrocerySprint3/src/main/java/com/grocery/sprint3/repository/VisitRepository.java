@@ -27,8 +27,8 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * Given the following parameters, return a List of Visit objects that contain the prefix and
    * have an entry time between the specified start/end time frame.
    * @param prefix - String representing the prefix to a subset of visit IDs
-   * @param start - String representing the start of the target interval (yyyy-mm-ddThh:mm)
-   * @param end - String representing the end of the target interval (yyyy-mm-ddThh:mm)
+   * @param start - LocalDateTime representing the start of the target interval (yyyy-mm-ddThh:mm)
+   * @param end - LocalDateTime representing the end of the target interval (yyyy-mm-ddThh:mm)
    * @return a List of Visit objects that contain the prefix and are between the specified
    * start/end time frame.
    */
@@ -38,8 +38,8 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
   /**
    * Given the following parameters, returns a List of Visit objects that have an entry time within
    * the specified interval.
-   * @param start - String representing the start of the target interval (yyyy-mm-ddThh:mm)
-   * @param end - String representing the end of the target interval (yyyy-mm-ddThh:mm)
+   * @param start - LocalDateTime representing the start of the target interval (yyyy-mm-ddThh:mm)
+   * @param end - LocalDateTime representing the end of the target interval (yyyy-mm-ddThh:mm)
    * @return a List of Visit objects that have an entry time within the specified interval.
    */
   List<Visit> findAllByEntryTimeIsBetweenOrderByEntryTime(LocalDateTime start, LocalDateTime end);
@@ -49,8 +49,8 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
   /**
    * Given the following parameters, returns a List of Visit objects that have a leave time within
    * the specific interval.
-   * @param start - String representing the start of the target interval (yyyy-mm-ddThh:mm)
-   * @param end - String representing the end of the target interval (yyyy-mm-ddThh:mm)
+   * @param start - LocalDateTime representing the start of the target interval (yyyy-mm-ddThh:mm)
+   * @param end - LocalDateTime representing the end of the target interval (yyyy-mm-ddThh:mm)
    * @return a List of Visit objects that have a leave time within the specific interval.
    */
   List<Visit> findAllByLeaveTimeIsBetweenOrderByLeaveTime(LocalDateTime start, LocalDateTime end);
