@@ -89,7 +89,7 @@ public class PilotSim {
             }
 
             // add event data (except Holiday and bad weather)
-            // Todo: Apply day/week before holiday effect.
+            // Apply day/week before holiday effect.
             if (holiday == HolidayType.DAY_BEFORE_HOLIDAY || holiday == HolidayType.WEEK_TO_HOLIDAY ) {
                 VisitParameters beforeHoliday = Modifier.applyBeforeHoliday(holiday, dailyVolume);
                 String prefixID = "H";
@@ -97,7 +97,7 @@ public class PilotSim {
                 newDay.mergeVisits(newVisits);
             }
 
-            // Todo: Apply the nice weather effect.
+            // Apply the nice weather effect.
             if (weatherType == WeatherType.IS_NICE && CheckDayOfWeek.isWeekend(dayOfWeek)) {
                 VisitParameters niceWeather = Modifier.applyNiceWeather(dailyVolume);
                 String prefixID = "W";
@@ -105,7 +105,7 @@ public class PilotSim {
                 newDay.mergeVisits(newVisits);
             }
 
-            // Todo: Apply the meal hour effect.
+            // Apply the meal hour effect.
             if (holiday != HolidayType.IS_HOLIDAY && !CheckDayOfWeek.isWeekend(dayOfWeek)) {
                 // Apply the meal rush effects.
                 VisitParameters mealRush = Modifier.applyMealRush(dailyVolume, LUNCH_PEAK,
@@ -115,7 +115,7 @@ public class PilotSim {
                 newDay.mergeVisits(newVisits);
             }
 
-            // Todo: Apply the senior discount effect.
+            // Apply the senior discount effect.
             if (holiday != HolidayType.IS_HOLIDAY && dayOfWeek == SENIOR_DISCOUNT_DAY) {
                 VisitParameters seniorTime = Modifier.applySeniorDiscount(dailyVolume,
                     SENIOR_DISCOUNT_START, SENIOR_DISCOUNT_END);

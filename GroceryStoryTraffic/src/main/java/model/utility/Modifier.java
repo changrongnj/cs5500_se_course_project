@@ -100,8 +100,7 @@ public final class Modifier {
    * and dinner rush hours.
    */
   public static VisitParameters applyMealRush(int original, int lunch, int dinner) {
-    // Todo: need to change entryDist to be possible for :30 (deferred until next sprint)
-    // Current assumption: Lunch/dinner rushes are one hour only
+    // Assumption: Lunch/dinner rushes are one hour only
     final double MEAL_BOOST = 0.3;
     final int STORE_OPENING = 6;
     final double LUNCH_PERCENTAGE = 0.4;
@@ -125,7 +124,7 @@ public final class Modifier {
    * effects of a senior discount interval.
    */
   public static VisitParameters applySeniorDiscount(int original, int startHour, int endHour) {
-    // Todo - Review assumptions: Start/end hours are full hours && senior discounts are two hours.
+    // Assumptions: Start/end hours are full hours && senior discounts are two hours.
     final double SENIOR_BOOST = 0.3;
     final int STORE_OPENING = 6;
     double[] durationDist = {0, 0, 0, .45, .5, .05};
