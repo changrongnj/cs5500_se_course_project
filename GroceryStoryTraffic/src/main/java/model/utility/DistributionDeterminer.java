@@ -43,23 +43,6 @@ public final class DistributionDeterminer {
         return DAILY_VOLUME;
     }
 
-//    /**
-//     * Given a LocalDate instance representing the date and an int representing the current daily
-//     * volume, returns an int representing the daily volume after applying weather conditions.
-//     * @param date - LocalDate instance representing the current date.
-//     * @param currentVolume - int representing the unmodified volume of customers.
-//     * @param util - Util instance containing weather data calculations.
-//     * @return an int representing the daily volume after applying weather conditions.
-//     */
-//    public static int applyNiceWeatherVolume(LocalDate date, int currentVolume, Util util) {
-//        final double NICE_WEATHER_FACTOR = 1.40;
-//        if(date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
-//            if(util.findWeather(date.atTime(12, 0)).getWeatherType() == WeatherType.IS_NICE)
-//                currentVolume *= NICE_WEATHER_FACTOR;
-//        }
-//        return currentVolume;
-//    }
-
     /**
      * Given an int representing the visit id, a LocalDate instance representing the date, and a
      * Constant instance representing the data source, returns a LocalDateTime instance representing
@@ -79,24 +62,6 @@ public final class DistributionDeterminer {
             ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Weekday"));
         }
         return ldt;
-
-
-        // Todo: Part of previous code. May remove if we proceed with just weekday/weekend split.
-        /*if(dayOfWeek == DayOfWeek.MONDAY) {
-            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Monday"));
-        } else if(dayOfWeek == DayOfWeek.TUESDAY) {
-            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Tuesday"));
-        } else if(dayOfWeek == DayOfWeek.WEDNESDAY) {
-            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Wednesday"));
-        } else if(dayOfWeek == DayOfWeek.THURSDAY) {
-            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Thursday"));
-        } else if(dayOfWeek == DayOfWeek.FRIDAY) {
-            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Friday"));
-        } else if(dayOfWeek == DayOfWeek.SATURDAY) {
-            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Saturday"));
-        } else  {
-            ldt = RandomGenerator.generateEntryData(id, data.getEntryTimeDist().get("Sunday"));
-        }*/
     }
 
     /**
@@ -123,24 +88,6 @@ public final class DistributionDeterminer {
         } else {
             durationDist = getDistributionSubset("Weekday", data, shoppingHour);
         }
-
-        // Todo: Review original code, split into 7 days of the week.
-        /*
-        if (dayOfWeek == DayOfWeek.MONDAY) {
-            durationDist = getDistributionSubset("Monday", data, shoppingHour);
-        } else if(dayOfWeek == DayOfWeek.TUESDAY) {
-            durationDist = getDistributionSubset("Tuesday", data, shoppingHour);
-        } else if(dayOfWeek == DayOfWeek.WEDNESDAY) {
-            durationDist = getDistributionSubset("Wednesday", data, shoppingHour);
-        } else if(dayOfWeek == DayOfWeek.THURSDAY) {
-            durationDist = getDistributionSubset("Thursday", data, shoppingHour);
-        } else if(dayOfWeek == DayOfWeek.FRIDAY) {
-            durationDist = getDistributionSubset("Friday", data, shoppingHour);
-        } else if(dayOfWeek == DayOfWeek.SATURDAY) {
-            durationDist = getDistributionSubset("Saturday", data, shoppingHour);
-        } else if(dayOfWeek == DayOfWeek.SUNDAY) {
-            durationDist = getDistributionSubset("Sunday", data, shoppingHour);
-        }*/
         return durationDist;
     }
 
@@ -166,23 +113,5 @@ public final class DistributionDeterminer {
             distributionSubset = data.getDurationTimeDist().get("19-21").get(key);
         }
         return distributionSubset;
-
-        // Todo: Kept previous code for reference. Please delete when ready.
-        /*
-        if (hour < 8) {
-            distributionSubset = data.getDurationTimeDist().get("6-7").get(key);
-        } else if(hour < 10) {
-            distributionSubset = data.getDurationTimeDist().get("8-9").get(key);
-        } else if(hour < 12) {
-            distributionSubset = data.getDurationTimeDist().get("10-11").get(key);
-        } else if(hour < 13) {
-            distributionSubset = data.getDurationTimeDist().get("12").get(key);
-        } else if(hour < 17) {
-            distributionSubset = data.getDurationTimeDist().get("13-16").get(key);
-        } else if(hour < 19) {
-            distributionSubset = data.getDurationTimeDist().get("17-18").get(key);
-        } else {
-            distributionSubset = data.getDurationTimeDist().get("19-20").get(key);
-        }*/
     }
 }
