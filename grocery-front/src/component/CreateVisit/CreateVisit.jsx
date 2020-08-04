@@ -13,8 +13,8 @@ class CreateVisit extends React.Component {
             entryDate:null,
             entryTime:null,
             leaveTime:null,
-            holiday:null,
-            dayOfWeek:null,
+            holiday:"",
+            dayOfWeek:"",
             reload:false
         };
     }
