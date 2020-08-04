@@ -14,6 +14,7 @@ class App extends React.Component{
             <Router>
                 <div className="App">
                     <Switch>
+                        <Route exact path="/" component={ShowVisits}/>
                         <Route path="/new" component={CreateVisit}/>
                         <Route path="/show" component={ShowVisits}/>
                     </Switch>

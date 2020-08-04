@@ -102,25 +102,25 @@ class CreateVisit extends React.Component {
                     />
                 </div>
 
-                <div className="block">
-                    <label htmlFor="holiday">holiday</label>
-                    <Form.Control
-                        type="text"
-                        name="holiday"
-                        value={this.state.holiday}
-                        onChange={this.updateForm}
-                    />
-                </div>
+                {/*<div className="block">*/}
+                {/*    <label htmlFor="holiday">holiday</label>*/}
+                {/*    <Form.Control*/}
+                {/*        type="text"*/}
+                {/*        name="holiday"*/}
+                {/*        value={this.state.holiday}*/}
+                {/*        onChange={this.updateForm}*/}
+                {/*    />*/}
+                {/*</div>*/}
 
-                <div className="block">
-                    <label htmlFor="dayOfWeek">dayOfWeek</label>
-                    <Form.Control
-                        type="text"
-                        name="dayOfWeek"
-                        value={this.state.dayOfWeek}
-                        onChange={this.updateForm}
-                    />
-                </div>
+                {/*<div className="block">*/}
+                {/*    <label htmlFor="dayOfWeek">dayOfWeek</label>*/}
+                {/*    <Form.Control*/}
+                {/*        type="text"*/}
+                {/*        name="dayOfWeek"*/}
+                {/*        value={this.state.dayOfWeek}*/}
+                {/*        onChange={this.updateForm}*/}
+                {/*    />*/}
+                {/*</div>*/}
 
                 <div className="block-button">
                     <button className="btn btn-lg btn-primary btn-block" onClick={() => this.createVisit(this.state)}>submit</button>
