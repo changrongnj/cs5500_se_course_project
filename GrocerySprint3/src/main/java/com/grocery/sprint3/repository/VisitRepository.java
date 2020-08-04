@@ -32,7 +32,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * @return a List of Visit objects that contain the prefix and are between the specified
    * start/end time frame.
    */
-  List<Visit> findAllByVisitIDContainingAndEntryTimeIsBetweenOrderByEntryTime(String prefix,
+  List<Visit> findAllByVisitIDContainingAndEntryTimeIsBetween(String prefix,
       LocalDateTime start, LocalDateTime end);
 
   /**
@@ -42,9 +42,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * @param end - LocalDateTime representing the end of the target interval (yyyy-mm-ddThh:mm)
    * @return a List of Visit objects that have an entry time within the specified interval.
    */
-  List<Visit> findAllByEntryTimeIsBetweenOrderByEntryTime(LocalDateTime start, LocalDateTime end);
-
-  // Finds all visits with leave times in between the specified interval
+  List<Visit> findAllByEntryTimeIsBetween(LocalDateTime start, LocalDateTime end);
 
   /**
    * Given the following parameters, returns a List of Visit objects that have a leave time within
@@ -53,7 +51,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * @param end - LocalDateTime representing the end of the target interval (yyyy-mm-ddThh:mm)
    * @return a List of Visit objects that have a leave time within the specific interval.
    */
-  List<Visit> findAllByLeaveTimeIsBetweenOrderByLeaveTime(LocalDateTime start, LocalDateTime end);
+  List<Visit> findAllByLeaveTimeIsBetween(LocalDateTime start, LocalDateTime end);
 
   /**
    * Given the following parameters, returns a List of Visit instances that have a duration within
@@ -62,7 +60,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * @param max - Integer representing the maximum duration of target interval
    * @return a List of Visit instances that have a duration within the provided interval.
    */
-  List<Visit> findAllByDurationBetweenOrderByEntryTime(Integer min, Integer max);
+  List<Visit> findAllByDurationBetween(Integer min, Integer max);
 
   /**
    * Given the following parameter, returns a List of Visit objects that contain a duration of at
@@ -70,7 +68,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * @param min - Integer representing the minimum duration of search target
    * @return a List of Visit objects that contain a duration of at least the provided value.
    */
-  List<Visit> findAllByDurationGreaterThanEqualOrderByEntryTime(Integer min);
+  List<Visit> findAllByDurationGreaterThanEqual(Integer min);
 
   /**
    * Given the following parameter, returns a List of Visit objects that contain a duration of at
@@ -78,9 +76,7 @@ public interface VisitRepository extends CrudRepository<Visit, String> {
    * @param max - Integer representing the minimum duration of search target
    * @return a List of Visit objects that contain a duration of at most the provided value.
    */
-  List<Visit> findAllByDurationLessThanEqualOrderByEntryTime(Integer max);
-
-  // Finds all visits by order of entry time.
+  List<Visit> findAllByDurationLessThanEqual(Integer max);
 
   /**
    * Returns a List of Visits ordered by Entry Time

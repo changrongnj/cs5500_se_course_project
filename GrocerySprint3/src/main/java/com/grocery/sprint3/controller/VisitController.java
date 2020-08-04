@@ -77,8 +77,7 @@ public class VisitController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     LocalDateTime entry = LocalDateTime.parse(start, formatter);
     LocalDateTime leave = LocalDateTime.parse(end, formatter);
-    return visitRepo.findAllByVisitIDContainingAndEntryTimeIsBetweenOrderByEntryTime(prefix, entry,
-        leave);
+    return visitRepo.findAllByVisitIDContainingAndEntryTimeIsBetween(prefix, entry, leave);
   }
 
   /**
@@ -94,7 +93,7 @@ public class VisitController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     LocalDateTime entry = LocalDateTime.parse(start, formatter);
     LocalDateTime leave = LocalDateTime.parse(end, formatter);
-    return visitRepo.findAllByEntryTimeIsBetweenOrderByEntryTime(entry, leave);
+    return visitRepo.findAllByEntryTimeIsBetween(entry, leave);
   }
 
   /**
@@ -110,7 +109,7 @@ public class VisitController {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     LocalDateTime entry = LocalDateTime.parse(start, formatter);
     LocalDateTime leave = LocalDateTime.parse(end, formatter);
-    return visitRepo.findAllByLeaveTimeIsBetweenOrderByLeaveTime(entry, leave);
+    return visitRepo.findAllByLeaveTimeIsBetween(entry, leave);
   }
 
   /**
@@ -123,7 +122,7 @@ public class VisitController {
   @GetMapping(path="partial/duration/interval/{min}to{max}")
   public List<Visit> findAllByDurationIsBetween(@PathVariable("min") Integer min,
       @PathVariable("max") Integer max){
-    return visitRepo.findAllByDurationBetweenOrderByEntryTime(min, max);
+    return visitRepo.findAllByDurationBetween(min, max);
   }
 
   /**
@@ -134,7 +133,7 @@ public class VisitController {
    */
   @GetMapping(path="partial/duration/LTE/{max}")
   public List<Visit> findAllByDurationLessThanEqual(@PathVariable("max") Integer max) {
-    return visitRepo.findAllByDurationLessThanEqualOrderByEntryTime(max);
+    return visitRepo.findAllByDurationLessThanEqual(max);
   }
 
   /**
@@ -145,7 +144,7 @@ public class VisitController {
    */
   @GetMapping(path="partial/duration/GTE/{min}")
   public List<Visit> findAllByDurationGreaterThanEqual(@PathVariable("min") Integer min) {
-    return visitRepo.findAllByDurationGreaterThanEqualOrderByEntryTime(min);
+    return visitRepo.findAllByDurationGreaterThanEqual(min);
   }
 
   /**
