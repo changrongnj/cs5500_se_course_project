@@ -2,7 +2,6 @@ package controller;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -146,7 +145,7 @@ public class PilotSim {
         MetaDao.truncateData();
 
         // initialize a DataSet object
-        DataSet ds = new DataSet();
+//        DataSet ds = new DataSet();
 
         // assign its corresponding Visits
         List<Visit> visits = new ArrayList<>();

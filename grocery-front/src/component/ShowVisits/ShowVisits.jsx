@@ -87,7 +87,7 @@ class ShowVisits extends React.Component {
             results.push(visit);
 
         }
-        await this.setState({visits:results});
+        await this.setState({visits:results, page:0});
         this.countVisits();
     };
 
