@@ -104,7 +104,7 @@ public class VisitController {
    * @return a subset of visits with leave times between the given interval.
    */
   @GetMapping(path="partial/leave/interval/{start}to{end}")
-  public List<Visit> findAllByLeaveTimeIsBetween(@PathVariable("start") String start,
+  public List<Visit> findAllByLeaveTimeIsBetweenm(@PathVariable("start") String start,
       @PathVariable("end") String end) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     LocalDateTime entry = LocalDateTime.parse(start, formatter);
